@@ -11,4 +11,4 @@ VAS's primary mode of interaction is via RESTful interface.  This API enables th
 
 The VAS Python API is licensed under the `Apache Licence, Version 2.0`_.
 
-.. _Apache Licence, Version 2.0 : http://www.apache.org/licenses/LICENSE-2.0.html
+.. _Apache Licence, Version 2.0: http://www.apache.org/licenses/LICENSE-2.0.html
