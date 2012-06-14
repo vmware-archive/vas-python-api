@@ -14,51 +14,34 @@
 # limitations under the License.
 
 
-from vas.test.test_TestRoot import TestRoot
+from unittest.case import TestCase
+from vas.shared.Security import Security
+from vas.test.StubClient import StubClient
 from vas.vfabric.VFabricNode import VFabricNode
 from vas.vfabric.VFabricNodes import VFabricNodes
 
-class TestVFabricNodes(TestRoot):
-    _PAYLOADS = dict()
-
-    _PAYLOADS['nodes-href'] = {
-        'nodes': [{
-            'links': [{
-                'rel': 'self',
-                'href': 'self-href'
-            }, {
-                'rel': 'security',
-                'href': 'security-href'
-            }]
-        }],
-        'links': [{
-            'rel': 'self',
-            'href': 'self-href'
-        }, {
-            'rel': 'security',
-            'href': 'security-href'
-        }]
-    }
-
-    _PAYLOADS['node-href'] = {
-        'agent-home': 'agent-home',
-        'architecture': 'architecture',
-        'host-names': ['host-name-1', 'host-name-2'],
-        'ip-addresses': ['ip-address-1', 'ip-address-2'],
-        'metadata': {'key', 'value'},
-        'operating-system': 'operating-system',
-        'links': [{
-            'rel': 'self',
-            'href': 'self-href'
-        }, {
-            'rel': 'security',
-            'href': 'security-href'
-        }]
-    }
+class TestVFabricNodes(TestCase):
+    __client = StubClient()
 
     def setUp(self):
-        super(TestVFabricNodes, self).setUp()
-        self.__nodes = VFabricNodes(self._client, 'nodes-href')
+        self.__client.delegate.reset_mock()
+        self.__nodes = VFabricNodes(self.__client, 'https://localhost:8443/vfabric/v1/nodes/')
+
+    def test_delete(self):
+        self.__nodes.delete(VFabricNode(self.__client, 'https://localhost:8443/vfabric/v1/nodes/0/'))
+        self.__client.delegate.delete.assert_called_once_with('https://localhost:8443/vfabric/v1/nodes/0/')
+
+    def test_attributes(self):
+        self.assertIsInstance(self.__nodes.security, Security)
 
     def test__create_item(self):
-        self.assertIsInstance(self.__nodes._create_item('node-href'), VFabricNode)
+        self.assertIsInstance(self.__nodes._create_item(self.__client, 'https://localhost:8443/vfabric/v1/nodes/0/'),
+            VFabricNode)
+
+    def test___iter__(self):
+        count = 0
+        #noinspection PyUnusedLocal
+        for node in self.__nodes:
+            count += 1
+
+        self.assertEqual(2, count)

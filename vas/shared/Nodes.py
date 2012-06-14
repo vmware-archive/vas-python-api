@@ -17,6 +17,11 @@
 from vas.shared.CollectionType import CollectionType
 
 class Nodes(CollectionType):
+    """A collection of abstract nodes
+
+    :ivar `vas.shared.Security` security:   The security configuration for the collection of abstract nodes
+    """
+
     __COLLECTION_KEY = 'nodes'
 
     def __init__(self, client, location):

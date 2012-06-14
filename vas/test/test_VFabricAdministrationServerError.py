@@ -18,6 +18,13 @@ from unittest import TestCase
 from vas.VFabricAdministrationServerError import VFabricAdministrationServerError
 
 class TestVFabricAdministrationServerError(TestCase):
-    def test_str(self):
-        self.assertEqual("(['message1', 'message2'],)",
-                         VFabricAdministrationServerError(['message1', 'message2']).__str__())
+
+    def test_no_code(self):
+        error = VFabricAdministrationServerError('message1', 'message2')
+        self.assertEqual(['message1', 'message2'], error.messages)
+        self.assertEqual(None, error.code)
+
+    def test_with_code(self):
+        error = VFabricAdministrationServerError('message1', 'message2', code='400')
+        self.assertEqual(['message1', 'message2'], error.messages)
+        self.assertEqual('400', error.code)

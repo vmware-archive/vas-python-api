@@ -19,5 +19,6 @@ vFabric Administration Server Python API Documentation
 .. toctree::
 
     vas
+    vas.tc_server
     vas.vfabric
     vas.shared

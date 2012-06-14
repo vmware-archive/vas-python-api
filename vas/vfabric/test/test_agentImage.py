@@ -13,31 +13,29 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
-from vas.test.test_TestRoot import TestRoot
+import os
+import shutil
+import tempfile
+from unittest.case import TestCase
+from vas.shared.Security import Security
+from vas.test.StubClient import StubClient
 from vas.vfabric.AgentImage import AgentImage
 
-class TestAgentImage(TestRoot):
-    _PAYLOADS = dict()
-
-    _PAYLOADS['agent-image-href'] = {
-        'links': [{
-            'rel': 'content',
-            'href': 'content-href'
-        }, {
-            'rel': 'security',
-            'href': 'security-href'
-        }, {
-            'rel': 'self',
-            'href': 'self-href'
-        }]
-    }
-
-    _PAYLOADS['content-href'] = 'content'
+class TestAgentImage(TestCase):
+    __client = StubClient()
 
     def setUp(self):
-        super(TestAgentImage, self).setUp()
-        self.__vfabric = AgentImage(self._client, 'agent-image-href')
+        self.__client.delegate.reset_mock()
+        self.__agent_image = AgentImage(self.__client, 'https://localhost:8443/vfabric/v1/agent-image/')
 
-    def test_content(self):
-        self.assertEqual('content', self.__vfabric.content)
+    def test_attributes(self):
+        self.assertEqual(164, len(self.__agent_image.content))
+        self.assertIsInstance(self.__agent_image.security, Security)
+
+    def test_extract_to(self):
+        location = tempfile.mkdtemp()
+        try:
+            self.__agent_image.extract_to(location)
+            self.assertTrue(os.path.exists(os.path.join(location, 'foo.txt')))
+        finally:
+            shutil.rmtree(location)

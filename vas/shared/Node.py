@@ -17,7 +17,7 @@
 from vas.shared.Type import Type
 
 class Node(Type):
-    """An abstract Node
+    """An abstract node
 
     :ivar str agent_home:   The path that the agent is installed at on the node
     :ivar str architecture: The operating system architecture of the node
@@ -25,6 +25,7 @@ class Node(Type):
     :ivar list ip_addresses: The ip addresses the node listens on
     :ivar dict metadata:    Arbitrary metadata configured in the ``agent.properties`` file on the node
     :ivar str operating_system: The operating system of the node
+    :ivar `vas.shared.Security` security:   The security configuration for the node
     """
 
     __KEY_AGENT_HOME = 'agent-home'
@@ -39,8 +40,8 @@ class Node(Type):
 
     __KEY_OPERATING_SYSTEM = 'operating-system'
 
-    def _initialize_attributes(self, client, location):
-        super(Node, self)._initialize_attributes(client, location)
+    def __init__(self, client, location):
+        super(Node, self).__init__(client, location)
 
         self.agent_home = self._details[self.__KEY_AGENT_HOME]
         self.architecture = self._details[self.__KEY_ARCHITECTURE]

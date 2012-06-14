@@ -13,35 +13,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 from vas.VFabricAdministrationServerError import VFabricAdministrationServerError
 from vas.shared.Type import Type
 from vas.util.LinkUtils import LinkUtils
 
 class CollectionType(Type):
+    """An abstract collection type
+
+    :ivar `vas.shared.Security` security:   The security configuration for the collection
+    """
+
     def __init__(self, client, location, collection_key):
-        self.__collection_key = collection_key
         super(CollectionType, self).__init__(client, location)
 
-    def delete(self, item):
-        """Delete an item from this collection
+        self.__collection_key = collection_key
 
-        .. note:: The contents of this collection are synchronized with the server after the operation is completed.
-
-        :type item:     type of object contained in this collection
-        :param item:    The item to delete
-        """
-
-        self._client.delete(item._location_self)
-        self._initialize_attributes(self._client, self._location_self)
-
-    def _create_item(self, location):
-        raise VFabricAdministrationServerError('_create_item(self, location) method is unimplemented')
-
-    def _initialize_attributes(self, client, location):
-        super(CollectionType, self)._initialize_attributes(client, location)
+    def _create_item(self, client, location):
+        raise VFabricAdministrationServerError('_create_item(self, client, location) method is unimplemented')
 
     def __iter__(self):
-        return iter([self._create_item(self_location) for self_location in
+        return iter([self._create_item(self._client, self_location) for self_location in
                      LinkUtils.get_collection_self_links(self._details, self.__collection_key)])
-

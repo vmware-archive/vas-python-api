@@ -18,30 +18,22 @@ from vas.shared.Security import Security
 from vas.util.LinkUtils import LinkUtils
 
 class Type:
+    """An abstract type
+
+    :ivar `vas.shared.Security` security:   The security configuration for the type
+    """
+
     __REL_SECURITY = 'security'
 
     __REL_SELF = 'self'
 
     def __init__(self, client, location):
         self._client = client
-        self._initialize_attributes(client, location)
-
-    @property
-    def security(self):
-        """The security configuration for this item or collection
-
-        :rtype:     :class:`vas.shared.Security`
-        :return:    The security configuration for this item or collection
-        """
-
-        return Security(self._client, self.__location_security)
-
-    def _initialize_attributes(self, client, location):
         self._details = client.get(location)
-        self._links = LinkUtils.get_links(client.get(location))
-
+        self._links = LinkUtils.get_links(self._details)
         self._location_self = self._links[self.__REL_SELF][0]
-        self.__location_security = self._links[self.__REL_SECURITY][0]
+
+        self.security = Security(client, self._links[self.__REL_SECURITY][0])
 
     def __eq__(self, other):
         return self._location_self == other._location_self
