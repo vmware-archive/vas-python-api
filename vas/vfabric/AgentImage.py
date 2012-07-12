@@ -14,25 +14,41 @@
 # limitations under the License.
 
 
+import os
+from io import BytesIO
 from vas.shared.Type import Type
+from zipfile import ZipFile
 
 class AgentImage(Type):
-    """A vFabric Administration Agent image"""
+    """A vFabric Administration Agent image
+
+    :ivar bytearray content: The binary data making up the agent distribution in the form of a ZIP file with Info-ZIP style permissions
+    :ivar `vas.shared.Security` security:   The security configuration for the agent image
+    """
 
     __REL_CONTENT = 'content'
 
-    @property
-    def content(self):
-        """Return the binary data making up the agent distribution
-
-        The binary data returned is in the form of a ZIP file with Info-ZIP style permissions.
-
-        :rtype:     ``iterable`` binary data
-        :return:    The binary data making up the agent distribution
-        """
-        return self._client.get(self.__location_content)
-
-    def _initialize_attributes(self, client, location):
-        super(AgentImage, self)._initialize_attributes(client, location)
+    def __init__(self, client, location):
+        super(AgentImage, self).__init__(client, location)
 
         self.__location_content = self._links[self.__REL_CONTENT][0]
+
+    @property
+    def content(self):
+        return self._client.get(self.__location_content)
+
+    def extract_to(self, location=os.curdir):
+        """Extract the Administration Agent image to a specified location
+
+        :type location:    :obj:`str`
+        :param location:   The location to extract the Administration Agent image to
+        :rtype:         :obj:`str`
+        :return:        The root directory of the extracted agent
+        """
+
+        with ZipFile(BytesIO(self.content), 'r') as zip_file:
+            for zip_info in zip_file.infolist():
+                file = zip_file.extract(zip_info, location)
+                os.chmod(file, zip_info.external_attr >> 16)
+
+        return '{}/vfabric-administration-agent'.format(location)

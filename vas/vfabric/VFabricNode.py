@@ -17,14 +17,15 @@
 from vas.shared.Node import Node
 
 class VFabricNode(Node):
-    """A vFabric Node
+    """A vFabric node
 
     :ivar str agent_home:   The path that the agent is installed at on the node
     :ivar str architecture: The operating system architecture of the node
-    :ivar list host_names: The host names configured on the node
-    :ivar list ip_addresses: The ip addresses the node listens on
+    :ivar list host_names:  The host names configured on the node
+    :ivar list ip_addresses:    The ip addresses the node listens on
     :ivar dict metadata:    Arbitrary metadata configured in the ``agent.properties`` file on the node
     :ivar str operating_system: The operating system of the node
+    :ivar `vas.shared.Security` security:   The security configuration for the node
     """
 
     pass

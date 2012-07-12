@@ -13,12 +13,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from vas.shared.MutableCollectionType import MutableCollectionType
 
-from vas.shared.Nodes import Nodes
+class VFabricNodes(MutableCollectionType):
+    """A collection of vFabric nodes
+
+    :ivar `vas.shared.Security` security:   The security configuration for the collection of nodes
+    """
+
+    __COLLECTION_KEY = 'nodes'
+
+    def __init__(self, client, location):
+        super(VFabricNodes, self).__init__(client, location, self.__COLLECTION_KEY)
+
+    def _create_item(self, client, location):
+        return VFabricNode(client, location)
+
 from vas.vfabric.VFabricNode import VFabricNode
-
-class VFabricNodes(Nodes):
-    """A collection of vFabric nodes"""
-
-    def _create_item(self, location):
-        return VFabricNode(self._client, location)

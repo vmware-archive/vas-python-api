@@ -14,75 +14,38 @@
 # limitations under the License.
 
 
-from vas.test.test_TestRoot import TestRoot
+from unittest.case import TestCase
+from vas.test.StubClient import StubClient
 from vas.util.LinkUtils import LinkUtils
 from vas.VFabricAdministrationServerError import VFabricAdministrationServerError
 
-class TestLinkUtils(TestRoot):
-    _PAYLOADS = dict()
-
-    _PAYLOADS['collection-href'] = {
-        'links': [{
-            'rel': 'self',
-            'href': 'self-1'
-        }],
-        'collection-key': [{
-            'links': [{
-                'rel': 'foo',
-                'href': 'foo-1'
-            }, {
-                'rel': 'self',
-                'href': 'self-2'
-            }]
-        }, {
-            'links': [{
-                'rel': 'foo',
-                'href': 'foo-2'
-            }, {
-                'rel': 'bar',
-                'href': 'bar-1'
-            }, {
-                'rel': 'self',
-                'href': 'self-3'
-            }]
-        }]
-    }
-
-    _PAYLOADS['item-href'] = {
-        'key': 'value',
-        'links': [{
-            'rel': 'foo',
-            'href': 'foo-href'
-        }, {
-            'rel': 'bar',
-            'href': 'bar-href-1'
-        }, {
-            'rel': 'bar',
-            'href': 'bar-href-1'
-        }, {
-            'rel': 'bar',
-            'href': 'bar-href-2'
-        }]
-    }
+class TestLinkUtils(TestCase):
+    __client = StubClient()
 
     def setUp(self):
-        super(TestLinkUtils, self).setUp()
+        self.__client.delegate.reset_mock()
 
     def test_get_collection_self_links(self):
-        links = LinkUtils.get_collection_self_links(self._PAYLOADS['collection-href'], 'collection-key')
-        self.assertEqual(['self-2', 'self-3'], links)
+        links = LinkUtils.get_collection_self_links(self.__client.get('https://localhost:8443/vfabric/v1/nodes/'),
+                                                    'nodes')
+        self.assertEqual(['https://localhost:8443/vfabric/v1/nodes/0/', 'https://localhost:8443/vfabric/v1/nodes/1/'],
+                                                                                                                     links)
 
     def test_get_link_single(self):
-        link = LinkUtils.get_link(self._PAYLOADS['item-href'], 'foo')
-        self.assertEqual('foo-href', link)
+        link = LinkUtils.get_link(self.__client.get('https://localhost:8443/vfabric/v1/'), 'nodes')
+        self.assertEqual('https://localhost:8443/vfabric/v1/nodes/', link)
 
     def test_get_link_multiple(self):
-        self.assertRaises(VFabricAdministrationServerError, LinkUtils.get_link, self._PAYLOADS['item-href'], 'bar')
+        self.assertRaises(VFabricAdministrationServerError, LinkUtils.get_link,
+                          self.__client.get('https://localhost:8443/tc-server/v1/groups/0/'), 'node')
 
     def test_get_links_no_rel(self):
-        links = LinkUtils.get_links(self._PAYLOADS['item-href'])
-        self.assertEqual({'foo': ['foo-href'], 'bar': ['bar-href-1', 'bar-href-2']}, links)
+        links = LinkUtils.get_links(self.__client.get('https://localhost:8443/vfabric/v1/'))
+        self.assertEqual({'agent-image': ['https://localhost:8443/vfabric/v1/agent-image/'],
+                          'nodes': ['https://localhost:8443/vfabric/v1/nodes/'],
+                          'tasks': ['https://localhost:8443/vfabric/v1/tasks/']}, links)
 
     def test_get_links_with_rel(self):
-        links = LinkUtils.get_links(self._PAYLOADS['item-href'], 'bar')
-        self.assertEqual(['bar-href-1', 'bar-href-2'], links)
+        links = LinkUtils.get_links(self.__client.get('https://localhost:8443/tc-server/v1/groups/0/'), 'node')
+        self.assertEqual(
+            ['https://localhost:8443/tc-server/v1/nodes/1/', 'https://localhost:8443/tc-server/v1/nodes/0/'], links)

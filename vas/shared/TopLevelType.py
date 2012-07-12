@@ -14,16 +14,22 @@
 # limitations under the License.
 
 
+from vas.VFabricAdministrationServerError import VFabricAdministrationServerError
 from vas.util.LinkUtils import LinkUtils
 
 class TopLevelType:
+    """An abstract top level type
+
+    :ivar `vas.shared.Nodes` nodes:  The collection of nodes
+    """
+
     __REL_NODES = 'nodes'
 
     def __init__(self, client, location):
         self._client = client
-        self._initialize_attributes(client, location)
-
-    def _initialize_attributes(self, client, location):
         self._links = LinkUtils.get_links(client.get(location))
 
-        self._location_nodes = self._links[self.__REL_NODES][0]
+        self.nodes = self._create_nodes(client, self._links[self.__REL_NODES][0])
+
+    def _create_nodes(self, client, location):
+        raise VFabricAdministrationServerError('_create_nodes(self, client, location) method is unimplemented')

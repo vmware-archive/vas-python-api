@@ -19,12 +19,12 @@ class VFabricAdministrationServerError(Exception):
 
     :type messages:     A variable number of :obj:`str`
     :param messages:    The messages to be displayed
+    :type code:     :obj:`str`
+    :param code:    The status code of the response that caused the error
     """
 
-    def __init__(self, *messages):
+    def __init__(self, *messages, code=None):
         super(VFabricAdministrationServerError, self).__init__()
-        self.__message = str(messages)
 
-    def __str__(self):
-        # TODO Make sure that the Python and Ruby exception messages match
-        return self.__message
+        self.messages = list(messages)
+        self.code = code

@@ -14,57 +14,19 @@
 # limitations under the License.
 
 
-from vas.shared.Nodes import Nodes
-from vas.test.test_TestRoot import TestRoot
+from unittest.case import TestCase
+from vas.test.StubClient import StubClient
 from vas.vfabric.AgentImage import AgentImage
 from vas.vfabric.VFabric import VFabric
+from vas.vfabric.VFabricNodes import VFabricNodes
 
-class TestVFabric(TestRoot):
-    _PAYLOADS = dict()
-
-    _PAYLOADS['https://localhost:8443/vfabric/v1'] = {
-        'links': [{
-            'rel': 'agent-image',
-            'href': 'agent-image-href'
-        }, {
-            'rel': 'nodes',
-            'href': 'nodes-href'
-        }, {
-            'rel': 'tasks',
-            'href': 'tasks-href'
-        }]
-    }
-
-    _PAYLOADS['agent-image-href'] = {
-        'links': [{
-            'rel': 'content',
-            'href': 'content-href'
-        }, {
-            'rel': 'security',
-            'href': 'security-href'
-        }, {
-            'rel': 'self',
-            'href': 'self-href'
-        }]
-    }
-
-    _PAYLOADS['nodes-href'] = {
-        'nodes': [],
-        'links': [{
-            'rel': 'security',
-            'href': 'security-href'
-        }, {
-            'rel': 'self',
-            'href': 'self-href'
-        }]
-    }
+class TestVFabric(TestCase):
+    __client = StubClient()
 
     def setUp(self):
-        super(TestVFabric, self).setUp()
-        self.__vfabric = VFabric(self._client, 'https://localhost:8443{}')
+        self.__client.delegate.reset_mock()
+        self.__vfabric = VFabric(self.__client, 'https://localhost:8443{}')
 
-    def test_agent_image(self):
+    def test_attributes(self):
         self.assertIsInstance(self.__vfabric.agent_image, AgentImage)
-
-    def test_nodes(self):
-        self.assertIsInstance(self.__vfabric.nodes, Nodes)
+        self.assertIsInstance(self.__vfabric.nodes, VFabricNodes)

@@ -14,62 +14,51 @@
 # limitations under the License.
 
 
+from unittest.case import TestCase
 from vas.shared.Security import Security
-from vas.test.test_TestRoot import TestRoot
+from vas.test.StubClient import StubClient
 
-class TestSecurity(TestRoot):
-    _PAYLOADS = dict()
-
-    _PAYLOADS['security-href'] = {
-        'owner': 'owner',
-        'group': 'group',
-        'permissions': {
-            'owner': ['READ', 'WRITE', 'EXECUTE'],
-            'group': ['READ', 'WRITE'],
-            'other': ['EXECUTE']
-        }
-    }
-
-    _PAYLOADS['less-than-href'] = {
-        'owner': 'owner',
-        'group': 'group',
-        'permissions': {
-            'owner': ['READ', 'WRITE', 'EXECUTE'],
-            'group': ['READ', 'WRITE'],
-            'other': ['EXECUTE']
-        }
-    }
+class TestSecurity(TestCase):
+    __client = StubClient()
 
     def setUp(self):
-        super(TestSecurity, self).setUp()
-        self.__security = Security(self._client, 'security-href')
+        self.__client.delegate.reset_mock()
+        self.__security = Security(self.__client, 'https://localhost:8443/vfabric/v1/security/0/')
 
     def test_attributes(self):
         self.assertEqual('owner', self.__security.owner)
         self.assertEqual('group', self.__security.group)
-        self.assertEqual({'owner': ['READ', 'WRITE', 'EXECUTE'], 'group': ['READ', 'WRITE'], 'other': ['EXECUTE']},
-                                                                                                                  self.__security.permissions)
+        self.assertEqual({'owner': ['READ', 'WRITE', 'EXECUTE'], 'group': ['READ', 'WRITE'], 'other': ['READ']},
+            self.__security.permissions)
 
-    def test_update(self):
-        self.__security.update()
-        self._client.post.assert_called_with('security-href', {})
+    def test_chown_no_optionals(self):
+        self.__client.delegate.reset_mock()
+        self.__security.chown()
+        self.__client.delegate.post.assert_called_once_with('https://localhost:8443/vfabric/v1/security/0/', {})
+        self.assertEqual('owner', self.__security.owner)
+        self.assertEqual('group', self.__security.group)
 
-        self.__security.update(owner='owner-2')
-        self._client.post.assert_called_with('security-href', {'owner': 'owner-2'})
+    def test_chown_all_optionals(self):
+        self.__client.delegate.reset_mock()
+        self.__security.chown(owner='owner-2', group='group-2')
+        self.__client.delegate.post.assert_called_once_with('https://localhost:8443/vfabric/v1/security/0/',
+                {'owner': 'owner-2', 'group': 'group-2'})
+        self.assertEqual('owner-2', self.__security.owner)
+        self.assertEqual('group-2', self.__security.group)
 
-        self.__security.update(group='group-2')
-        self._client.post.assert_called_with('security-href', {'group': 'group-2'})
+    def test_chmod_no_optionals(self):
+        self.__client.delegate.reset_mock()
+        self.__security.chmod()
+        self.__client.delegate.post.assert_called_once_with('https://localhost:8443/vfabric/v1/security/0/',
+                {'permissions': {}})
+        self.assertEqual({'owner': ['READ', 'WRITE', 'EXECUTE'], 'group': ['READ', 'WRITE'], 'other': ['READ']},
+            self.__security.permissions)
 
-        self.__security.update(permissions={'other': ['EXECUTE']})
-        self._client.post.assert_called_with('security-href', {'permissions': {'other': ['EXECUTE']}})
+    def test_chmod_all_optionals(self):
+        self.__client.delegate.reset_mock()
+        self.__security.chmod(owner=['READ', 'WRITE'], group=['READ'], other=['READ', 'WRITE', 'EXECUTE'])
+        self.__client.delegate.post.assert_called_once_with('https://localhost:8443/vfabric/v1/security/0/',
+                {'permissions': {'owner': ['READ', 'WRITE'], 'group': ['READ'], 'other': ['READ', 'WRITE', 'EXECUTE']}})
+        self.assertEqual({'owner': ['READ', 'WRITE'], 'group': ['READ'], 'other': ['READ', 'WRITE', 'EXECUTE']},
+            self.__security.permissions)
 
-    def test_equals(self):
-        self.assertEqual(Security(self._client, 'security-href'), self.__security)
-
-    def test_hash(self):
-        self.assertEqual(hash(Security(self._client, 'security-href')), hash(self.__security))
-
-    def test_less_than(self):
-        security_less_than = Security(self._client, 'less-than-href')
-        self.assertTrue(security_less_than < self.__security)
-        self.assertFalse(security_less_than > self.__security)

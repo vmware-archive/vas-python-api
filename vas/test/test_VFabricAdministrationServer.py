@@ -14,30 +14,21 @@
 # limitations under the License.
 
 
+from unittest.case import TestCase
 from vas.VFabricAdministrationServer import VFabricAdministrationServer
 from vas.tc_server.TcServer import TcServer
-from vas.test.test_TestRoot import TestRoot
+from vas.test.StubClient import StubClient
 from vas.vfabric.VFabric import VFabric
 
-class TestVFabricAdministrationServer(TestRoot):
-    _PAYLOADS = dict()
-
-    _PAYLOADS['https://localhost:8443/vfabric/v1'] = {
-        'links': [{
-            'rel': 'agent-image',
-            'href': 'agent-image-href'
-        }, {
-            'rel': 'nodes',
-            'href': 'nodes-href'
-        }, {
-            'rel': 'tasks',
-            'href': 'tasks-href'
-        }]
-    }
+class TestVFabricAdministrationServer(TestCase):
+    __client = StubClient()
 
     def setUp(self):
-        super(TestVFabricAdministrationServer, self).setUp()
-        self.__vfabric_administration_server = VFabricAdministrationServer(client=self._client)
+        self.__client.delegate.reset_mock()
+        self.__vfabric_administration_server = VFabricAdministrationServer(client=self.__client)
+
+    def test_tc_server(self):
+        self.assertIsInstance(self.__vfabric_administration_server.tc_server, TcServer)
 
     def test_vfabric(self):
         self.assertIsInstance(self.__vfabric_administration_server.vfabric, VFabric)

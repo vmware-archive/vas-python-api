@@ -17,8 +17,8 @@
 class Security:
     """The security configuration for an item or collection
 
-    :ivar str owner: The owner of the item or collection
-    :ivar str group:   The group of the item or collection
+    :ivar str owner:    The owner of the item or collection
+    :ivar str group:    The group of the item or collection
     :ivar dict permissions: The permissions of the item or collection. This :obj:`dict` contains keys of ``owner``,
                             ``group``, and ``other``.  The value for any of those keys is a :obj:`list` which contains
                             any of ``READ``, ``WRITE``, and ``EXECUTE``.  For example::
@@ -32,6 +32,8 @@ class Security:
 
     __KEY_GROUP = 'group'
 
+    __KEY_OTHER = 'other'
+
     __KEY_OWNER = 'owner'
 
     __KEY_PERMISSIONS = 'permissions'
@@ -40,29 +42,21 @@ class Security:
         self.__client = client
         self.__location_self = location
 
-        self._initialize_attributes(client, location)
+        details = client.get(location)
+        self.group = details[self.__KEY_GROUP]
+        self.owner = details[self.__KEY_OWNER]
+        self.permissions = details[self.__KEY_PERMISSIONS]
 
-    def update(self, owner=None, group=None, permissions=None):
-        """Update this security configuration
+    def chown(self, owner=None, group=None):
+        """Change the owner and group security configuration for an item or collection. Analogous to the UNIX |chown|_ command.
 
-        All elements are optional and any that are not specified will be unchanged.
+        .. |chown| replace:: ``chown``
+        .. _chown: http://en.wikipedia.org/wiki/Chown
 
-        .. note:: The contents of this instance are synchronized with the server after the operation is completed.
-
-        :type owner:    :obj:`str`
-        :param owner:   The owner of the item or collection
-        :type group:    :obj:`str`
-        :param group:   The group of the item or collection
-        :type permissions:  :obj:`dict`
-        :param permissions: The permissions of the item or collection. This :obj:`dict` can only contain keys of
-                            ``owner``, ``group``, and ``other``.  The value for any of those keys must be a :obj:`list`
-                            which can only contain ``READ``, ``WRITE``, and ``EXECUTE``.  For example::
-
-                                {
-                                    'owner': ['READ', 'WRITE', 'EXECUTE'],
-                                    'group': ['READ', 'WRITE'],
-                                    'other': ['READ']
-                                }
+        :type owner:     :obj:`str`
+        :param owner:    The new owner of the item or collection.  Unchanged if :obj:`None`.
+        :type group:     :obj:`str`
+        :param group:    The new group of the item or collection.  Unchanged if :obj:`None`.
         """
 
         payload = dict()
@@ -73,17 +67,54 @@ class Security:
         if group is not None:
             payload[self.__KEY_GROUP] = group
 
-        if permissions is not None:
-            payload[self.__KEY_PERMISSIONS] = permissions
-
         self.__client.post(self.__location_self, payload)
-        self._initialize_attributes(self.__client, self.__location_self)
 
-    def _initialize_attributes(self, client, location):
-        details = client.get(location)
-        self.group = details[self.__KEY_GROUP]
-        self.owner = details[self.__KEY_OWNER]
-        self.permissions = details[self.__KEY_PERMISSIONS]
+        if owner is not None:
+            self.owner = owner
+
+        if group is not None:
+            self.group = group
+
+
+    def chmod(self, owner=None, group=None, other=None):
+        """Change the permissions for an item or collection. Analogous to the UNIX |chmod|_ command.
+
+        .. |chmod| replace:: ``chmod``
+        .. _chmod: http://en.wikipedia.org/wiki/Chmod
+
+        :type owner:     :obj:`list` of :obj:`str`
+        :param owner:    The new owner class permissions of the item or collection.  Legal values are any of ``READ``,
+                         ``WRITE``, and ``EXECUTE``. Unchanged if :obj:`None`.
+        :type group:     :obj:`list` of :obj:`str`
+        :param group:    The new group class permissions of the item or collection.  Legal values are any of ``READ``,
+                         ``WRITE``, and ``EXECUTE``. Unchanged if :obj:`None`.
+        :type other:     :obj:`list` of :obj:`str`
+        :param other:    The new other class permissions of the item or collection.  Legal values are any of ``READ``,
+                         ``WRITE``, and ``EXECUTE``. Unchanged if :obj:`None`.
+        """
+
+        permissions = dict()
+
+        if owner is not None:
+            permissions[self.__KEY_OWNER] = owner
+
+        if group is not None:
+            permissions[self.__KEY_GROUP] = group
+
+        if other is not None:
+            permissions[self.__KEY_OTHER] = other
+
+        self.__client.post(self.__location_self, {self.__KEY_PERMISSIONS: permissions})
+
+        if owner is not None:
+            self.permissions[self.__KEY_OWNER] = owner
+
+        if group is not None:
+            self.permissions[self.__KEY_GROUP] = group
+
+        if other is not None:
+            self.permissions[self.__KEY_OTHER] = other
+
 
     def __eq__(self, other):
         return self.__location_self == other.__location_self

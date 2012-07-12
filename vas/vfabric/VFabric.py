@@ -15,41 +15,26 @@
 
 
 from vas.shared.TopLevelType import TopLevelType
-from vas.vfabric.AgentImage import AgentImage
-from vas.vfabric.VFabricNodes import VFabricNodes
 
 class VFabric(TopLevelType):
-    """The vFabric component of the vFabric Administration Server"""
+    """The vFabric component of the vFabric Administration Server
+
+    :ivar `vas.vfabric.AgentImage` agent_image: The vFabric Administration Agent image
+    :ivar `vas.vfabric.VFabricNodes` nodes: The collection of nodes
+    """
 
     __REL_AGENT_IMAGE = 'agent-image'
 
-    __ROOT_PATH = "/vfabric/v1"
+    __ROOT_PATH = "/vfabric/v1/"
 
 
     def __init__(self, client, location_stem):
         super(VFabric, self).__init__(client, location_stem.format(self.__ROOT_PATH))
 
-    @property
-    def agent_image(self):
-        """Return the vFabric Administration Agent image
+        self.agent_image = AgentImage(client, self._links[self.__REL_AGENT_IMAGE][0])
 
-        :rtype:     :class:`vas.vfabric.AgentImage`
-        :return:    The vFabric Administration Agent image
-        """
+    def _create_nodes(self, client, location):
+        return VFabricNodes(client, location)
 
-        return AgentImage(self._client, self.__location_agent_image)
-
-    @property
-    def nodes(self):
-        """Return the collection of vFabric nodes
-
-        :rtype:     :class:`vas.vfabric.VFabricNodes`
-        :return:    The collection of vFabric nodes
-        """
-
-        return VFabricNodes(self._client, self._location_nodes)
-
-    def _initialize_attributes(self, client, location):
-        super(VFabric, self)._initialize_attributes(client, location)
-
-        self.__location_agent_image = self._links[self.__REL_AGENT_IMAGE][0]
+from vas.vfabric.AgentImage import AgentImage
+from vas.vfabric.VFabricNodes import VFabricNodes
