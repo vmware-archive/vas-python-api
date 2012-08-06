@@ -11,10 +11,10 @@ customized using the ``--context-path`` option.
 Running the example
 -------------------
 
-The example requires four arguments:
+The example requires two arguments:
 
- * The path to the tc Server ZIP file
- * The installation image's version
+* The path to the tc Server ZIP file
+* The installation image's version
 
 For example::
 

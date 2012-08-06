@@ -13,10 +13,10 @@ Running the example
 
 The example requires four arguments:
 
- * The path to the tc Server ZIP file
- * The installation image's version
- * The path to the WAR file that should be deployed
- * The WAR file's version
+* The path to the tc Server ZIP file
+* The installation image's version
+* The path to the WAR file that should be deployed
+* The WAR file's version
 
 For example::
 
