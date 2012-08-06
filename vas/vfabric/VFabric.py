@@ -32,9 +32,14 @@ class VFabric(TopLevelType):
         super(VFabric, self).__init__(client, location_stem.format(self.__ROOT_PATH))
 
         self.agent_image = AgentImage(client, self._links[self.__REL_AGENT_IMAGE][0])
+        self.__location_stem = location_stem
 
     def _create_nodes(self, client, location):
         return VFabricNodes(client, location)
+
+    def __repr__(self):
+        return "{}(client={}, location_stem={})".format(self.__class__.__name__, self._client,
+            repr(self.__location_stem))
 
 from vas.vfabric.AgentImage import AgentImage
 from vas.vfabric.VFabricNodes import VFabricNodes

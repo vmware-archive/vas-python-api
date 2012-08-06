@@ -45,3 +45,13 @@ class VFabricAdministrationServer:
         location_stem = 'https://{}:{}{}'.format(host, port, '{}')
         self.tc_server = TcServer(client, location_stem)
         self.vfabric = VFabric(client, location_stem)
+
+        self.__host = host
+        self.__port = port
+        self.__username = username
+        self.__password = password
+        self.__client = client
+
+    def __repr__(self):
+        return "{}(host={}, port={}, username={}, password={}, client={})".format(self.__class__.__name__,
+            repr(self.__host), self.__port, repr(self.__username), repr(self.__password), self.__client)

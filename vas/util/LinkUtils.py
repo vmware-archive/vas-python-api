@@ -54,3 +54,6 @@ class LinkUtils:
             return links
         else:
             return links[rel]
+
+    def __repr__(self):
+        return "{}()".format(self.__class__.__name__)

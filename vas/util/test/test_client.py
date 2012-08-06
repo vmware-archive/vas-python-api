@@ -13,25 +13,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 import re
 from unittest.case import TestCase
-from vas.test.StubClient import StubClient
-from vas.vfabric.AgentImage import AgentImage
-from vas.vfabric.VFabric import VFabric
-from vas.vfabric.VFabricNodes import VFabricNodes
+from vas.util.Client import Client
 
-class TestVFabric(TestCase):
-    __client = StubClient()
-
-    def setUp(self):
-        self.__client.delegate.reset_mock()
-        self.__vfabric = VFabric(self.__client, 'https://localhost:8443{}')
-
-    def test_attributes(self):
-        self.assertIsInstance(self.__vfabric.agent_image, AgentImage)
-        self.assertIsInstance(self.__vfabric.nodes, VFabricNodes)
+class TestClient(TestCase):
+    __client = Client('username', 'password')
 
     def test_repr(self):
-        self.assertIsNone(re.match('<.* object at 0x.*>', repr(self.__vfabric)), '__repr__ method has not been specified')
-        eval(repr(self.__vfabric))
+        self.assertIsNone(re.match('<.* object at 0x.*>', repr(self.__client)), '__repr__ method has not been specified')
+        eval(repr(self.__client))

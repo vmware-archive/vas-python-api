@@ -14,6 +14,7 @@
 # limitations under the License.
 
 
+import re
 from unittest.case import TestCase
 from vas.tc_server.TcServerInstallationImages import TcServerInstallationImages
 from vas.tc_server.TcServerRevisionImages import TcServerRevisionImages
@@ -36,3 +37,7 @@ class TestTcServer(TestCase):
         self.assertIsInstance(self.__tc_server.nodes, TcServerNodes)
         self.assertIsInstance(self.__tc_server.revision_images, TcServerRevisionImages)
         self.assertIsInstance(self.__tc_server.template_images, TcServerTemplateImages)
+
+    def test_repr(self):
+        self.assertIsNone(re.match('<.* object at 0x.*>', repr(self.__tc_server)), '__repr__ method has not been specified')
+        eval(repr(self.__tc_server))

@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
+import re
 from unittest import TestCase
 from vas.VFabricAdministrationServerError import VFabricAdministrationServerError
 
@@ -28,3 +28,9 @@ class TestVFabricAdministrationServerError(TestCase):
         error = VFabricAdministrationServerError('message1', 'message2', code='400')
         self.assertEqual(['message1', 'message2'], error.messages)
         self.assertEqual('400', error.code)
+
+    def test_repr(self):
+        error = VFabricAdministrationServerError('message1', 'message2', code='400')
+
+        self.assertIsNone(re.match('<.* object at 0x.*>', repr(error)), '__repr__ method has not been specified')
+        eval(repr(error))

@@ -14,6 +14,7 @@
 # limitations under the License.
 
 
+import re
 from unittest.case import TestCase
 from vas.shared.Security import Security
 from vas.test.StubClient import StubClient
@@ -34,3 +35,7 @@ class TestVFabricNode(TestCase):
         self.assertEqual({'a': 'alpha', 'b': 'bravo'}, self.__node.metadata)
         self.assertEqual('Linux', self.__node.operating_system)
         self.assertIsInstance(self.__node.security, Security)
+
+    def test_repr(self):
+        self.assertIsNone(re.match('<.* object at 0x.*>', repr(self.__node)), '__repr__ method has not been specified')
+        eval(repr(self.__node))

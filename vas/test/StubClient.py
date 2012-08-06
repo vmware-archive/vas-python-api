@@ -76,3 +76,5 @@ class StubClient:
     def post_multipart(self, location, metadata, content):
         return self.delegate.post_multipart(location, metadata, content)
 
+    def __repr__(self):
+        return "{}()".format(self.__class__.__name__)

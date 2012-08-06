@@ -14,6 +14,7 @@
 # limitations under the License.
 
 
+import re
 from unittest.case import TestCase
 from vas.shared.Security import Security
 from vas.tc_server.TcServerGroupApplication import TcServerGroupApplication
@@ -54,3 +55,7 @@ class TestTcServerGroupRevision(TestCase):
         self.__client.delegate.post.assert_called_once_with(
             'https://localhost:8443/tc-server/v1/groups/3/instances/4/applications/7/revisions/10/state/',
                 {'status': 'STOPPED'})
+
+    def test_repr(self):
+        self.assertIsNone(re.match('<.* object at 0x.*>', repr(self.__revision)), '__repr__ method has not been specified')
+        eval(repr(self.__revision))

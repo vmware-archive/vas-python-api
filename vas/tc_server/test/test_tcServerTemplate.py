@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
+import re
 from unittest.case import TestCase
 from vas.shared.Security import Security
 from vas.tc_server.TcServerInstallation import TcServerInstallation
@@ -34,3 +36,7 @@ class TestTcServerTemplate(TestCase):
         self.assertIsInstance(self.__template.installation, TcServerInstallation)
         self.assertIsInstance(self.__template.template_image, TcServerTemplateImage)
         self.assertIsInstance(self.__template.security, Security)
+
+    def test_repr(self):
+        self.assertIsNone(re.match('<.* object at 0x.*>', repr(self.__template)), '__repr__ method has not been specified')
+        eval(repr(self.__template))
