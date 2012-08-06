@@ -17,17 +17,17 @@
 from vas.shared.NodeInstance import NodeInstance
 
 class TcServerNodeInstance(NodeInstance):
-    """A tc Server group instance
+    """A tc Server node instance
 
     :ivar `vas.tc_server.TcServerGroupInstance` group_instance: The group instance that the node instance is a member of
-    :ivar str layout:   The layout of the group instance
+    :ivar str layout:   The layout of the node instance
     :ivar `vas.tc_server.TcServerLogs` logs: The collection of logs
-    :ivar str name: The name of the group instance
+    :ivar str name: The name of the node instance
     :ivar `vas.tc_server.TcServerNode` node: The node instance's parent node
-    :ivar `vas.tc_server.TcServerNodeApplications` node_applications: The collection of node applications
-    :ivar str runtime_version:  The runtime version of the group instance
+    :ivar `vas.tc_server.TcServerNodeApplications` applications: The collection of node applications
+    :ivar str runtime_version:  The runtime version of the node instance
     :ivar `vas.shared.Security` security: The security configuration for the node instance
-    :ivar str services: The services configured in the group instance
+    :ivar str services: The services configured in the node instance
     :ivar str state:    The current state of the node instance.  Will be one of the following:
 
                         * ``STARTING``
@@ -37,25 +37,22 @@ class TcServerNodeInstance(NodeInstance):
     """
     __KEY_LAYOUT = 'layout'
 
-    __KEY_NAME = 'name'
-
     __KEY_RUNTIME_VERSION = 'runtime-version'
 
     __KEY_SERVICES = 'services'
-
-    __REL_GROUP_INSTANCE = 'group-instance'
 
     __REL_NODE_APPLICATIONS = 'node-applications'
 
     def __init__(self, client, location):
         super(TcServerNodeInstance, self).__init__(client, location)
 
-        self.group_instance = TcServerGroupInstance(client, self._links[self.__REL_GROUP_INSTANCE][0])
         self.layout = self._details[self.__KEY_LAYOUT]
-        self.name = self._details[self.__KEY_NAME]
-        self.node_applications = TcServerNodeApplications(client, self._links[self.__REL_NODE_APPLICATIONS][0])
+        self.applications = TcServerNodeApplications(client, self._links[self.__REL_NODE_APPLICATIONS][0])
         self.runtime_version = self._details[self.__KEY_RUNTIME_VERSION]
         self.services = self._details[self.__KEY_SERVICES]
+
+    def _create_group_instance(self, client, location):
+        return TcServerGroupInstance(client, location)
 
     def _create_logs(self, client, location):
         return TcServerLogs(client, location)

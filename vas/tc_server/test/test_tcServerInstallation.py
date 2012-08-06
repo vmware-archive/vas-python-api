@@ -38,7 +38,7 @@ class TestTcServerInstallation(TestCase):
         self.assertEqual(
             [TcServerGroupInstance(self.__client, 'https://localhost:8443/tc-server/v1/groups/1/instances/3/'),
              TcServerGroupInstance(self.__client, 'https://localhost:8443/tc-server/v1/groups/1/instances/4/'), ],
-            self.__installation.group_instances)
+            self.__installation.instances)
         self.assertIsInstance(self.__installation.installation_image, TcServerInstallationImage)
         self.assertIsInstance(self.__installation.security, Security)
         self.assertIsInstance(self.__installation.templates, TcServerTemplates)

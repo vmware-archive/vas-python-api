@@ -32,7 +32,7 @@ class TestTcServerPendingConfiguration(TestCase):
         self.assertEqual('conf/server.xml', self.__configuration.path)
         self.assertEqual(10537, self.__configuration.size)
         self.assertEqual('groups-instances-configurations-pending-content\n', self.__configuration.content)
-        self.assertIsInstance(self.__configuration.group_instance, TcServerGroupInstance)
+        self.assertIsInstance(self.__configuration.instance, TcServerGroupInstance)
         self.assertIsInstance(self.__configuration.security, Security)
 
     def test_set_content(self):

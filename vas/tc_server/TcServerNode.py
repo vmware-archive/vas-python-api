@@ -27,7 +27,7 @@ class TcServerNode(Node):
     :ivar list ip_addresses:    The ip addresses the node listens on
     :ivar str java_home:    The path for the ``$JAVA_HOME`` that the agent is using
     :ivar dict metadata:    Arbitrary metadata configured in the ``agent.properties`` file on the node
-    :ivar `vas.tc_server.TcServerNodeInstances` node_instances: The collection of node instances
+    :ivar `vas.tc_server.TcServerNodeInstances` instances: The collection of node instances
     :ivar str operating_system: The operating system of the node
     :ivar `vas.shared.Security` security:   The security configuration for the node
     """
@@ -42,7 +42,7 @@ class TcServerNode(Node):
         super(TcServerNode, self).__init__(client, location)
 
         self.java_home = self._details[self.__KEY_JAVA_HOME]
-        self.node_instances = TcServerNodeInstances(self._client, self._links[self.__REL_NODE_INSTANCES][0])
+        self.instances = TcServerNodeInstances(self._client, self._links[self.__REL_NODE_INSTANCES][0])
 
     @property
     def groups(self):

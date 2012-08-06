@@ -97,10 +97,12 @@ class GroupInstance(Type):
         raise VFabricAdministrationServerError('_create_installation(self, client, location) method is unimplemented')
 
     def _create_live_configurations(self, client, location):
-        raise VFabricAdministrationServerError('_create_live_configurations(self, client, location) method is unimplemented')
+        raise VFabricAdministrationServerError(
+            '_create_live_configurations(self, client, location) method is unimplemented')
 
     def _create_node_instance(self, client, location):
         raise VFabricAdministrationServerError('_create_node_instance(self, client, location) method is unimplemented')
 
     def _create_pending_configurations(self, client, location):
-            raise VFabricAdministrationServerError('_create_pending_configurations(self, client, location) method is unimplemented')
+        raise VFabricAdministrationServerError(
+            '_create_pending_configurations(self, client, location) method is unimplemented')

@@ -40,7 +40,7 @@ class TestTcServerGroupInstance(TestCase):
         self.assertEqual({'Catalina': {'hosts': ['localhost']}}, self.__instance.services)
         self.assertEqual('STOPPED', self.__instance.state)
         self.assertIsInstance(self.__instance.group, TcServerGroup)
-        self.assertIsInstance(self.__instance.group_applications, TcServerGroupApplications)
+        self.assertIsInstance(self.__instance.applications, TcServerGroupApplications)
         self.assertIsInstance(self.__instance.installation, TcServerInstallation)
         self.assertIsInstance(self.__instance.live_configurations, TcServerLiveConfigurations)
         self.assertEquals(

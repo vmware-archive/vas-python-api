@@ -23,8 +23,8 @@ class TcServerNodeApplication(Type):
     :ivar `vas.tc_server.TcServerGroupApplication` group_application: The group application that the node application is a member of
     :ivar str host: The host of the node application
     :ivar str name: The name of the node  application
-    :ivar `vas.tc_server.TcServerNodeInstance` node_instance: The The node application's parent node instance
-    :ivar `vas.tc_server.TcServerNodeRevisions` node_revisions:  The collection of node revisions
+    :ivar `vas.tc_server.TcServerNodeInstance` instance: The The node application's parent node instance
+    :ivar `vas.tc_server.TcServerNodeRevisions` revisions:  The collection of node revisions
     :ivar `vas.shared.Security` security:   The security configuration for the node application
     :ivar str service: The service of the node application
     """
@@ -47,12 +47,12 @@ class TcServerNodeApplication(Type):
         super(TcServerNodeApplication, self).__init__(client, location)
 
         self.context_path = self._details[self.__KEY_CONTEXT_PATH]
-        self.host = self._details[self.__KEY_HOST]
-        self.name = self._details[self.__KEY_NAME]
-        self.service = self._details[self.__KEY_SERVICE]
         self.group_application = TcServerGroupApplication(client, self._links[self.__REL_GROUP_APPLICATION][0])
-        self.node_instance = TcServerNodeInstance(client, self._links[self.__REL_NODE_INSTANCE][0])
-        self.node_revisions = TcServerNodeRevisions(client, self._links[self.__REL_NODE_REVISIONS][0])
+        self.host = self._details[self.__KEY_HOST]
+        self.instance = TcServerNodeInstance(client, self._links[self.__REL_NODE_INSTANCE][0])
+        self.name = self._details[self.__KEY_NAME]
+        self.revisions = TcServerNodeRevisions(client, self._links[self.__REL_NODE_REVISIONS][0])
+        self.service = self._details[self.__KEY_SERVICE]
 
 from vas.tc_server.TcServerNodeInstance import TcServerNodeInstance
 from vas.tc_server.TcServerNodeRevisions import TcServerNodeRevisions

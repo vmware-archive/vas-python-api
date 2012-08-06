@@ -20,7 +20,7 @@ class TcServerNodeRevision(Type):
     """A tc Server node revision
 
     :ivar `vas.tc_server.TcServerGroupRevision` group_revision: The group revision that the node revision is a member of
-    :ivar `vas.tc_server.TcServerNodeApplication` node_application: The node revision's parent node application
+    :ivar `vas.tc_server.TcServerNodeApplication` application: The node revision's parent node application
     :ivar str state:    The current state of the group revision.  Will be one of the following:
 
                         * ``STARTING``
@@ -44,7 +44,7 @@ class TcServerNodeRevision(Type):
 
         self.version = self._details[self.__KEY_VERSION]
         self.group_revision = TcServerGroupRevision(client, self._links[self.__REL_GROUP_REVISION][0])
-        self.node_application = TcServerNodeApplication(client, self._links[self.__REL_NODE_APPLICATION][0])
+        self.application = TcServerNodeApplication(client, self._links[self.__REL_NODE_APPLICATION][0])
         self.__location_state = self._links[self.__REL_STATE][0]
 
     def start(self):

@@ -36,6 +36,6 @@ class TestTcServerNodeApplication(TestCase):
         self.assertEqual('Example', self.__application.name)
         self.assertEqual('Catalina', self.__application.service)
         self.assertIsInstance(self.__application.group_application, TcServerGroupApplication)
-        self.assertIsInstance(self.__application.node_instance, TcServerNodeInstance)
-        self.assertIsInstance(self.__application.node_revisions, TcServerNodeRevisions)
+        self.assertIsInstance(self.__application.instance, TcServerNodeInstance)
+        self.assertIsInstance(self.__application.revisions, TcServerNodeRevisions)
         self.assertIsInstance(self.__application.security, Security)

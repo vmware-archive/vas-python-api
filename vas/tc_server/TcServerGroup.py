@@ -19,7 +19,7 @@ from vas.shared.Group import Group
 class TcServerGroup(Group):
     """A tc Server group
 
-    :ivar `vas.tc_server.TcServerGroupInstances` group_instances:  The collection of instances
+    :ivar `vas.tc_server.TcServerGroupInstances` instances:  The collection of instances
     :ivar `vas.tc_server.TcServerInstallations` installations:  The collection of installations
     :ivar str name: The name of the group
     :ivar `vas.shared.Nodes` nodes: The :class:`vas.tc_server.TcServerNode` s that are members of the group
@@ -31,7 +31,7 @@ class TcServerGroup(Group):
     def __init__(self, client, location):
         super(TcServerGroup, self).__init__(client, location)
 
-        self.group_instances = TcServerGroupInstances(self._client, self._links[self.__REL_GROUP_INSTANCES][0])
+        self.instances = TcServerGroupInstances(self._client, self._links[self.__REL_GROUP_INSTANCES][0])
 
     def _create_installations(self, client, location):
         return TcServerInstallations(client, location)

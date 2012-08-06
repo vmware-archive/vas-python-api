@@ -38,7 +38,7 @@ class TestTcServerNode(TestCase):
         self.assertEqual(['192.168.0.2', '127.0.0.1'], self.__node.ip_addresses)
         self.assertEqual('/usr/bin', self.__node.java_home)
         self.assertEqual({'a': 'alpha', 'b': 'bravo'}, self.__node.metadata)
-        self.assertIsInstance(self.__node.node_instances, TcServerNodeInstances)
+        self.assertIsInstance(self.__node.instances, TcServerNodeInstances)
         self.assertEqual('Linux', self.__node.operating_system)
         self.assertIsInstance(self.__node.security, Security)
 

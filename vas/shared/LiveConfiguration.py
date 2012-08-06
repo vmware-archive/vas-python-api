@@ -20,7 +20,7 @@ from vas.shared.Type import Type
 class LiveConfiguration(Type):
     """A live configuration
 
-    :ivar `vas.shared.GroupInstance` group_instance: The configuration's parent group instance
+    :ivar `vas.shared.GroupInstance` instance: The configuration's parent group instance
     :ivar str path: The path of the configuration
     :ivar int size: The size of the configuration
     :ivar str content:  The contents of the configuration
@@ -38,7 +38,7 @@ class LiveConfiguration(Type):
     def __init__(self, client, location):
         super(LiveConfiguration, self).__init__(client, location)
 
-        self.group_instance = self._create_group_instance(client, self._links[self.__REL_GROUP_INSTANCE][0])
+        self.instance = self._create_group_instance(client, self._links[self.__REL_GROUP_INSTANCE][0])
         self.path = self._details[self.__KEY_PATH]
         self.size = self._details[self.__KEY_SIZE]
 

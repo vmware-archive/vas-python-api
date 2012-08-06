@@ -71,10 +71,10 @@ print('Creating instance at http://localhost:8080')
 instance = group.instances.create(name='my-instance', installation=installation, properties={'base.jmx.port': 6970})
 
 print('Creating application at /petcare')
-application = instance.group_applications.create('/petcare', 'localhost', 'PetCare', 'Catalina')
+application = instance.applications.create('/petcare', 'localhost', 'PetCare', 'Catalina')
 
 print('Creating revision')
-application.group_revisions.create(revision_image)
+application.revisions.create(revision_image)
 
 print('Starting instance')
 instance.start()

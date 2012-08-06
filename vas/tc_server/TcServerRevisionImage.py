@@ -21,7 +21,7 @@ class TcServerRevisionImage(NamedImage):
     """A revision image
 
     :ivar str name: The name of the revision image
-    :ivar list group_revisions: The :class:`vas.tc_server.TcServerGroupRevision` s that use the revision image
+    :ivar list revisions: The :class:`vas.tc_server.TcServerGroupRevision` s that use the revision image
     :ivar `vas.shared.Security` security:   The security configuration for the revision image
     :ivar int size: The size of the revision image
     :ivar str version: The version of the revision image
@@ -30,7 +30,7 @@ class TcServerRevisionImage(NamedImage):
     __REL_REVISION = 'group-revision'
 
     @property
-    def group_revisions(self):
+    def revisions(self):
         return [TcServerGroupRevision(self._client, location) for location in
                 LinkUtils.get_links(self._client.get(self._location_self), self.__REL_REVISION)]
 

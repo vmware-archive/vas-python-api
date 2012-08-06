@@ -19,7 +19,7 @@ from vas.shared.PendingConfiguration import PendingConfiguration
 class TcServerPendingConfiguration(PendingConfiguration):
     """A tc Server pending configuration
 
-    :ivar `vas.tc_server.TcServerGroupInstance` group_instance: The configuration's parent group instance
+    :ivar `vas.tc_server.TcServerGroupInstance` instance: The configuration's parent group instance
     :ivar str path: The path of the configuration
     :ivar int size: The size of the configuration
     :ivar str content:  The contents of the configuration
