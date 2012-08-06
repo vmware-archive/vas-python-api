@@ -20,7 +20,7 @@ from vas.util.LinkUtils import LinkUtils
 class TcServerGroupRevision(Type):
     """A tc Server group revision
 
-    :ivar `vas.tc_server.TcServerGroupApplication` group_application: The group revision's parent group application
+    :ivar `vas.tc_server.TcServerGroupApplication` application: The group revision's parent group application
     :ivar list node_revisions: The :class:`vas.tc_server.TcServerNodeRevision` s that are members of the group revision
     :ivar `vas.tc_server.TcServerRevisionImage` revision_image: The image the group revision is based on
     :ivar `vas.shared.Security` security:   The security configuration for the group revision
@@ -46,7 +46,7 @@ class TcServerGroupRevision(Type):
     def __init__(self, client, location):
         super(TcServerGroupRevision, self).__init__(client, location)
 
-        self.group_application = TcServerGroupApplication(client, self._links[self.__REL_GROUP_APPLICATION][0])
+        self.application = TcServerGroupApplication(client, self._links[self.__REL_GROUP_APPLICATION][0])
         self.revision_image = TcServerRevisionImage(client, self._links[self.__REL_REVISION_IMAGE][0])
         self.version = self._details[self.__KEY_VERSION]
         self.__location_state = self._links[self.__REL_STATE][0]

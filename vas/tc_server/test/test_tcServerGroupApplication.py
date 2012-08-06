@@ -35,8 +35,8 @@ class TestTcServerGroupApplication(TestCase):
         self.assertEqual('localhost', self.__application.host)
         self.assertEqual('Example', self.__application.name)
         self.assertEqual('Catalina', self.__application.service)
-        self.assertIsInstance(self.__application.group_instance, TcServerGroupInstance)
-        self.assertIsInstance(self.__application.group_revisions, TcServerGroupRevisions)
+        self.assertIsInstance(self.__application.instance, TcServerGroupInstance)
+        self.assertIsInstance(self.__application.revisions, TcServerGroupRevisions)
         self.assertEqual(
             [TcServerNodeApplication(self.__client,
                 'https://localhost:8443/tc-server/v1/nodes/1/instances/5/applications/8/'),

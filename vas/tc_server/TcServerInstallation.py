@@ -21,7 +21,7 @@ class TcServerInstallation(Installation):
     """A tc Server installation
 
     :ivar `vas.tc_server.TcServerGroup` group: The installation's parent group
-    :ivar list group_instances: The :class:`vas.tc_server.TcServerGroupInstance` s that use this installation
+    :ivar list instances: The :class:`vas.tc_server.TcServerGroupInstance` s that use this installation
     :ivar `vas.shared.InstallationImage` installation_image: The image the installation is based on
     :ivar list runtime_versions: The runtime versions (:obj:`str`) available in the installation
     :ivar `vas.shared.Security` security:   The security configuration for the type
@@ -42,7 +42,7 @@ class TcServerInstallation(Installation):
         self.templates = TcServerTemplates(client, self._links[self.__REL_TEMPLATES][0])
 
     @property
-    def group_instances(self):
+    def instances(self):
         return [TcServerGroupInstance(self._client, location) for location in
                 LinkUtils.get_links(self._client.get(self._location_self), self.__REL_GROUP_INSTANCE)]
 

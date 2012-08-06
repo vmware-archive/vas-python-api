@@ -33,7 +33,7 @@ class TestTcServerNodeRevision(TestCase):
         self.assertEqual('1.0.0', self.__revision.version)
         self.assertEqual('STOPPED', self.__revision.state)
         self.assertIsInstance(self.__revision.group_revision, TcServerGroupRevision)
-        self.assertIsInstance(self.__revision.node_application, TcServerNodeApplication)
+        self.assertIsInstance(self.__revision.application, TcServerNodeApplication)
         self.assertIsInstance(self.__revision.security, Security)
 
     def test_start(self):

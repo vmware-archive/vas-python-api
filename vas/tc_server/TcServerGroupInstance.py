@@ -21,7 +21,7 @@ class TcServerGroupInstance(GroupInstance):
 
 
     :ivar `vas.tc_server.TcServerGroup` group: The group instance's parent group
-    :ivar `vas.tc_server.TcServerGroupApplication` group_applications: The collection of group applications
+    :ivar `vas.tc_server.TcServerGroupApplication` applications: The collection of group applications
     :ivar `vas.tc_server.TcServerInstallation` installation: The group instance's installation
     :ivar str layout:   The layout of the group instance
     :ivar `vas.tc_server.TcServerLiveConfigurations` live_configurations:  The collection of live configurations
@@ -49,11 +49,11 @@ class TcServerGroupInstance(GroupInstance):
     def __init__(self, client, location):
         super(TcServerGroupInstance, self).__init__(client, location)
 
+        self.applications = TcServerGroupApplications(client, self._links[self.__REL_GROUP_APPLICATIONS][0])
         self.layout = self._details[self.__KEY_LAYOUT]
         self.runtime_version = self._details[self.__KEY_RUNTIME_VERSION]
         self.services = self._details[self.__KEY_SERVICES]
 
-        self.group_applications = TcServerGroupApplications(client, self._links[self.__REL_GROUP_APPLICATIONS][0])
 
     def update(self, installation, runtime_version=None):
         """Update the group instance to use a different installation, optionally specifying a new runtime version to be used with the new installation

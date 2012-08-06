@@ -37,7 +37,7 @@ class TestTcServerNodeInstance(TestCase):
         self.assertIsInstance(self.__instance.logs, TcServerLogs)
         self.assertEqual('example', self.__instance.name)
         self.assertIsInstance(self.__instance.node, TcServerNode)
-        self.assertIsInstance(self.__instance.node_applications, TcServerNodeApplications)
+        self.assertIsInstance(self.__instance.applications, TcServerNodeApplications)
         self.assertEqual('7.0.21.A.RELEASE', self.__instance.runtime_version)
         self.assertEqual({'Catalina': {'hosts': ['localhost']}}, self.__instance.services)
         self.assertEqual('STOPPED', self.__instance.state)

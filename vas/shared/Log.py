@@ -22,7 +22,7 @@ class Log(Type):
 
     :ivar `datetime.datetime` last_modified: The time the log file was last modified
     :ivar str name: The name of the log
-    :ivar `vas.shared.NodeInstance` node_instance: The log's parent node instance
+    :ivar `vas.shared.NodeInstance` instance: The log's parent node instance
     :ivar int size: The size of the log
     :ivar `vas.shared.Security` security: The security configuration for the group
     """
@@ -42,8 +42,8 @@ class Log(Type):
 
         self.__location_content = self._links[self.__REL_CONTENT][0]
 
+        self.instance = self._create_node_instance(client, self._links[self.__REL_NODE_INSTANCE][0])
         self.name = self._details[self.__KEY_NAME]
-        self.node_instance = self._create_node_instance(client, self._links[self.__REL_NODE_INSTANCE][0])
 
     @property
     def last_modified(self):

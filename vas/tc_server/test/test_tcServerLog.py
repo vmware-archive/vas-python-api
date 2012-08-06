@@ -32,7 +32,7 @@ class TestTcServerLog(TestCase):
         self.assertEqual(datetime(2012, 5, 24, 15, 20, 56), self.__log.last_modified)
         self.assertEqual('catalina.out', self.__log.name)
         self.assertEqual(17638, self.__log.size)
-        self.assertIsInstance(self.__log.node_instance, TcServerNodeInstance)
+        self.assertIsInstance(self.__log.instance, TcServerNodeInstance)
         self.assertIsInstance(self.__log.security, Security)
 
     def test_content(self):

@@ -37,5 +37,5 @@ class TestTcServerRevisionImage(TestCase):
                 'https://localhost:8443/tc-server/v1/groups/5/instances/6/applications/7/revisions/8/'),
              TcServerGroupRevision(self.__client,
                  'https://localhost:8443/tc-server/v1/groups/1/instances/2/applications/3/revisions/4/')],
-            self.__revision_image.group_revisions)
+            self.__revision_image.revisions)
         self.assertIsInstance(self.__revision_image.security, Security)

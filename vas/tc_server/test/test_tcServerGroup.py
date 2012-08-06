@@ -31,7 +31,7 @@ class TestTcServerGroup(TestCase):
 
     def test_attributes(self):
         self.assertEqual('example-group', self.__group.name)
-        self.assertIsInstance(self.__group.group_instances, TcServerGroupInstances)
+        self.assertIsInstance(self.__group.instances, TcServerGroupInstances)
         self.assertIsInstance(self.__group.installations, TcServerInstallations)
         self.assertEqual(
             [TcServerNode(self.__client, 'https://localhost:8443/tc-server/v1/nodes/1/'),

@@ -21,8 +21,8 @@ class TcServerGroupApplication(Type):
     """A tc Server group application
 
     :ivar str context_path: The context path of the group application
-    :ivar `vas.tc_server.TcServerGroupInstance` group_instance: The group applications' parent group instance
-    :ivar `vas.tc_server.TcServerGroupRevisions` group_revisions:  The collection of group revisions
+    :ivar `vas.tc_server.TcServerGroupInstance` instance: The group applications' parent group instance
+    :ivar `vas.tc_server.TcServerGroupRevisions` revisions:  The collection of group revisions
     :ivar str host: The host of the group application
     :ivar str name: The name of the group application
     :ivar list node_applications: The :class:`vas.tc_server.TcServerNodeApplication` s that are members of the group application
@@ -50,9 +50,9 @@ class TcServerGroupApplication(Type):
         self.context_path = self._details[self.__KEY_CONTEXT_PATH]
         self.host = self._details[self.__KEY_HOST]
         self.name = self._details[self.__KEY_NAME]
+        self.revisions = TcServerGroupRevisions(client, self._links[self.__REL_GROUP_REVISIONS][0])
         self.service = self._details[self.__KEY_SERVICE]
-        self.group_instance = TcServerGroupInstance(client, self._links[self.__REL_GROUP_INSTANCE][0])
-        self.group_revisions = TcServerGroupRevisions(client, self._links[self.__REL_GROUP_REVISIONS][0])
+        self.instance = TcServerGroupInstance(client, self._links[self.__REL_GROUP_INSTANCE][0])
 
     @property
     def node_applications(self):

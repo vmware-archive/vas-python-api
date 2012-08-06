@@ -20,7 +20,9 @@ from vas.shared.Type import Type
 class NodeInstance(Type):
     """An abstract node instance
 
+    :ivar `vas.shared.GroupInstance` group_instance: The group instance that the node instance is a member of
     :ivar `vas.shared.Logs` logs: The collection of logs
+    :ivar str name: The name of the node instance
     :ivar `vas.shared.Node` node: The node instance's parent node
     :ivar `vas.shared.Security` security:   The security configuration for the node instance
     :ivar str state:    The current state of the node instance.  Will be one of the following:
@@ -30,6 +32,10 @@ class NodeInstance(Type):
                         * ``STOPPING``
                         * ``STOPPED``
     """
+
+    __KEY_NAME = 'name'
+
+    __REL_GROUP_INSTANCE = 'group-instance'
 
     __REL_LOGS = 'logs'
 
@@ -42,7 +48,10 @@ class NodeInstance(Type):
 
         self.__location_state = self._links[self.__REL_STATE][0]
 
+
+        self.group_instance = self._create_group_instance(client, self._links[self.__REL_GROUP_INSTANCE][0])
         self.logs = self._create_logs(client, self._links[self.__REL_LOGS][0])
+        self.name = self._details[self.__KEY_NAME]
         self.node = self._create_node(client, self._links[self.__REL_NODE][0])
 
     def start(self):
@@ -58,6 +67,9 @@ class NodeInstance(Type):
     @property
     def state(self):
         return self._client.get(self.__location_state)['status']
+
+    def _create_group_instance(self, client, location):
+        raise VFabricAdministrationServerError('_create_group_instance(self, client, location) method is unimplemented')
 
     def _create_logs(self, client, location):
         raise VFabricAdministrationServerError('_create_logs(self, client, location) method is unimplemented')

@@ -17,18 +17,12 @@ from vas.shared.LiveConfiguration import LiveConfiguration
 class PendingConfiguration(LiveConfiguration):
     """A pending configuration
 
-    :ivar `vas.shared.GroupInstance` group_instance: The configuration's parent group instance
+    :ivar `vas.shared.GroupInstance` instance: The configuration's parent group instance
     :ivar str path: The path of the configuration
     :ivar int size: The size of the configuration
     :ivar str content:  The contents of the configuration
     :ivar `vas.shared.Security` security:   The security configuration for the type
     """
-
-    __KEY_PATH = 'path'
-
-    __KEY_SIZE = 'size'
-
-    __REL_CONTENT = 'content'
 
     def __init__(self, client, location):
         super(PendingConfiguration, self).__init__(client, location)
