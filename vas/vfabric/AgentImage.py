@@ -46,9 +46,13 @@ class AgentImage(Type):
         :return:        The root directory of the extracted agent
         """
 
+        permissions = list()
         with ZipFile(BytesIO(self.content), 'r') as zip_file:
             for zip_info in zip_file.infolist():
                 file = zip_file.extract(zip_info, location)
-                os.chmod(file, zip_info.external_attr >> 16)
+                permissions.append((file, zip_info.external_attr >> 16))
+
+        for file, permission in permissions:
+            os.chmod(file, permission)
 
         return '{}/vfabric-administration-agent'.format(location)
