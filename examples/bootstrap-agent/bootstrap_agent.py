@@ -28,6 +28,10 @@ def __get_parser():
     parser.add_argument('--host', default='localhost',
         help='The vFabric Administration Server host (default: localhost)')
     parser.add_argument('--port', default=8443, type=int, help='The vFabric Administration Server port (default: 8443)')
+    parser.add_argument('--username', default='admin',
+        help='The vFabric Administration Server username (default: admin)')
+    parser.add_argument('--password', default='vmware',
+        help='The vFabric Administration Server password (default: password)')
     parser.add_argument('--location', default=os.curdir,
         help='The location to install the vFabric Administration Agent (default: current working directory)')
 
@@ -35,5 +39,6 @@ def __get_parser():
 
 args = __get_parser().parse_args()
 
-agent_root = VFabricAdministrationServer(args.host, args.port).vfabric.agent_image.extract_to(args.location)
+agent_root = VFabricAdministrationServer(args.host, args.port, args.username,
+    args.password).vfabric.agent_image.extract_to(args.location)
 call(['{}/bin/administration-agent.sh'.format(agent_root), 'start'])
