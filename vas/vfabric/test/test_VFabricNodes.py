@@ -14,6 +14,7 @@
 # limitations under the License.
 
 
+import re
 from unittest.case import TestCase
 from vas.shared.Security import Security
 from vas.test.StubClient import StubClient
@@ -45,3 +46,7 @@ class TestVFabricNodes(TestCase):
             count += 1
 
         self.assertEqual(2, count)
+
+    def test_repr(self):
+        self.assertIsNone(re.match('<.* object at 0x.*>', repr(self.__nodes)), '__repr__ method has not been specified')
+        eval(repr(self.__nodes))

@@ -14,6 +14,7 @@
 # limitations under the License.
 
 
+import re
 from unittest.case import TestCase
 from vas.shared.Security import Security
 from vas.tc_server.TcServerInstallation import TcServerInstallation
@@ -36,3 +37,7 @@ class TestInstallationImage(TestCase):
              TcServerInstallation(self.__client, 'https://localhost:8443/tc-server/v1/groups/3/installations/4/')],
             self.__installation_image.installations)
         self.assertIsInstance(self.__installation_image.security, Security)
+
+    def test_repr(self):
+        self.assertIsNone(re.match('<.* object at 0x.*>', repr(self.__installation_image)), '__repr__ method has not been specified')
+        eval(repr(self.__installation_image))

@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
+import re
 import os
 import shutil
 import tempfile
@@ -39,3 +41,7 @@ class TestAgentImage(TestCase):
             self.assertTrue(os.path.exists(os.path.join(location, 'foo.txt')))
         finally:
             shutil.rmtree(location)
+
+    def test_repr(self):
+        self.assertIsNone(re.match('<.* object at 0x.*>', repr(self.__agent_image)), '__repr__ method has not been specified')
+        eval(repr(self.__agent_image))

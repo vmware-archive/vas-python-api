@@ -43,3 +43,6 @@ class Type:
 
     def __lt__(self, other):
         return self._location_self < other._location_self
+
+    def __repr__(self):
+        return "{}(client={}, location={})".format(self.__class__.__name__, self._client, repr(self._location_self))

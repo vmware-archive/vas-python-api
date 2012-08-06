@@ -14,6 +14,7 @@
 # limitations under the License.
 
 
+import re
 from unittest.case import TestCase
 from vas.test.StubClient import StubClient
 from vas.util.LinkUtils import LinkUtils
@@ -49,3 +50,8 @@ class TestLinkUtils(TestCase):
         links = LinkUtils.get_links(self.__client.get('https://localhost:8443/tc-server/v1/groups/0/'), 'node')
         self.assertEqual(
             ['https://localhost:8443/tc-server/v1/nodes/1/', 'https://localhost:8443/tc-server/v1/nodes/0/'], links)
+
+    def test_repr(self):
+        linkUtils = LinkUtils()
+        self.assertIsNone(re.match('<.* object at 0x.*>', repr(linkUtils)), '__repr__ method has not been specified')
+        eval(repr(linkUtils))

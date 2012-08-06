@@ -14,6 +14,7 @@
 # limitations under the License.
 
 
+import re
 from unittest.case import TestCase
 from vas.shared.Security import Security
 from vas.tc_server.TcServerGroup import TcServerGroup
@@ -48,3 +49,7 @@ class TestTcServerGroup(TestCase):
                 {'nodes': ['https://localhost:8443/tc-server/v1/nodes/0/',
                            'https://localhost:8443/tc-server/v1/nodes/0/',
                            'https://localhost:8443/tc-server/v1/nodes/0/']})
+
+    def test_repr(self):
+        self.assertIsNone(re.match('<.* object at 0x.*>', repr(self.__group)), '__repr__ method has not been specified')
+        eval(repr(self.__group))

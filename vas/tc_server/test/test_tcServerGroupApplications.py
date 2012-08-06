@@ -14,6 +14,7 @@
 # limitations under the License.
 
 
+import re
 from unittest.case import TestCase
 from vas.shared.Security import Security
 from vas.tc_server.TcServerGroupApplication import TcServerGroupApplication
@@ -60,3 +61,7 @@ class TestTcServerGroupApplications(TestCase):
             count += 1
 
         self.assertEqual(2, count)
+
+    def test_repr(self):
+        self.assertIsNone(re.match('<.* object at 0x.*>', repr(self.__applications)), '__repr__ method has not been specified')
+        eval(repr(self.__applications))

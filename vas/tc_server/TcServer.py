@@ -37,6 +37,7 @@ class TcServer(ComponentType):
 
         self.revision_images = TcServerRevisionImages(client, self._links[self.__REL_REVISION_IMAGES][0])
         self.template_images = TcServerTemplateImages(client, self._links[self.__REL_TEMPLATE_IMAGES][0])
+        self.__location_stem = location_stem
 
     def _create_groups(self, client, location):
         return TcServerGroups(client, location)
@@ -46,6 +47,10 @@ class TcServer(ComponentType):
 
     def _create_nodes(self, client, location):
         return TcServerNodes(client, location)
+
+    def __repr__(self):
+        return "{}(client={}, location_stem={})".format(self.__class__.__name__, self._client,
+            repr(self.__location_stem))
 
 from vas.tc_server.TcServerInstallationImages import TcServerInstallationImages
 from vas.tc_server.TcServerRevisionImages import TcServerRevisionImages

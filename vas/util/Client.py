@@ -129,3 +129,7 @@ class Client:
             reasons.append(reason['message'])
 
         raise VFabricAdministrationServerError(*reasons, code=response.status_code)
+
+    def __repr__(self):
+        return "{}(username={}, password={})".format(self.__class__.__name__, repr(self.__username),
+            repr(self.__password))

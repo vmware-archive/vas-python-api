@@ -124,3 +124,6 @@ class Security:
 
     def __lt__(self, other):
         return self.__location_self < other.__location_self
+
+    def __repr__(self):
+        return "{}(client={}, location={})".format(self.__class__.__name__, self.__client, repr(self.__location_self))

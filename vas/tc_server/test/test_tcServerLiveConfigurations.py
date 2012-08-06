@@ -14,6 +14,7 @@
 # limitations under the License.
 
 
+import re
 from unittest.case import TestCase
 from vas.shared.Security import Security
 from vas.tc_server.TcServerLiveConfiguration import TcServerLiveConfiguration
@@ -44,3 +45,7 @@ class TestTcServerLiveConfigurations(TestCase):
             count += 1
 
         self.assertEqual(3, count)
+
+    def test_repr(self):
+        self.assertIsNone(re.match('<.* object at 0x.*>', repr(self.__live_configurations)), '__repr__ method has not been specified')
+        eval(repr(self.__live_configurations))

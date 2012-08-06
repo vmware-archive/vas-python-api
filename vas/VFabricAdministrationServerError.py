@@ -28,3 +28,7 @@ class VFabricAdministrationServerError(Exception):
 
         self.messages = list(messages)
         self.code = code
+
+    def __repr__(self):
+        return "{}({}, code={})".format(self.__class__.__name__, ','.join(map(lambda x: repr(x), self.messages)),
+            self.code)
