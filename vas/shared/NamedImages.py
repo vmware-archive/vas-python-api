@@ -38,5 +38,5 @@ class NamedImages(MutableCollectionType):
         :return:        The newly created named image
         """
 
-        location = self._client.post_multipart(self._location_self, {'name': name, 'version': version}, image)
+        location = self._client.post_multipart(self._location_self, image, {'name': name, 'version': version})
         return self._create_item(self._client, location)

@@ -90,5 +90,6 @@ class TestTcServerGroupInstance(TestCase):
                  'runtime-version': '7.0.27.A.RELEASE'})
 
     def test_repr(self):
-        self.assertIsNone(re.match('<.* object at 0x.*>', repr(self.__instance)), '__repr__ method has not been specified')
+        self.assertIsNone(re.match('<.* object at 0x.*>', repr(self.__instance)),
+            '__repr__ method has not been specified')
         eval(repr(self.__instance))

@@ -47,5 +47,6 @@ class TestTcServerLiveConfigurations(TestCase):
         self.assertEqual(3, count)
 
     def test_repr(self):
-        self.assertIsNone(re.match('<.* object at 0x.*>', repr(self.__live_configurations)), '__repr__ method has not been specified')
+        self.assertIsNone(re.match('<.* object at 0x.*>', repr(self.__live_configurations)),
+            '__repr__ method has not been specified')
         eval(repr(self.__live_configurations))

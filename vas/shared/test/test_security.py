@@ -64,5 +64,6 @@ class TestSecurity(TestCase):
             self.__security.permissions)
 
     def test_repr(self):
-        self.assertIsNone(re.match('<.* object at 0x.*>', repr(self.__security)), '__repr__ method has not been specified')
+        self.assertIsNone(re.match('<.* object at 0x.*>', repr(self.__security)),
+            '__repr__ method has not been specified')
         eval(repr(self.__security))

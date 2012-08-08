@@ -17,7 +17,6 @@
 from vas.VFabricAdministrationServerError import VFabricAdministrationServerError
 
 class LinkUtils:
-
     __KEY_HREF = 'href'
 
     __KEY_LINKS = 'links'

@@ -44,7 +44,7 @@ class TestInstallationImages(TestCase):
         self.assertIsInstance(installation_image, TcServerInstallationImage)
         self.__client.delegate.post_multipart.assert_called_once_with(
             'https://localhost:8443/tc-server/v1/installation-images/',
-                {'version': '2.8.0.RELEASE'}, '/tmp/vfabric-tc-server-standard-2.8.0.RELEASE.zip')
+            '/tmp/vfabric-tc-server-standard-2.8.0.RELEASE.zip', {'version': '2.8.0.RELEASE'})
 
     def test_attributes(self):
         self.assertIsInstance(self.__installation_images.security, Security)

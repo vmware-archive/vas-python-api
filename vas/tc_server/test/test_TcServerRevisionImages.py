@@ -41,8 +41,8 @@ class TestTcServerRevisionImages(TestCase):
 
         self.assertIsInstance(revision_image, TcServerRevisionImage)
         self.__client.delegate.post_multipart.assert_called_once_with(
-            'https://localhost:8443/tc-server/v1/revision-images/',
-                {'name': 'example', 'version': '1.0.0'}, '/tmp/petcare-1.0.0.RELEASE.war')
+            'https://localhost:8443/tc-server/v1/revision-images/', '/tmp/petcare-1.0.0.RELEASE.war',
+                {'name': 'example', 'version': '1.0.0'})
 
     def test_attributes(self):
         self.assertIsInstance(self.__revision_images.security, Security)
@@ -61,5 +61,6 @@ class TestTcServerRevisionImages(TestCase):
         self.assertEqual(2, count)
 
     def test_repr(self):
-        self.assertIsNone(re.match('<.* object at 0x.*>', repr(self.__revision_images)), '__repr__ method has not been specified')
+        self.assertIsNone(re.match('<.* object at 0x.*>', repr(self.__revision_images)),
+            '__repr__ method has not been specified')
         eval(repr(self.__revision_images))

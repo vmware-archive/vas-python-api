@@ -36,6 +36,6 @@ class VersionedImages(MutableCollectionType):
         :return:        The newly created versioned image
         """
 
-        location = self._client.post_multipart(self._location_self, {'version': version}, image)
+        location = self._client.post_multipart(self._location_self, image, {'version': version})
         return self._create_item(self._client, location)
 

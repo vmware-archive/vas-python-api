@@ -20,7 +20,7 @@ class TcServer(ComponentType):
     """The tc Server component of the vFabric Administration Server
 
     :ivar `vas.tc_server.TcServerGroups` groups:    The collection of groups
-    :ivar `vas.shared.TcServerInstallationImages` installation_images:  The collection of installation images
+    :ivar `vas.tc_server.TcServerInstallationImages` installation_images:  The collection of installation images
     :ivar `vas.tc_server.TcServerNodes` nodes: The collection of nodes
     :ivar `vas.tc_server.TcServerRevisionImages` revision_images: The collection of revision images
     :ivar `vas.tc_server.TcServerTemplateImages` template_images: The collection of template images
