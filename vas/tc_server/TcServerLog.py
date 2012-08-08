@@ -21,7 +21,7 @@ class TcServerLog(Log):
 
     :ivar `datetime.datetime` last_modified: The time the log file was last modified
     :ivar str name: The name of the log
-    :ivar `vas.shared.NodeInstance` instance: The log's parent node instance
+    :ivar `vas.tc_server.TcServerNodeInstance` instance: The log's parent node instance
     :ivar int size: The size of the log
     :ivar `vas.shared.Security` security: The security configuration for the group
     """

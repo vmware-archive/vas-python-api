@@ -73,8 +73,8 @@ class StubClient:
         else:
             return self.delegate.post(location, payload, rel)
 
-    def post_multipart(self, location, metadata, content):
-        return self.delegate.post_multipart(location, metadata, content)
+    def post_multipart(self, location, content, metadata=None):
+        return self.delegate.post_multipart(location, content, metadata)
 
     def __repr__(self):
         return "{}()".format(self.__class__.__name__)

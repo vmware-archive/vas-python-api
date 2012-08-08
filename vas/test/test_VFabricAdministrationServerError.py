@@ -18,7 +18,6 @@ from unittest import TestCase
 from vas.VFabricAdministrationServerError import VFabricAdministrationServerError
 
 class TestVFabricAdministrationServerError(TestCase):
-
     def test_no_code(self):
         error = VFabricAdministrationServerError('message1', 'message2')
         self.assertEqual(['message1', 'message2'], error.messages)

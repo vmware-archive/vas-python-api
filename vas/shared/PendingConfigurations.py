@@ -34,9 +34,9 @@ class PendingConfigurations(MutableCollectionType):
         :param path:    The path of the pending configuration
         :type configuration:    :obj:`str`
         :param configuration:   The local path configuration file
-        :rtype:         :class:`vas.shared.Configuration`
+        :rtype:         :class:`vas.shared.PendingConfiguration`
         :return:        The newly created pending configuration
         """
 
-        location = self._client.post_multipart(self._location_self, {'path': path}, configuration)
+        location = self._client.post_multipart(self._location_self, configuration, {'path': path})
         return self._create_item(self._client, location)

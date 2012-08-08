@@ -44,4 +44,5 @@ class Installation(Type):
         raise VFabricAdministrationServerError('_create_group(self, client, location) method is unimplemented')
 
     def _create_installation_image(self, client, location):
-        raise VFabricAdministrationServerError('_create_installation_image(self, client, location) method is unimplemented')
+        raise VFabricAdministrationServerError(
+            '_create_installation_image(self, client, location) method is unimplemented')

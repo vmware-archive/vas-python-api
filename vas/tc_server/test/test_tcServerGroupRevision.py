@@ -57,5 +57,6 @@ class TestTcServerGroupRevision(TestCase):
                 {'status': 'STOPPED'})
 
     def test_repr(self):
-        self.assertIsNone(re.match('<.* object at 0x.*>', repr(self.__revision)), '__repr__ method has not been specified')
+        self.assertIsNone(re.match('<.* object at 0x.*>', repr(self.__revision)),
+            '__repr__ method has not been specified')
         eval(repr(self.__revision))

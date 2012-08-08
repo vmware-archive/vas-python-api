@@ -12,9 +12,11 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from vas.tc_server.TcServer import TcServer
+
 
 from vas.util.Client import Client
+from vas.rabbitmq.RabbitMq import RabbitMq
+from vas.tc_server.TcServer import TcServer
 from vas.vfabric.VFabric import VFabric
 
 class VFabricAdministrationServer:
@@ -25,6 +27,7 @@ class VFabricAdministrationServer:
     .. note::   This is the only type that should ever be instantiated directly.  All other types are created
                 automatically based on the payloads returned from the server.
 
+    :ivar `vas.rabbitmq.RabbitMq` rabbitmq:   The RabbitMQ component of the vFabric Administration Server
     :ivar `vas.tc_server.TcServer` tc_server:   The tc Server component of the vFabric Administration Server
     :ivar `vas.vfabric.VFabric` vfabric:    The vFabric component of the vFabric Administration Server
 
@@ -43,6 +46,7 @@ class VFabricAdministrationServer:
             client = Client(username, password)
 
         location_stem = 'https://{}:{}{}'.format(host, port, '{}')
+        self.rabbitmq = RabbitMq(client, location_stem)
         self.tc_server = TcServer(client, location_stem)
         self.vfabric = VFabric(client, location_stem)
 

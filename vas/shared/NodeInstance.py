@@ -48,7 +48,6 @@ class NodeInstance(Type):
 
         self.__location_state = self._links[self.__REL_STATE][0]
 
-
         self.group_instance = self._create_group_instance(client, self._links[self.__REL_GROUP_INSTANCE][0])
         self.logs = self._create_logs(client, self._links[self.__REL_LOGS][0])
         self.name = self._details[self.__KEY_NAME]

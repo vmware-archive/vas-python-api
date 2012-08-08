@@ -41,8 +41,8 @@ class TestTcServerTemplateImages(TestCase):
 
         self.assertIsInstance(template_image, TcServerTemplateImage)
         self.__client.delegate.post_multipart.assert_called_once_with(
-            'https://localhost:8443/tc-server/v1/template-images/',
-                {'name': 'example', 'version': '1.0.0'}, '/tmp/template-image.zip')
+            'https://localhost:8443/tc-server/v1/template-images/', '/tmp/template-image.zip',
+                {'name': 'example', 'version': '1.0.0'})
 
     def test_attributes(self):
         self.assertIsInstance(self.__template_images.security, Security)

@@ -84,8 +84,11 @@ class Client:
         else:
             self.__raise_exception(response)
 
-    def post_multipart(self, location, metadata, content):
-        encoded_body = {'metadata': ('metadata.json', json.dumps(metadata))}
+    def post_multipart(self, location, content, metadata=None):
+        if metadata is None:
+            encoded_body = None
+        else:
+            encoded_body = {'metadata': ('metadata.json', json.dumps(metadata))}
 
         if os.path.isfile(content):
             with open(content, 'rb') as data:

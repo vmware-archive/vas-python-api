@@ -36,7 +36,7 @@ class Groups(MutableCollectionType):
         :param name:    The name of the group
         :type nodes:    :obj:`list` of :class:`vas.shared.Node`
         :param nodes:   The collection of nodes to be included in the group
-        :rtype:         :class:`vas.shared.GroupInstances`
+        :rtype:         :class:`vas.shared.Group`
         :return:        The newly created group
         """
 

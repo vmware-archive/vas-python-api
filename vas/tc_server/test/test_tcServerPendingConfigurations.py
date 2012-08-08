@@ -43,8 +43,8 @@ class TestTcServerPendingConfigurations(TestCase):
 
         self.assertIsInstance(pending_configuration, TcServerPendingConfiguration)
         self.__client.delegate.post_multipart.assert_called_once_with(
-            'https://localhost:8443/tc-server/v1/groups/0/instances/1/configurations/pending/',
-                {'path': 'conf/server.xml'}, 'configuration-content')
+            'https://localhost:8443/tc-server/v1/groups/0/instances/1/configurations/pending/', 'configuration-content',
+                {'path': 'conf/server.xml'})
 
     def test_attributes(self):
         self.assertIsInstance(self.__pending_configurations.security, Security)
@@ -64,5 +64,6 @@ class TestTcServerPendingConfigurations(TestCase):
         self.assertEqual(3, count)
 
     def test_repr(self):
-        self.assertIsNone(re.match('<.* object at 0x.*>', repr(self.__pending_configurations)), '__repr__ method has not been specified')
+        self.assertIsNone(re.match('<.* object at 0x.*>', repr(self.__pending_configurations)),
+            '__repr__ method has not been specified')
         eval(repr(self.__pending_configurations))

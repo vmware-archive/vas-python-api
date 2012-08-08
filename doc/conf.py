@@ -89,7 +89,7 @@ release = '1.0.0.RELEASE'
 pygments_style = 'sphinx'
 
 # A list of ignored prefixes for module index sorting.
-modindex_common_prefix = ['vas.', 'vas.shared.', 'vas.tc_server.', 'vas.vfabric.']
+modindex_common_prefix = ['vas.', 'vas.rabbitmq.', 'vas.shared.', 'vas.tc_server.', 'vas.vfabric.']
 
 
 # -- Options for HTML output ---------------------------------------------------

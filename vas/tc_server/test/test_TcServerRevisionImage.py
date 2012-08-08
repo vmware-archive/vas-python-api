@@ -42,5 +42,6 @@ class TestTcServerRevisionImage(TestCase):
         self.assertIsInstance(self.__revision_image.security, Security)
 
     def test_repr(self):
-        self.assertIsNone(re.match('<.* object at 0x.*>', repr(self.__revision_image)), '__repr__ method has not been specified')
+        self.assertIsNone(re.match('<.* object at 0x.*>', repr(self.__revision_image)),
+            '__repr__ method has not been specified')
         eval(repr(self.__revision_image))

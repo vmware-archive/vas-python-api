@@ -39,5 +39,6 @@ class TestTcServer(TestCase):
         self.assertIsInstance(self.__tc_server.template_images, TcServerTemplateImages)
 
     def test_repr(self):
-        self.assertIsNone(re.match('<.* object at 0x.*>', repr(self.__tc_server)), '__repr__ method has not been specified')
+        self.assertIsNone(re.match('<.* object at 0x.*>', repr(self.__tc_server)),
+            '__repr__ method has not been specified')
         eval(repr(self.__tc_server))

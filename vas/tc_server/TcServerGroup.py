@@ -22,7 +22,7 @@ class TcServerGroup(Group):
     :ivar `vas.tc_server.TcServerGroupInstances` instances:  The collection of instances
     :ivar `vas.tc_server.TcServerInstallations` installations:  The collection of installations
     :ivar str name: The name of the group
-    :ivar `vas.shared.Nodes` nodes: The :class:`vas.tc_server.TcServerNode` s that are members of the group
+    :ivar list nodes: The :class:`vas.tc_server.TcServerNode` s that are members of the group
     :ivar `vas.shared.Security` security:   The security configuration for the group
     """
 

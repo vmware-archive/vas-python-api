@@ -38,5 +38,5 @@ class Installations(MutableCollectionType):
         :return:    The newly created installation
         """
         location = self._client.post(self._location_self, {'image': installation_image._location_self},
-                                     self.__REL_INSTALLATION)
+            self.__REL_INSTALLATION)
         return self._create_item(self._client, location)

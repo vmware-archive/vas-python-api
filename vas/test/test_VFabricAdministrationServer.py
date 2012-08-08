@@ -17,6 +17,7 @@
 import re
 from unittest.case import TestCase
 from vas.VFabricAdministrationServer import VFabricAdministrationServer
+from vas.rabbitmq.RabbitMq import RabbitMq
 from vas.tc_server.TcServer import TcServer
 from vas.test.StubClient import StubClient
 from vas.vfabric.VFabric import VFabric
@@ -28,12 +29,12 @@ class TestVFabricAdministrationServer(TestCase):
         self.__client.delegate.reset_mock()
         self.__vfabric_administration_server = VFabricAdministrationServer(client=self.__client)
 
-    def test_tc_server(self):
+    def test_attributes(self):
+        self.assertIsInstance(self.__vfabric_administration_server.rabbitmq, RabbitMq)
         self.assertIsInstance(self.__vfabric_administration_server.tc_server, TcServer)
-
-    def test_vfabric(self):
         self.assertIsInstance(self.__vfabric_administration_server.vfabric, VFabric)
 
     def test_repr(self):
-        self.assertIsNone(re.match('<.* object at 0x.*>', repr(self.__vfabric_administration_server)), '__repr__ method has not been specified')
+        self.assertIsNone(re.match('<.* object at 0x.*>', repr(self.__vfabric_administration_server)),
+            '__repr__ method has not been specified')
         eval(repr(self.__vfabric_administration_server))
