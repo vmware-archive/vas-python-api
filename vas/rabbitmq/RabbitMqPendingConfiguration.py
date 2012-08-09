@@ -26,6 +26,11 @@ class RabbitMqPendingConfiguration(PendingConfiguration):
     :ivar `vas.shared.Security` security:   The security configuration for the type
     """
 
+    __REL_GROUP_INSTANCE = 'group-instance'
+
+    def __init__(self, client, location):
+        super(RabbitMqPendingConfiguration, self).__init__(client, location, self.__REL_GROUP_INSTANCE)
+
     def _create_group_instance(self, client, location):
         return RabbitMqGroupInstance(client, location)
 

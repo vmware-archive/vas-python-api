@@ -17,7 +17,7 @@
 from vas.shared.MutableCollectionType import MutableCollectionType
 
 class RabbitMqGroupPlugins(MutableCollectionType):
-    """A collection of RabbitMq group plugins
+    """A collection of RabbitMQ group plugins
 
     :ivar `vas.shared.Security` security:   The security configuration for the collection of group plugins
     """

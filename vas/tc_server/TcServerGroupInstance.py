@@ -26,7 +26,7 @@ class TcServerGroupInstance(GroupInstance):
     :ivar str layout:   The layout of the group instance
     :ivar `vas.tc_server.TcServerLiveConfigurations` live_configurations:  The collection of live configurations
     :ivar str name: The name of the group instance
-    :ivar list node_instance: The :class:`vas.tc_server.TcServerNodeInstance` s that are members of the group instance
+    :ivar list node_instances: The :class:`vas.tc_server.TcServerNodeInstance` s that are members of the group instance
     :ivar `vas.tc_server.TcServerPendingConfigurations` pending_configurations: The collection of pending configurations
     :ivar str runtime_version:  The runtime version of the group instance
     :ivar `vas.shared.Security` security:   The security configuration for group instance
@@ -46,8 +46,10 @@ class TcServerGroupInstance(GroupInstance):
 
     __REL_GROUP_APPLICATIONS = 'group-applications'
 
+    __REL_NODE_INSTANCE = 'node-instance'
+
     def __init__(self, client, location):
-        super(TcServerGroupInstance, self).__init__(client, location)
+        super(TcServerGroupInstance, self).__init__(client, location, self.__REL_NODE_INSTANCE)
 
         self.applications = TcServerGroupApplications(client, self._links[self.__REL_GROUP_APPLICATIONS][0])
         self.layout = self._details[self.__KEY_LAYOUT]

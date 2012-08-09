@@ -24,7 +24,7 @@ class RabbitMqGroupInstance(GroupInstance):
     :ivar `vas.rabbitmq.RabbitMqInstallation` installation: The group instance's installation
     :ivar `vas.rabbitmq.RabbitMqLiveConfigurations` live_configurations:  The collection of live configurations
     :ivar str name: The name of the group instance
-    :ivar list node_instance: The :class:`vas.rabbitmq.RabbitMqNodeInstance` s that are members of the group instance
+    :ivar list node_instances: The :class:`vas.rabbitmq.RabbitMqNodeInstance` s that are members of the group instance
     :ivar `vas.rabbitmq.RabbitMqPendingConfigurations` pending_configurations: The collection of pending configurations
     :ivar `vas.rabbitmq.RabbitMqGroupPlugins` plugins:   The collection of plugins
     :ivar `vas.shared.Security` security:   The security configuration for group instance
@@ -36,10 +36,12 @@ class RabbitMqGroupInstance(GroupInstance):
                         * ``STOPPED``
     """
 
+    __REL_NODE_INSTANCE = 'node-instance'
+
     __REL_PLUGINS = 'plugins'
 
     def __init__(self, client, location):
-        super(RabbitMqGroupInstance, self).__init__(client, location)
+        super(RabbitMqGroupInstance, self).__init__(client, location, self.__REL_NODE_INSTANCE)
 
         self.plugins = RabbitMqGroupPlugins(client, self._links[self.__REL_PLUGINS][0])
 

@@ -17,7 +17,7 @@
 from vas.shared.InstallationImages import InstallationImages
 
 class TcServerInstallationImages(InstallationImages):
-    """A collection of installation images
+    """A collection of tc Server installation images
 
     :ivar `vas.shared.Security` security:   The security configuration for the collection of installation images
     """

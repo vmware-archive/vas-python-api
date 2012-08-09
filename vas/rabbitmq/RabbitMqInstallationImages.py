@@ -17,7 +17,7 @@
 from vas.shared.InstallationImages import InstallationImages
 
 class RabbitMqInstallationImages(InstallationImages):
-    """A collection of installation images
+    """A collection of RabbitMQ installation images
 
     :ivar `vas.shared.Security` security:   The security configuration for the collection of installation images
     """

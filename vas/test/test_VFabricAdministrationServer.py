@@ -17,6 +17,7 @@
 import re
 from unittest.case import TestCase
 from vas.VFabricAdministrationServer import VFabricAdministrationServer
+from vas.gemfire.GemFire import GemFire
 from vas.rabbitmq.RabbitMq import RabbitMq
 from vas.tc_server.TcServer import TcServer
 from vas.test.StubClient import StubClient
@@ -30,6 +31,7 @@ class TestVFabricAdministrationServer(TestCase):
         self.__vfabric_administration_server = VFabricAdministrationServer(client=self.__client)
 
     def test_attributes(self):
+        self.assertIsInstance(self.__vfabric_administration_server.gemfire, GemFire)
         self.assertIsInstance(self.__vfabric_administration_server.rabbitmq, RabbitMq)
         self.assertIsInstance(self.__vfabric_administration_server.tc_server, TcServer)
         self.assertIsInstance(self.__vfabric_administration_server.vfabric, VFabric)

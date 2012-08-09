@@ -32,6 +32,16 @@ class RabbitMqNodeInstance(NodeInstance):
                         * ``STOPPED``
     """
 
+    __REL_GROUP_INSTANCE = 'group-instance'
+
+    def __init__(self, client, location):
+        super(RabbitMqNodeInstance, self).__init__(client, location, self.__REL_GROUP_INSTANCE)
+
+    def start(self):
+        """Start the instance by attempting to set its ``status`` to ``STARTED``"""
+
+        self._client.post(self._location_state, {'status': 'STARTED'})
+
     def _create_group_instance(self, client, location):
         return RabbitMqGroupInstance(client, location)
 

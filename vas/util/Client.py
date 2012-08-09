@@ -128,8 +128,13 @@ class Client:
     def __raise_exception(self, response):
         reasons = []
 
-        for reason in response.json['reasons']:
-            reasons.append(reason['message'])
+        body = response.read()
+        try:
+            for reason in response.json['reasons']:
+                reasons.append(reason['message'])
+        except ValueError:
+            reasons.append(body)
+
 
         raise VFabricAdministrationServerError(*reasons, code=response.status_code)
 

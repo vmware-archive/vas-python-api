@@ -15,6 +15,7 @@
 
 
 from vas.util.Client import Client
+from vas.gemfire.GemFire import GemFire
 from vas.rabbitmq.RabbitMq import RabbitMq
 from vas.tc_server.TcServer import TcServer
 from vas.vfabric.VFabric import VFabric
@@ -27,6 +28,7 @@ class VFabricAdministrationServer:
     .. note::   This is the only type that should ever be instantiated directly.  All other types are created
                 automatically based on the payloads returned from the server.
 
+    :ivar `vas.gemfire.GemFire` gemfire:   The GemFire component of the vFabric Administration Server
     :ivar `vas.rabbitmq.RabbitMq` rabbitmq:   The RabbitMQ component of the vFabric Administration Server
     :ivar `vas.tc_server.TcServer` tc_server:   The tc Server component of the vFabric Administration Server
     :ivar `vas.vfabric.VFabric` vfabric:    The vFabric component of the vFabric Administration Server
@@ -46,6 +48,7 @@ class VFabricAdministrationServer:
             client = Client(username, password)
 
         location_stem = 'https://{}:{}{}'.format(host, port, '{}')
+        self.gemfire = GemFire(client, location_stem)
         self.rabbitmq = RabbitMq(client, location_stem)
         self.tc_server = TcServer(client, location_stem)
         self.vfabric = VFabric(client, location_stem)

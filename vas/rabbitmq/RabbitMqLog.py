@@ -26,6 +26,11 @@ class RabbitMqLog(Log):
     :ivar `vas.shared.Security` security: The security configuration for the group
     """
 
+    __REL_NODE_INSTANCE = 'node-instance'
+
+    def __init__(self, client, location):
+        super(RabbitMqLog, self).__init__(client, location, self.__REL_NODE_INSTANCE)
+
     def _create_node_instance(self, client, location):
         return RabbitMqNodeInstance(client, location)
 

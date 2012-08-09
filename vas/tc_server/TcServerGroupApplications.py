@@ -44,13 +44,9 @@ class TcServerGroupApplications(MutableCollectionType):
         :return:        The newly created group application
         """
 
-        payload = dict()
-        payload['context-path'] = context_path
-        payload['host'] = host
-        payload['name'] = name
-        payload['service'] = service
-
-        location = self._client.post(self._location_self, payload, self.__REL_GROUP_APPLICATION)
+        location = self._client.post(self._location_self,
+            {'context-path': context_path, 'host': host, 'name': name, 'service': service},
+            self.__REL_GROUP_APPLICATION)
         return self._create_item(self._client, location)
 
     def _create_item(self, client, location):

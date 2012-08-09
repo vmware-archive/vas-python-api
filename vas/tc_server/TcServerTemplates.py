@@ -34,8 +34,8 @@ class TcServerTemplates(MutableCollectionType):
 
         :type template_image:   :class:`vas.tc_server.TcServerTemplateImage`
         :param template_image:  The template image to use when creating this template
-        :rtype:         :class:`vas.tc_server.TcServerTemplateImage`
-        :return:        The newly created template image
+        :rtype:         :class:`vas.tc_server.TcServerTemplate`
+        :return:        The newly created template
         """
 
         location = self._client.post(self._location_self, {'image': template_image._location_self},

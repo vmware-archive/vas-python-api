@@ -39,17 +39,6 @@ class TestRabbitMqGroup(TestCase):
              RabbitMqNode(self.__client, 'https://localhost:8443/rabbitmq/v1/nodes/0/')], self.__group.nodes)
         self.assertIsInstance(self.__group.security, Security)
 
-    def test_update(self):
-        self.__client.delegate.reset_mock()
-        self.__group.update([RabbitMqNode(self.__client, 'https://localhost:8443/rabbitmq/v1/nodes/0/'),
-                             RabbitMqNode(self.__client, 'https://localhost:8443/rabbitmq/v1/nodes/1/'),
-                             RabbitMqNode(self.__client, 'https://localhost:8443/rabbitmq/v1/nodes/2/')])
-
-        self.__client.delegate.post.assert_called_once_with('https://localhost:8443/rabbitmq/v1/groups/2/',
-                {'nodes': ['https://localhost:8443/rabbitmq/v1/nodes/0/',
-                           'https://localhost:8443/rabbitmq/v1/nodes/0/',
-                           'https://localhost:8443/rabbitmq/v1/nodes/0/']})
-
     def test_repr(self):
         self.assertIsNone(re.match('<.* object at 0x.*>', repr(self.__group)), '__repr__ method has not been specified')
         eval(repr(self.__group))

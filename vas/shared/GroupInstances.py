@@ -21,8 +21,3 @@ class GroupInstances(MutableCollectionType):
 
     :ivar `vas.shared.Security` security:   The security configuration for the collection of abstract group instances
     """
-
-    __COLLECTION_KEY = 'group-instances'
-
-    def __init__(self, client, location):
-        super(GroupInstances, self).__init__(client, location, self.__COLLECTION_KEY)

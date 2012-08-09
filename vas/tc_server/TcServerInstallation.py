@@ -22,7 +22,7 @@ class TcServerInstallation(Installation):
 
     :ivar `vas.tc_server.TcServerGroup` group: The installation's parent group
     :ivar list instances: The :class:`vas.tc_server.TcServerGroupInstance` s that use this installation
-    :ivar `vas.shared.InstallationImage` installation_image: The image the installation is based on
+    :ivar `vas.tc_server.TcServerInstallationImage` installation_image: The image the installation is based on
     :ivar list runtime_versions: The runtime versions (:obj:`str`) available in the installation
     :ivar `vas.shared.Security` security:   The security configuration for the type
     :ivar `vas.tc_server.TcServerTemplates` templates: The collection of templates
