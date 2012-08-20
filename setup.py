@@ -22,7 +22,7 @@ with open('README.rst') as file:
 setup(
     name='vas-python-api',
     version='1.0.0.BUILD-SNAPSHOT',
-    packages=['vas', 'vas.shared', 'vas.tc_server', 'vas.util', 'vas.vfabric'],
+    packages=['vas', 'vas.rabbitmq', 'vas.shared', 'vas.tc_server', 'vas.util', 'vas.vfabric'],
     url='https://github.com/vFabric/vas-python-api',
     author='Ben Hale',
     author_email='bhale@vmware.com',
