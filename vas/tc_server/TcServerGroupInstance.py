@@ -21,7 +21,7 @@ class TcServerGroupInstance(GroupInstance):
 
 
     :ivar `vas.tc_server.TcServerGroup` group: The group instance's parent group
-    :ivar `vas.tc_server.TcServerGroupApplication` applications: The collection of group applications
+    :ivar `vas.tc_server.TcServerGroupApplications` applications: The collection of group applications
     :ivar `vas.tc_server.TcServerInstallation` installation: The group instance's installation
     :ivar str layout:   The layout of the group instance
     :ivar `vas.tc_server.TcServerLiveConfigurations` live_configurations:  The collection of live configurations
