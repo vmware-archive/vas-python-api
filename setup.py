@@ -13,8 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
-from setuptools import setup
+from setuptools import setup, find_packages
 
 with open('README.rst') as file:
     long_description = file.read()
@@ -22,13 +21,11 @@ with open('README.rst') as file:
 setup(
     name='vas-python-api',
     version='1.0.0.BUILD-SNAPSHOT',
-    packages=['vas', 'vas.rabbitmq', 'vas.shared', 'vas.tc_server', 'vas.util', 'vas.vfabric'],
     url='https://github.com/vFabric/vas-python-api',
     author='Ben Hale',
     author_email='bhale@vmware.com',
     description='Python API for accessing the vFabric Administration Server',
     long_description=long_description,
-    requires=['requests', 'mock'],
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
@@ -36,8 +33,13 @@ setup(
         'License :: OSI Approved :: Apache Software License',
         'Operating System :: OS Independent',
         'Programming Language :: Python :: 3',
+        'Topic :: Software Development :: Libraries :: Application Frameworks',
         'Topic :: System :: Installation/Setup',
         'Topic :: System :: Software Distribution',
         'Topic :: System :: Systems Administration'
-    ]
+    ],
+    packages=find_packages(exclude=["*.test"]),
+    install_requires=['requests'],
+    test_suite='vas',
+    tests_require=['mock']
 )

@@ -1,1 +1,7 @@
-include *.txt
+recursive-include doc *
+recursive-include examples *
+recursive-include test-responses *
+recursive-include vas *
+include LICENSE
+include NOTICE
+include README.rst
