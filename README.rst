@@ -10,6 +10,10 @@ The VAS Python API is licensed under the `Apache Licence, Version 2.0`_.
 .. _vFabric Administration Server: http://www.vmware.com/support/pubs/vfabric-vas.html
 .. _Apache Licence, Version 2.0: http://www.apache.org/licenses/LICENSE-2.0.html
 
+Installing
+----------
+
+The VAS Python API can be installed by running ``pip install vas``.
 
 Dependencies
 ------------

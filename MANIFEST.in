@@ -3,5 +3,8 @@ recursive-include examples *
 recursive-include test-responses *
 recursive-include vas *
 include LICENSE
+include MANIFEST.in
 include NOTICE
 include README.rst
+include setup.cfg
+include setup.py
