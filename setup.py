@@ -15,17 +15,14 @@
 
 from setuptools import setup, find_packages
 
-with open('README.rst') as file:
-    long_description = file.read()
-
 setup(
-    name='vas-python-api',
-    version='1.0.0.BUILD-SNAPSHOT',
-    url='https://github.com/vFabric/vas-python-api',
-    author='Ben Hale',
-    author_email='bhale@vmware.com',
-    description='Python API for accessing the vFabric Administration Server',
-    long_description=long_description,
+    name='vas',
+    version='0.2.0.dev',
+    url='http://vfabric.co',
+    author='VMware',
+    author_email='support@vmware.com',
+    description='vFabric Administration Server Python API',
+    long_description='A Python API for VMware vFabric Administration Server',
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
