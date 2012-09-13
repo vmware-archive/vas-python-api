@@ -17,7 +17,7 @@
 from vas.VFabricAdministrationServerError import VFabricAdministrationServerError
 from vas.util.LinkUtils import LinkUtils
 
-class TopLevelType:
+class TopLevelType(object):
     """An abstract top level type
 
     :ivar `vas.shared.Nodes` nodes:  The collection of nodes

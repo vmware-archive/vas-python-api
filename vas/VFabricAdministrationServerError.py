@@ -23,12 +23,17 @@ class VFabricAdministrationServerError(Exception):
     :param code:    The status code of the response that caused the error
     """
 
-    def __init__(self, *messages, code=None):
+    def __init__(self, messages, code=None):
         super(VFabricAdministrationServerError, self).__init__()
 
-        self.messages = list(messages)
+        self.messages = []
+        if isinstance(messages, list):
+            self.messages.extend(messages)
+        else:
+            self.messages.append(messages)
+
         self.code = code
 
     def __repr__(self):
-        return "{}({}, code={})".format(self.__class__.__name__, ','.join(map(lambda x: repr(x), self.messages)),
+        return "{}([{}], code={})".format(self.__class__.__name__, ','.join(map(lambda x: repr(x), self.messages)),
             self.code)

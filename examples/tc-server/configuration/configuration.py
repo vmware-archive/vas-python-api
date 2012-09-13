@@ -14,6 +14,7 @@
 # limitations under the License.
 
 
+from __future__ import print_function
 import argparse
 import re
 from vas.VFabricAdministrationServer import VFabricAdministrationServer

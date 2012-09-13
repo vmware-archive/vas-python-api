@@ -1,41 +1,50 @@
 vFabric Administration Server Python API
 ========================================
-
-The vFabric Administration Server (VAS) API is a Python library used for interacting with the `vFabric Administration Server`_.
+The vFabric Administration Server (VAS) API is a Python library used for interacting with the `vFabric Administration Server <http://www.vmware.com/support/pubs/vfabric-vas.html>`_.
 
 VAS's primary mode of interaction is via RESTful interface.  This API enables the use of VAS using rich Python types, eliminating the need for a detailed understanding of the REST API and its JSON payloads.
 
-The VAS Python API is licensed under the `Apache Licence, Version 2.0`_.
 
-.. _vFabric Administration Server: http://www.vmware.com/support/pubs/vfabric-vas.html
-.. _Apache Licence, Version 2.0: http://www.apache.org/licenses/LICENSE-2.0.html
-
-Installing
-----------
-
-The VAS Python API can be installed by running ``pip install vas``.
-
-Dependencies
+Requirements
 ------------
+The VAS Python API requires Python 2.7.  It has been built and tested on 2.7.3.
 
-The VAS Python API requires **Python3**.  This can be installed with the default package manager on most operating systems, or downloaded from the `Python website`_.
 
-Runtime Dependencies
-~~~~~~~~~~~~~~~~~~~~
+Installation
+------------
+The VAS Python egg is available on `PyPI <http://pypi.python.org/pypi/vas>`_.  To install it run::
 
-* requests_ (0.13.6)
+    pip install vas
 
-Development Dependencies
-~~~~~~~~~~~~~~~~~~~~~~~~
 
-* coverage_ (3.5.2)
-* mock_ (1.0b1)
-* sphinx_ (1.1.3)
+Getting Started
+---------------
+Examples
+~~~~~~~~
 
-All of these dependencies can be installed by running ``pip install <dependency>``.
+A number of `examples <https://github.com/vFabric/vas-python-api/tree/master/examples>`_ are provided:
 
-.. _Python website: http://python.org/download/
-.. _Requests: http://docs.python-requests.org
-.. _Coverage: http://nedbatchelder.com/code/coverage/
-.. _Mock: http://www.voidspace.org.uk/python/mock/
-.. _Sphinx: http://sphinx.pocoo.org
+
+tc Server
++++++++++
+* `Provision tc Server and deploy a web application <https://github.com/vFabric/vas-python-api/tree/master/examples/tc-server/web-application>`_
+
+
+RabbitMQ
+++++++++
+* `Provision Rabbit and enable the management plugin <https://github.com/vFabric/vas-python-api/tree/master/examples/rabbitmq/management-plugin>`_
+
+
+VAS
++++
+* `Download, install, and start the VAS agent <https://github.com/vFabric/vas-python-api/tree/master/examples/rabbitmq/management-plugin>`_
+
+
+Documentation
+~~~~~~~~~~~~~
+You may also like to look at the `API Documentation <http://packages.python.org/vas>`_.
+
+
+License
+-------
+The VAS Python API is licensed under the `Apache Licence, Version 2.0 <http://www.apache.org/licenses/LICENSE-2.0.html>`_.
