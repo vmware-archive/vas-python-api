@@ -17,7 +17,7 @@
 from vas.shared.Security import Security
 from vas.util.LinkUtils import LinkUtils
 
-class Type:
+class Type(object):
     """An abstract type
 
     :ivar `vas.shared.Security` security:   The security configuration for the type

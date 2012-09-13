@@ -19,17 +19,22 @@ from vas.VFabricAdministrationServerError import VFabricAdministrationServerErro
 
 class TestVFabricAdministrationServerError(TestCase):
     def test_no_code(self):
-        error = VFabricAdministrationServerError('message1', 'message2')
+        error = VFabricAdministrationServerError(['message1', 'message2'])
         self.assertEqual(['message1', 'message2'], error.messages)
         self.assertEqual(None, error.code)
 
+    def test_single(self):
+        error = VFabricAdministrationServerError('message1')
+        self.assertEqual(['message1'], error.messages)
+        self.assertEqual(None, error.code)
+
     def test_with_code(self):
-        error = VFabricAdministrationServerError('message1', 'message2', code='400')
+        error = VFabricAdministrationServerError(['message1', 'message2'], code='400')
         self.assertEqual(['message1', 'message2'], error.messages)
         self.assertEqual('400', error.code)
 
     def test_repr(self):
-        error = VFabricAdministrationServerError('message1', 'message2', code='400')
+        error = VFabricAdministrationServerError(['message1', 'message2'], code='400')
 
         self.assertIsNone(re.match('<.* object at 0x.*>', repr(error)), '__repr__ method has not been specified')
         eval(repr(error))
