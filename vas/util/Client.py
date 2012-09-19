@@ -70,11 +70,11 @@ class Client:
         if isinstance(payload, dict) or isinstance(payload, list):
             headers = {self.__HEADER_CONTENT_TYPE: self.__CONTENT_TYPE_JSON}
             encoded_body = json.dumps(payload)
-        elif isinstance(payload, str):
+        elif isinstance(payload, str) or isinstance(payload, unicode):
             headers = {self.__HEADER_CONTENT_TYPE: self.__CONTENT_TYPE_TEXT_PLAIN}
             encoded_body = payload
         else:
-            raise VFabricAdministrationServerError('Unknown payload type')
+            raise VFabricAdministrationServerError('Unknown payload type: {}'.format(type(payload)))
 
         response = self.__do_request('POST', location, headers=headers, body=encoded_body)
         if response.status_code == requests.codes.OK:
@@ -85,18 +85,18 @@ class Client:
             self.__raise_exception(response)
 
     def post_multipart(self, location, content, metadata=None):
-        if metadata is None:
-            encoded_body = None
-        else:
-            encoded_body = {'metadata': ('metadata.json', json.dumps(metadata))}
+        files = {}
+
+        if metadata is not None:
+            files['metadata'] =('metadata.json', json.dumps(metadata))
 
         if os.path.isfile(content):
             with open(content, 'rb') as data:
-                encoded_files = {'data': data}
-                response = self.__do_request('POST', location, body=encoded_body, files=encoded_files)
+                files['data'] = data
+                response = self.__do_request('POST', location, files=files)
         else:
-            encoded_files = json.dumps({'data': content})
-            response = self.__do_request('POST', location, body=encoded_body, files=encoded_files)
+            files['data'] = content
+            response = self.__do_request('POST', location, files=files)
 
         if response.status_code == requests.codes.CREATED:
             return response.headers[self.__HEADER_LOCATION]

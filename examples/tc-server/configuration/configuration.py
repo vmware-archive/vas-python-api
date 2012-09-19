@@ -58,7 +58,7 @@ print('Starting instance... ', end='')
 instance.start()
 print('done')
 
-input('Press any key to change configuration')
+raw_input('Press any key to change configuration')
 
 print('Stopping instance... ', end='')
 instance.stop()
@@ -78,7 +78,7 @@ print('Starting instance... ', end='')
 instance.start()
 print('done')
 
-input('Press any key to cleanup')
+raw_input('Press any key to cleanup')
 
 print('Stopping instance... ', end='')
 instance.stop()
