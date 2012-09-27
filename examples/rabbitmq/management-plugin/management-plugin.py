@@ -35,42 +35,48 @@ def __get_parser():
 
 args = __get_parser().parse_args()
 
-rabbitmq = VFabricAdministrationServer(args.host, args.port, args.username, args.password).rabbitmq
+try:
+    rabbitmq = VFabricAdministrationServer(args.host, args.port, args.username, args.password).rabbitmq
 
-print('Creating installation image... ', end='')
-installation_image = rabbitmq.installation_images.create(args.installation_image_version, args.installation_image)
-print('done')
+    print('Creating installation image... ', end='')
+    installation_image = rabbitmq.installation_images.create(args.installation_image_version, args.installation_image)
+    print('done')
 
-print('Creating group... ', end='')
-group = rabbitmq.groups.create('example', rabbitmq.nodes)
-print('done')
+    print('Creating group... ', end='')
+    group = rabbitmq.groups.create('example', rabbitmq.nodes)
+    print('done')
 
-print('Creating installation... ', end='')
-installation = group.installations.create(installation_image)
-print('done')
+    print('Creating installation... ', end='')
+    installation = group.installations.create(installation_image)
+    print('done')
 
-print('Creating instance... ', end='')
-instance = group.instances.create('example', installation)
-print('done')
+    print('Creating instance... ', end='')
+    instance = group.instances.create('example', installation)
+    print('done')
 
-for plugin in instance.plugins:
-    if 'rabbitmq_management' == plugin.name:
-        plugin.enable()
+    for plugin in instance.plugins:
+        if 'rabbitmq_management' == plugin.name:
+            plugin.enable()
 
-print('Starting instance... ', end='')
-instance.start()
-print('done')
+    print('Starting instance... ', end='')
+    instance.start()
+    print('done')
 
-raw_input('Press any key to cleanup')
+    raw_input('Press any key to cleanup')
+finally:
+    variables = dir()
 
-print('Stopping instance... ', end='')
-instance.stop()
-print('done')
+    if 'instance' in variables:
+        print('Stopping instance... ', end='')
+        instance.stop()
+        print('done')
 
-print('Deleting group... ', end='')
-rabbitmq.groups.delete(group)
-print('done')
+    if 'group' in variables:
+        print('Deleting group... ', end='')
+        rabbitmq.groups.delete(group)
+        print('done')
 
-print('Deleting installation image... ', end='')
-rabbitmq.installation_images.delete(installation_image)
-print('done')
+    if 'installation_image' in variables:
+        print('Deleting installation image... ', end='')
+        rabbitmq.installation_images.delete(installation_image)
+        print('done')

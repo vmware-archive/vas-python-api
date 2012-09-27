@@ -36,58 +36,64 @@ def __get_parser():
 
 args = __get_parser().parse_args()
 
-tc_server = VFabricAdministrationServer(args.host, args.port, args.username, args.password).tc_server
+try:
+    tc_server = VFabricAdministrationServer(args.host, args.port, args.username, args.password).tc_server
 
-print('Creating installation image... ', end='')
-installation_image = tc_server.installation_images.create(args.installation_image_version, args.installation_image)
-print('done')
+    print('Creating installation image... ', end='')
+    installation_image = tc_server.installation_images.create(args.installation_image_version, args.installation_image)
+    print('done')
 
-print('Creating group... ', end='')
-group = tc_server.groups.create('example', tc_server.nodes)
-print('done')
+    print('Creating group... ', end='')
+    group = tc_server.groups.create('example', tc_server.nodes)
+    print('done')
 
-print('Creating installation... ', end='')
-installation = group.installations.create(installation_image)
-print('done')
+    print('Creating installation... ', end='')
+    installation = group.installations.create(installation_image)
+    print('done')
 
-print('Creating instance that will listen on 8080... ', end='')
-instance = group.instances.create('example', installation, properties={'base.jmx.port': 6970})
-print('done')
+    print('Creating instance that will listen on 8080... ', end='')
+    instance = group.instances.create('example', installation, properties={'base.jmx.port': 6970})
+    print('done')
 
-print('Starting instance... ', end='')
-instance.start()
-print('done')
+    print('Starting instance... ', end='')
+    instance.start()
+    print('done')
 
-raw_input('Press any key to change configuration')
+    raw_input('Press any key to change configuration')
 
-print('Stopping instance... ', end='')
-instance.stop()
-print('done')
+    print('Stopping instance... ', end='')
+    instance.stop()
+    print('done')
 
-print('Changing instance to listen on 8081... ', end='')
-pending_configuration = None
-for configuration in instance.pending_configurations:
-    if 'conf/catalina.properties' == configuration.path:
-        pending_configuration = configuration
-        break
+    print('Changing instance to listen on 8081... ', end='')
+    pending_configuration = None
+    for configuration in instance.pending_configurations:
+        if 'conf/catalina.properties' == configuration.path:
+            pending_configuration = configuration
+            break
 
-pending_configuration.content = re.sub('bio.http.port=8080', 'bio.http.port=8081', pending_configuration.content)
-print('done')
+    pending_configuration.content = re.sub('bio.http.port=8080', 'bio.http.port=8081', pending_configuration.content)
+    print('done')
 
-print('Starting instance... ', end='')
-instance.start()
-print('done')
+    print('Starting instance... ', end='')
+    instance.start()
+    print('done')
 
-raw_input('Press any key to cleanup')
+    raw_input('Press any key to cleanup')
+finally:
+    variables = dir()
 
-print('Stopping instance... ', end='')
-instance.stop()
-print('done')
+    if 'instance' in variables:
+        print('Stopping instance... ', end='')
+        instance.stop()
+        print('done')
 
-print('Deleting group... ', end='')
-tc_server.groups.delete(group)
-print('done')
+    if 'group' in variables:
+        print('Deleting group... ', end='')
+        tc_server.groups.delete(group)
+        print('done')
 
-print('Deleting installation image... ', end='')
-tc_server.installation_images.delete(installation_image)
-print('done')
+    if 'installation_image' in variables:
+        print('Deleting installation image... ', end='')
+        tc_server.installation_images.delete(installation_image)
+        print('done')

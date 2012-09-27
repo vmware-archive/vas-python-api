@@ -18,7 +18,10 @@
 
 from __future__ import print_function
 import argparse
+import sys
+import traceback
 from vas.VFabricAdministrationServer import VFabricAdministrationServer
+from vas.VFabricAdministrationServerError import VFabricAdministrationServerError
 
 def __get_parser():
     parser = argparse.ArgumentParser(description='Provision a tc Server and a deploy a web application')
@@ -41,54 +44,61 @@ def __get_parser():
 
 args = __get_parser().parse_args()
 
-tc_server = VFabricAdministrationServer(args.host, args.port, args.username, args.password).tc_server
+try:
+    tc_server = VFabricAdministrationServer(args.host, args.port, args.username, args.password).tc_server
 
-print('Creating installation image... ', end='')
-installation_image = tc_server.installation_images.create(args.installation_image_version, args.installation_image)
-print('done')
+    print('Creating installation image... ', end='')
+    installation_image = tc_server.installation_images.create(args.installation_image_version, args.installation_image)
+    print('done')
 
-print('Creating revision image... ', end='')
-revision_image = tc_server.revision_images.create('example', args.revision_image_version, args.revision_image)
-print('done')
+    print('Creating revision image... ', end='')
+    revision_image = tc_server.revision_images.create('example', args.revision_image_version, args.revision_image)
+    print('done')
 
-print('Creating group... ', end='')
-group = tc_server.groups.create('example', tc_server.nodes)
-print('done')
+    print('Creating group... ', end='')
+    group = tc_server.groups.create('example', tc_server.nodes)
+    print('done')
 
-print('Creating installation... ', end='')
-installation = group.installations.create(installation_image)
-print('done')
+    print('Creating installation... ', end='')
+    installation = group.installations.create(installation_image)
+    print('done')
 
-print('Creating instance that will listen on 8080... ', end='')
-instance = group.instances.create('example', installation, properties={'base.jmx.port': 6970})
-print('done')
+    print('Creating instance that will listen on 8080... ', end='')
+    instance = group.instances.create('example', installation, properties={'base.jmx.port': 6970})
+    print('done')
 
-print('Creating application at {}... '.format(args.context_path), end='')
-application = instance.applications.create(args.context_path, 'localhost', 'Example', 'Catalina')
-print('done')
+    print('Creating application at {}... '.format(args.context_path), end='')
+    application = instance.applications.create(args.context_path, 'localhost', 'Example', 'Catalina')
+    print('done')
 
-print('Deploying revision... ', end='')
-revision = application.revisions.create(revision_image)
-print('done')
+    print('Deploying revision... ', end='')
+    revision = application.revisions.create(revision_image)
+    print('done')
 
-print('Starting instance... ', end='')
-instance.start()
-print('done')
+    print('Starting instance... ', end='')
+    instance.start()
+    print('done')
 
-raw_input('Press any key to cleanup')
+    raw_input('Press any key to cleanup')
+finally:
+    variables = dir()
 
-print('Stopping instance... ', end='')
-instance.stop()
-print('done')
+    if 'instance' in variables:
+        print('Stopping instance... ', end='')
+        instance.stop()
+        print('done')
 
-print('Deleting group... ', end='')
-tc_server.groups.delete(group)
-print('done')
+    if 'group' in variables:
+        print('Deleting group... ', end='')
+        tc_server.groups.delete(group)
+        print('done')
 
-print('Deleting revision image... ', end='')
-tc_server.revision_images.delete(revision_image)
-print('done')
+    if 'revision_image' in variables:
+        print('Deleting revision image... ', end='')
+        tc_server.revision_images.delete(revision_image)
+        print('done')
 
-print('Deleting installation image... ', end='')
-tc_server.installation_images.delete(installation_image)
-print('done')
+    if 'installation_image' in variables:
+        print('Deleting installation image... ', end='')
+        tc_server.installation_images.delete(installation_image)
+        print('done')
