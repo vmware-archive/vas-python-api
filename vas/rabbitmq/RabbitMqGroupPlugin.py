@@ -19,7 +19,7 @@ from vas.shared.Type import Type
 class RabbitMqGroupPlugin(Type):
     """A RabbitMQ group plugin
 
-    :ivar `vas.rabbitmq.RabbitMqGroupInstance` instance: The group plugins' parent group instance
+    :ivar `vas.rabbitmq.RabbitMqGroupInstance` instance: The group plugin's parent group instance
     :ivar str name: The name of the group plugin
     :ivar `vas.rabbitmq.RabbitMqPluginImage` plugin_image: The image the plugin is based on
     :ivar `vas.shared.Security` security:   The security configuration for the group plugin

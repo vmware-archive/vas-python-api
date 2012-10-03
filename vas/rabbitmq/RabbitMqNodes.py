@@ -17,7 +17,6 @@
 from vas.shared.Nodes import Nodes
 
 class RabbitMqNodes(Nodes):
-
     """A collection of RabbitMQ nodes
 
     :ivar `vas.shared.Security` security:   The security configuration for the collection of nodes

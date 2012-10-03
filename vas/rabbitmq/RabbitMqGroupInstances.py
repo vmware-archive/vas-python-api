@@ -24,6 +24,11 @@ class RabbitMqGroupInstances(GroupInstances):
 
     __REL_GROUP_INSTANCE = 'group-instance'
 
+    __COLLECTION_KEY = 'group-instances'
+
+    def __init__(self, client, location):
+        super(RabbitMqGroupInstances, self).__init__(client, location, self.__COLLECTION_KEY)
+
     def create(self, name, installation):
         """Create a new group instance
 

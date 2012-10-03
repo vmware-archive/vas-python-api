@@ -33,12 +33,10 @@ class LiveConfiguration(Type):
 
     __REL_CONTENT = 'content'
 
-    __REL_GROUP_INSTANCE = 'group-instance'
-
-    def __init__(self, client, location):
+    def __init__(self, client, location, group_instance_rel):
         super(LiveConfiguration, self).__init__(client, location)
 
-        self.instance = self._create_group_instance(client, self._links[self.__REL_GROUP_INSTANCE][0])
+        self.instance = self._create_group_instance(client, self._links[group_instance_rel][0])
         self.path = self._details[self.__KEY_PATH]
         self.size = self._details[self.__KEY_SIZE]
 

@@ -24,6 +24,11 @@ class TcServerGroupInstances(GroupInstances):
 
     __REL_GROUP_INSTANCE = 'group-instance'
 
+    __COLLECTION_KEY = 'group-instances'
+
+    def __init__(self, client, location):
+        super(TcServerGroupInstances, self).__init__(client, location, self.__COLLECTION_KEY)
+
     def create(self, name, installation, layout=None, properties=None, runtime_version=None, templates=None):
         """Create a new group instance
 

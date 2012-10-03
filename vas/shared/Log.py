@@ -35,14 +35,12 @@ class Log(Type):
 
     __REL_CONTENT = 'content'
 
-    __REL_NODE_INSTANCE = 'node-instance'
-
-    def __init__(self, client, location):
+    def __init__(self, client, location, node_instance_rel):
         super(Log, self).__init__(client, location)
 
         self.__location_content = self._links[self.__REL_CONTENT][0]
 
-        self.instance = self._create_node_instance(client, self._links[self.__REL_NODE_INSTANCE][0])
+        self.instance = self._create_node_instance(client, self._links[node_instance_rel][0])
         self.name = self._details[self.__KEY_NAME]
 
     @property

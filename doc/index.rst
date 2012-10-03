@@ -19,6 +19,7 @@ vFabric Administration Server Python API Documentation
 .. toctree::
 
     vas
+    vas.gemfire
     vas.rabbitmq
     vas.tc_server
     vas.vfabric

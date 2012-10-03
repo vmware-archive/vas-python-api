@@ -44,15 +44,6 @@ class Group(Type):
         return [self._create_node(self._client, node_location) for node_location in
                 LinkUtils.get_links(self._client.get(self._location_self), self.__REL_NODE)]
 
-    def update(self, nodes):
-        """Update the membership of the group
-
-        :type nodes:    :obj:`list` of :class:`vas.shared.Node`
-        :param nodes:   The collection of nodes to be included in the group
-        """
-
-        self._client.post(self._location_self, {'nodes': [node._location_self for node in nodes]})
-
     def _create_installations(self, client, location):
         raise VFabricAdministrationServerError('_create_installations(self, client, location) method is unimplemented')
 

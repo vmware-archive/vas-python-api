@@ -41,15 +41,22 @@ class TcServerNodeInstance(NodeInstance):
 
     __KEY_SERVICES = 'services'
 
+    __REL_GROUP_INSTANCE = 'group-instance'
+
     __REL_NODE_APPLICATIONS = 'node-applications'
 
     def __init__(self, client, location):
-        super(TcServerNodeInstance, self).__init__(client, location)
+        super(TcServerNodeInstance, self).__init__(client, location, self.__REL_GROUP_INSTANCE)
 
         self.layout = self._details[self.__KEY_LAYOUT]
         self.applications = TcServerNodeApplications(client, self._links[self.__REL_NODE_APPLICATIONS][0])
         self.runtime_version = self._details[self.__KEY_RUNTIME_VERSION]
         self.services = self._details[self.__KEY_SERVICES]
+
+    def start(self):
+        """Start the instance by attempting to set its ``status`` to ``STARTED``"""
+
+        self._client.post(self._location_state, {'status': 'STARTED'})
 
     def _create_group_instance(self, client, location):
         return TcServerGroupInstance(client, location)

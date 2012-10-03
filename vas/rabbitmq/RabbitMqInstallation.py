@@ -22,7 +22,7 @@ class RabbitMqInstallation(Installation):
 
     :ivar `vas.rabbitmq.RabbitMqGroup` group: The installation's parent group
     :ivar list instances: The :class:`vas.rabbitmq.RabbitMqGroupInstance` s that use this installation
-    :ivar `vas.shared.InstallationImage` installation_image: The image the installation is based on
+    :ivar `vas.rabbitmq.RabbitMqInstallationImage` installation_image: The image the installation is based on
     :ivar `vas.shared.Security` security:   The security configuration for the type
     :ivar str version: The version of the installation
     """

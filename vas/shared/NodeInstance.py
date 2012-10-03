@@ -35,37 +35,30 @@ class NodeInstance(Type):
 
     __KEY_NAME = 'name'
 
-    __REL_GROUP_INSTANCE = 'group-instance'
-
     __REL_LOGS = 'logs'
 
     __REL_NODE = 'node'
 
     __REL_STATE = 'state'
 
-    def __init__(self, client, location):
+    def __init__(self, client, location, group_instance_rel):
         super(NodeInstance, self).__init__(client, location)
 
-        self.__location_state = self._links[self.__REL_STATE][0]
+        self._location_state = self._links[self.__REL_STATE][0]
 
-        self.group_instance = self._create_group_instance(client, self._links[self.__REL_GROUP_INSTANCE][0])
+        self.group_instance = self._create_group_instance(client, self._links[group_instance_rel][0])
         self.logs = self._create_logs(client, self._links[self.__REL_LOGS][0])
         self.name = self._details[self.__KEY_NAME]
         self.node = self._create_node(client, self._links[self.__REL_NODE][0])
 
-    def start(self):
-        """Start the instance by attempting to set its ``status`` to ``STARTED``"""
-
-        self._client.post(self.__location_state, {'status': 'STARTED'})
-
     def stop(self):
         """Stop the instance by attempting to set its ``status`` to ``STOPPED``"""
 
-        self._client.post(self.__location_state, {'status': 'STOPPED'})
+        self._client.post(self._location_state, {'status': 'STOPPED'})
 
     @property
     def state(self):
-        return self._client.get(self.__location_state)['status']
+        return self._client.get(self._location_state)['status']
 
     def _create_group_instance(self, client, location):
         raise VFabricAdministrationServerError('_create_group_instance(self, client, location) method is unimplemented')

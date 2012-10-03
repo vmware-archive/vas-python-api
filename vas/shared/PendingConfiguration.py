@@ -12,6 +12,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+
 from vas.shared.LiveConfiguration import LiveConfiguration
 
 class PendingConfiguration(LiveConfiguration):
@@ -24,8 +26,8 @@ class PendingConfiguration(LiveConfiguration):
     :ivar `vas.shared.Security` security:   The security configuration for the type
     """
 
-    def __init__(self, client, location):
-        super(PendingConfiguration, self).__init__(client, location)
+    def __init__(self, client, location, group_instance_rel):
+        super(PendingConfiguration, self).__init__(client, location, group_instance_rel)
 
     @property
     def content(self):

@@ -33,6 +33,15 @@ class TcServerGroup(Group):
 
         self.instances = TcServerGroupInstances(self._client, self._links[self.__REL_GROUP_INSTANCES][0])
 
+    def update(self, nodes):
+        """Update the membership of the group
+
+        :type nodes:    :obj:`list` of :class:`vas.tc_server.TcServerNode`
+        :param nodes:   The collection of nodes to be included in the group
+        """
+
+        self._client.post(self._location_self, {'nodes': [node._location_self for node in nodes]})
+
     def _create_installations(self, client, location):
         return TcServerInstallations(client, location)
 
