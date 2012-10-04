@@ -17,7 +17,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='vas',
-    version='0.3.0.dev',
+    version='0.4.0.dev',
     url='http://vfabric.co',
     author='VMware',
     author_email='support@vmware.com',
