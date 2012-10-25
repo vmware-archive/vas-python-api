@@ -20,10 +20,16 @@ vas
 :mod:`VFabricAdministrationServer`
 ----------------------------------
 .. automodule:: vas.VFabricAdministrationServer
+.. autoclass:: VFabricAdministrationServer()
+    :show-inheritance:
     :members:
-    :inherited-members:
+
+    .. automethod:: __init__(host='localhost', port=8443, username='admin', password='vmware')
+
 
 :mod:`VFabricAdministrationServerError`
 ---------------------------------------
 .. automodule:: vas.VFabricAdministrationServerError
+.. autoclass:: VFabricAdministrationServerError()
+    :show-inheritance:
     :members:

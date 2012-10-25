@@ -39,7 +39,7 @@ try:
     rabbitmq = VFabricAdministrationServer(args.host, args.port, args.username, args.password).rabbitmq
 
     print('Creating installation image... ', end='')
-    installation_image = rabbitmq.installation_images.create(args.installation_image_version, args.installation_image)
+    installation_image = rabbitmq.installation_images.create(args.installation_image, args.installation_image_version)
     print('done')
 
     print('Creating group... ', end='')
@@ -68,15 +68,18 @@ finally:
 
     if 'instance' in variables:
         print('Stopping instance... ', end='')
+        #noinspection PyUnboundLocalVariable
         instance.stop()
         print('done')
 
     if 'group' in variables:
         print('Deleting group... ', end='')
-        rabbitmq.groups.delete(group)
+        #noinspection PyUnboundLocalVariable
+        group.delete()
         print('done')
 
     if 'installation_image' in variables:
         print('Deleting installation image... ', end='')
-        rabbitmq.installation_images.delete(installation_image)
+        #noinspection PyUnboundLocalVariable
+        installation_image.delete()
         print('done')

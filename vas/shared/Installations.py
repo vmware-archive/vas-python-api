@@ -14,29 +14,69 @@
 # limitations under the License.
 
 
-from vas.shared.MutableCollectionType import MutableCollectionType
+from vas.shared.Deletable import Deletable
+from vas.shared.MutableCollection import MutableCollection
+from vas.shared.Resource import Resource
+from vas.util.LinkUtils import LinkUtils
 
-class Installations(MutableCollectionType):
-    """An collection of abstract installations
+class Installations(MutableCollection):
+    """A collection of installations
 
-    :ivar `vas.shared.Security` security:   The security configuration for the collection of abstract installations
+    :ivar `vas.shared.Security.Security`    security:   The resource's security
     """
 
-    __COLLECTION_KEY = 'installations'
-
-    __REL_INSTALLATION = 'installation'
-
-    def __init__(self, client, location):
-        super(Installations, self).__init__(client, location, self.__COLLECTION_KEY)
+    def __init__(self, client, location, installation_class):
+        super(Installations, self).__init__(client, location, 'installations', installation_class)
 
     def create(self, installation_image):
         """Create a new installation
 
-        :type installation_image:   :class:`vas.shared.InstallationImage`
-        :param installation_image:  The installation image to use when creating this installation
-        :rtype:     :class:`vas.shared.Installation`
-        :return:    The newly created installation
+        :type   installation_image: :class:`vas.shared.InstallationImages.InstallationImage`
+        :param  installation_image: The installation image to use to create the installation
+        :rtype:     :class:`vas.shared.Installations.Installation`
+        :return:    The new installation
         """
-        location = self._client.post(self._location_self, {'image': installation_image._location_self},
-            self.__REL_INSTALLATION)
-        return self._create_item(self._client, location)
+
+        return self._create({'image': installation_image._location}, 'installation')
+
+
+class Installation(Resource, Deletable):
+    """An installation of a middleware component. Created from an installation image. Once created, an installation is
+    used when creating a new instance and provides the binaries that the instance uses at runtime.
+
+    :ivar `vas.shared.Groups.Group`                         group:              The group that contains the installation
+    :ivar `vas.shared.InstallationImages.InstallationImage` installation_image: The installation image that was used to
+                                                                                create the installation
+    :ivar `vas.shared.Security.Security`                    security:           The resource's security
+    :ivar str                                               version:            The installation's version
+    """
+
+    __group = None
+    __installation_image = None
+
+    @property
+    def group(self):
+        self.__group = self.__group or self.__group_class(self._client, self.__group_location)
+        return self.__group
+
+    @property
+    def installation_image(self):
+        self.__installation_image = self.__installation_image or self.__installation_image_class(self._client,
+            self.__installation_image_location)
+        return self.__installation_image
+
+    @property
+    def version(self):
+        return self.__version
+
+    def __init__(self, client, location, installation_image_class, group_class):
+        super(Installation, self).__init__(client, location)
+
+        self.__installation_image_location = LinkUtils.get_link_href(self._details, 'installation-image')
+        self.__group_location = LinkUtils.get_link_href(self._details, 'group')
+
+        self.__installation_image_class = installation_image_class
+        self.__group_class = group_class
+
+        self.__version = self._details['version']
+

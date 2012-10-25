@@ -17,296 +17,416 @@
 vas.gemfire
 =============
 
+:mod:`AgentInstances`
+---------------------
+.. automodule:: vas.gemfire.AgentInstances
+.. autoclass:: AgentInstance()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: AgentInstances()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`AgentLiveConfigurations`
+------------------------------
+.. automodule:: vas.gemfire.AgentLiveConfigurations
+.. autoclass:: AgentLiveConfiguration()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: AgentLiveConfigurations()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`AgentLogs`
+----------------
+.. automodule:: vas.gemfire.AgentLogs
+.. autoclass:: AgentLog()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: AgentLogs()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`AgentNodeInstances`
+-------------------------
+.. automodule:: vas.gemfire.AgentNodeInstances
+.. autoclass:: AgentNodeInstance()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: AgentNodeInstances()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`AgentNodeLiveConfigurations`
+----------------------------------
+.. automodule:: vas.gemfire.AgentNodeLiveConfigurations
+.. autoclass:: AgentNodeLiveConfiguration()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: AgentNodeLiveConfigurations()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`AgentPendingConfigurations`
+---------------------------------
+.. automodule:: vas.gemfire.AgentPendingConfigurations
+.. autoclass:: AgentPendingConfiguration()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: AgentPendingConfigurations()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`ApplicationCode`
+----------------------
+.. automodule:: vas.gemfire.ApplicationCode
+.. autoclass:: ApplicationCode()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`ApplicationCodeImages`
+----------------------------
+.. automodule:: vas.gemfire.ApplicationCodeImages
+.. autoclass:: ApplicationCodeImage()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: ApplicationCodeImages()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`CacheServerInstances`
+---------------------------
+.. automodule:: vas.gemfire.CacheServerInstances
+.. autoclass:: CacheServerInstance()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: CacheServerInstances()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`CacheServerLiveConfigurations`
+------------------------------------
+.. automodule:: vas.gemfire.CacheServerLiveConfigurations
+.. autoclass:: CacheServerLiveConfiguration()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: CacheServerLiveConfigurations()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`CacheServerLogs`
+----------------------
+.. automodule:: vas.gemfire.CacheServerLogs
+.. autoclass:: CacheServerLog()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: CacheServerLogs()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`CacheServerNodeInstances`
+-------------------------------
+.. automodule:: vas.gemfire.CacheServerNodeInstances
+.. autoclass:: CacheServerNodeInstance()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: CacheServerNodeInstances()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`CacheServerNodeLiveConfigurations`
+----------------------------------------
+.. automodule:: vas.gemfire.CacheServerNodeLiveConfigurations
+.. autoclass:: CacheServerNodeLiveConfiguration()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: CacheServerNodeLiveConfigurations()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`CacheServerPendingConfigurations`
+---------------------------------------
+.. automodule:: vas.gemfire.CacheServerPendingConfigurations
+.. autoclass:: CacheServerPendingConfiguration()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: CacheServerPendingConfigurations()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`DiskStores`
+-----------------
+.. automodule:: vas.gemfire.DiskStores
+.. autoclass:: DiskStore()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: DiskStores()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
 :mod:`GemFire`
 --------------
 .. automodule:: vas.gemfire.GemFire
+.. autoclass:: GemFire()
+    :show-inheritance:
     :members:
     :inherited-members:
 
-:mod:`GemFireAgentGroupInstance`
---------------------------------
-.. automodule:: vas.gemfire.GemFireAgentGroupInstance
+:mod:`Groups`
+-------------
+.. automodule:: vas.gemfire.Groups
+.. autoclass:: Group()
+    :show-inheritance:
     :members:
     :inherited-members:
 
-:mod:`GemFireAgentGroupInstances`
----------------------------------
-.. automodule:: vas.gemfire.GemFireAgentGroupInstances
+----
+
+.. autoclass:: Groups()
+    :show-inheritance:
     :members:
     :inherited-members:
 
-:mod:`GemFireAgentLiveConfiguration`
-------------------------------------
-.. automodule:: vas.gemfire.GemFireAgentLiveConfiguration
-    :members:
-    :inherited-members:
-
-:mod:`GemFireAgentLiveConfigurations`
--------------------------------------
-.. automodule:: vas.gemfire.GemFireAgentLiveConfigurations
-    :members:
-    :inherited-members:
-
-:mod:`GemFireAgentLog`
-----------------------
-.. automodule:: vas.gemfire.GemFireAgentLog
-    :members:
-    :inherited-members:
-
-:mod:`GemFireAgentLogs`
------------------------
-.. automodule:: vas.gemfire.GemFireAgentLogs
-    :members:
-    :inherited-members:
-
-:mod:`GemFireAgentNodeInstance`
--------------------------------
-.. automodule:: vas.gemfire.GemFireAgentNodeInstance
-    :members:
-    :inherited-members:
-
-:mod:`GemFireAgentNodeInstances`
---------------------------------
-.. automodule:: vas.gemfire.GemFireAgentNodeInstances
-    :members:
-    :inherited-members:
-
-:mod:`GemFireAgentPendingConfiguration`
----------------------------------------
-.. automodule:: vas.gemfire.GemFireAgentPendingConfiguration
-    :members:
-    :inherited-members:
-
-:mod:`GemFireAgentPendingConfigurations`
-----------------------------------------
-.. automodule:: vas.gemfire.GemFireAgentPendingConfigurations
-    :members:
-    :inherited-members:
-
-:mod:`GemFireApplicationCodeImage`
-----------------------------------
-.. automodule:: vas.gemfire.GemFireApplicationCodeImage
-    :members:
-    :inherited-members:
-
-:mod:`GemFireApplicationCodeImages`
------------------------------------
-.. automodule:: vas.gemfire.GemFireApplicationCodeImages
-    :members:
-    :inherited-members:
-
-:mod:`GemFireCacheServerGroupInstance`
---------------------------------------
-.. automodule:: vas.gemfire.GemFireCacheServerGroupInstance
-    :members:
-    :inherited-members:
-
-:mod:`GemFireCacheServerGroupInstances`
----------------------------------------
-.. automodule:: vas.gemfire.GemFireCacheServerGroupInstances
-    :members:
-    :inherited-members:
-
-:mod:`GemFireCacheServerLiveConfiguration`
-------------------------------------------
-.. automodule:: vas.gemfire.GemFireCacheServerLiveConfiguration
-    :members:
-    :inherited-members:
-
-:mod:`GemFireCacheServerLiveConfigurations`
--------------------------------------------
-.. automodule:: vas.gemfire.GemFireCacheServerLiveConfigurations
-    :members:
-    :inherited-members:
-
-:mod:`GemFireCacheServerLog`
-----------------------------
-.. automodule:: vas.gemfire.GemFireCacheServerLog
-    :members:
-    :inherited-members:
-
-:mod:`GemFireCacheServerLogs`
------------------------------
-.. automodule:: vas.gemfire.GemFireCacheServerLogs
-    :members:
-    :inherited-members:
-
-:mod:`GemFireCacheServerNodeInstance`
--------------------------------------
-.. automodule:: vas.gemfire.GemFireCacheServerNodeInstance
-    :members:
-    :inherited-members:
-
-:mod:`GemFireCacheServerNodeInstances`
---------------------------------------
-.. automodule:: vas.gemfire.GemFireCacheServerNodeInstances
-    :members:
-    :inherited-members:
-
-:mod:`GemFireCacheServerPendingConfiguration`
----------------------------------------------
-.. automodule:: vas.gemfire.GemFireCacheServerPendingConfiguration
-    :members:
-    :inherited-members:
-
-:mod:`GemFireCacheServerPendingConfigurations`
-----------------------------------------------
-.. automodule:: vas.gemfire.GemFireCacheServerPendingConfigurations
-    :members:
-    :inherited-members:
-
-:mod:`GemFireDiskStore`
------------------------
-.. automodule:: vas.gemfire.GemFireDiskStore
-    :members:
-    :inherited-members:
-
-:mod:`GemFireDiskStores`
-------------------------
-.. automodule:: vas.gemfire.GemFireDiskStores
-    :members:
-    :inherited-members:
-
-:mod:`GemFireGroup`
--------------------
-.. automodule:: vas.gemfire.GemFireGroup
-    :members:
-    :inherited-members:
-
-:mod:`GemFireGroups`
---------------------
-.. automodule:: vas.gemfire.GemFireGroups
-    :members:
-    :inherited-members:
-
-:mod:`GemFireInstallation`
---------------------------
-.. automodule:: vas.gemfire.GemFireInstallation
-    :members:
-    :inherited-members:
-
-:mod:`GemFireInstallations`
----------------------------
-.. automodule:: vas.gemfire.GemFireInstallations
-    :members:
-    :inherited-members:
-
-:mod:`GemFireInstallationImage`
--------------------------------
-.. automodule:: vas.gemfire.GemFireInstallationImage
-    :members:
-    :inherited-members:
-
-:mod:`GemFireInstallationImages`
---------------------------------
-.. automodule:: vas.gemfire.GemFireInstallationImages
-    :members:
-    :inherited-members:
-
-:mod:`GemFireLiveApplicationCode`
----------------------------------
-.. automodule:: vas.gemfire.GemFireLiveApplicationCode
-    :members:
-    :inherited-members:
-
-:mod:`GemFireLiveApplicationCodes`
-----------------------------------
-.. automodule:: vas.gemfire.GemFireLiveApplicationCodes
-    :members:
-    :inherited-members:
-
-:mod:`GemFireLocatorGroupInstance`
-----------------------------------
-.. automodule:: vas.gemfire.GemFireLocatorGroupInstance
-    :members:
-    :inherited-members:
-
-:mod:`GemFireLocatorGroupInstances`
------------------------------------
-.. automodule:: vas.gemfire.GemFireLocatorGroupInstances
-    :members:
-    :inherited-members:
-
-:mod:`GemFireLocatorLiveConfiguration`
---------------------------------------
-.. automodule:: vas.gemfire.GemFireLocatorLiveConfiguration
-    :members:
-    :inherited-members:
-
-:mod:`GemFireLocatorLiveConfigurations`
----------------------------------------
-.. automodule:: vas.gemfire.GemFireLocatorLiveConfigurations
-    :members:
-    :inherited-members:
-
-:mod:`GemFireLocatorLog`
-------------------------
-.. automodule:: vas.gemfire.GemFireLocatorLog
-    :members:
-    :inherited-members:
-
-:mod:`GemFireLocatorLogs`
+:mod:`InstallationImages`
 -------------------------
-.. automodule:: vas.gemfire.GemFireLocatorLogs
+.. automodule:: vas.gemfire.InstallationImages
+.. autoclass:: InstallationImage()
+    :show-inheritance:
     :members:
     :inherited-members:
 
-:mod:`GemFireLocatorNodeInstance`
----------------------------------
-.. automodule:: vas.gemfire.GemFireLocatorNodeInstance
+----
+
+.. autoclass:: InstallationImages()
+    :show-inheritance:
     :members:
     :inherited-members:
 
-:mod:`GemFireLocatorNodeInstances`
-----------------------------------
-.. automodule:: vas.gemfire.GemFireLocatorNodeInstances
-    :members:
-    :inherited-members:
-
-:mod:`GemFireLocatorPendingConfiguration`
------------------------------------------
-.. automodule:: vas.gemfire.GemFireLocatorPendingConfiguration
-    :members:
-    :inherited-members:
-
-:mod:`GemFireLocatorPendingConfigurations`
-------------------------------------------
-.. automodule:: vas.gemfire.GemFireLocatorPendingConfigurations
-    :members:
-    :inherited-members:
-
-:mod:`GemFireNode`
--------------------
-.. automodule:: vas.gemfire.GemFireNode
-    :members:
-    :inherited-members:
-
-:mod:`GemFireNodes`
+:mod:`Installations`
 --------------------
-.. automodule:: vas.gemfire.GemFireNodes
+.. automodule:: vas.gemfire.Installations
+.. autoclass:: Installation()
+    :show-inheritance:
     :members:
     :inherited-members:
 
-:mod:`GemFirePendingApplicationCode`
-------------------------------------
-.. automodule:: vas.gemfire.GemFirePendingApplicationCode
+----
+
+.. autoclass:: Installations()
+    :show-inheritance:
     :members:
     :inherited-members:
 
-:mod:`GemFirePendingApplicationCodes`
--------------------------------------
-.. automodule:: vas.gemfire.GemFirePendingApplicationCodes
+:mod:`LiveApplicationCodes`
+---------------------------
+.. automodule:: vas.gemfire.LiveApplicationCodes
+.. autoclass:: LiveApplicationCodes()
+    :show-inheritance:
     :members:
     :inherited-members:
 
-:mod:`GemFireStatistic`
+:mod:`LocatorInstances`
 -----------------------
-.. automodule:: vas.gemfire.GemFireStatistic
+.. automodule:: vas.gemfire.LocatorInstances
+.. autoclass:: LocatorInstance()
+    :show-inheritance:
     :members:
     :inherited-members:
 
-:mod:`GemFireStatistics`
-------------------------
-.. automodule:: vas.gemfire.GemFireStatistics
+----
+
+.. autoclass:: LocatorInstances()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`LocatorLiveConfigurations`
+--------------------------------
+.. automodule:: vas.gemfire.LocatorLiveConfigurations
+.. autoclass:: LocatorLiveConfiguration()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: LocatorLiveConfigurations()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`LocatorLogs`
+------------------
+.. automodule:: vas.gemfire.LocatorLogs
+.. autoclass:: LocatorLog()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: LocatorLogs()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`LocatorNodeInstances`
+---------------------------
+.. automodule:: vas.gemfire.LocatorNodeInstances
+.. autoclass:: LocatorNodeInstance()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: LocatorNodeInstances()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`LocatorNodeLiveConfigurations`
+------------------------------------
+.. automodule:: vas.gemfire.LocatorNodeLiveConfigurations
+.. autoclass:: LocatorNodeLiveConfiguration()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: LocatorNodeLiveConfigurations()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`LocatorPendingConfigurations`
+-----------------------------------
+.. automodule:: vas.gemfire.LocatorPendingConfigurations
+.. autoclass:: LocatorPendingConfiguration()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: LocatorPendingConfigurations()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`Nodes`
+------------
+.. automodule:: vas.gemfire.Nodes
+.. autoclass:: Node()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: Nodes()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`PendingApplicationCodes`
+-----------------------------------
+.. automodule:: vas.gemfire.PendingApplicationCodes
+.. autoclass:: PendingApplicationCode()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: PendingApplicationCodes()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`Statistics`
+-----------------------------------
+.. automodule:: vas.gemfire.Statistics
+.. autoclass:: Statistic()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: Statistics()
+    :show-inheritance:
     :members:
     :inherited-members:

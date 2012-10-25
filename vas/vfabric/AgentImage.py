@@ -16,34 +16,33 @@
 
 import os
 from io import BytesIO
-from vas.shared.Type import Type
+from vas.shared.Resource import Resource
 from zipfile import ZipFile
+from vas.util.LinkUtils import LinkUtils
 
-class AgentImage(Type):
-    """A vFabric Administration Agent image
+class AgentImage(Resource):
+    """Provides access to the installation image for the vFabric Administration Agent
 
-    :ivar bytearray content: The binary data making up the agent distribution in the form of a ZIP file with Info-ZIP style permissions
-    :ivar `vas.shared.Security` security:   The security configuration for the agent image
+    :ivar bytearray                         content:    The content of the agent installation image (a zip file) from
+                                                        the server
+    :ivar `vas.shared.Security.Security`    security:   The resource's security
     """
 
-    __REL_CONTENT = 'content'
+    @property
+    def content(self):
+        return self._client.get(self.__content_location)
 
     def __init__(self, client, location):
         super(AgentImage, self).__init__(client, location)
 
-        self.__location_content = self._links[self.__REL_CONTENT][0]
-
-    @property
-    def content(self):
-        return self._client.get(self.__location_content)
+        self.__content_location = LinkUtils.get_link_href(self._details, 'content')
 
     def extract_to(self, location=os.curdir):
-        """Extract the Administration Agent image to a specified location
+        """Downloads and extracts the agent installation image
 
-        :type location:    :obj:`str`
-        :param location:   The location to extract the Administration Agent image to
-        :rtype:         :obj:`str`
-        :return:        The root directory of the extracted agent
+        :param str  location:   The location to extract the agent to
+        :rtype:     :obj:`str`
+        :return:    The root directory of the extracted agent
         """
 
         permissions = list()

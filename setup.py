@@ -13,11 +13,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 from setuptools import setup, find_packages
 
 setup(
     name='vas',
-    version='0.4.0.dev',
+    version='1.0.0.dev',
     url='http://vfabric.co',
     author='VMware',
     author_email='support@vmware.com',

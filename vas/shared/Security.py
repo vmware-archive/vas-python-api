@@ -14,67 +14,73 @@
 # limitations under the License.
 
 
-class Security:
-    """The security configuration for an item or collection
+class Security(object):
+    """The security configuration for a resource
 
-    :ivar str owner:    The owner of the item or collection
-    :ivar str group:    The group of the item or collection
-    :ivar dict permissions: The permissions of the item or collection. This :obj:`dict` contains keys of ``owner``,
-                            ``group``, and ``other``.  The value for any of those keys is a :obj:`list` which contains
-                            any of ``READ``, ``WRITE``, and ``EXECUTE``.  For example::
+    :ivar str   group:          the group of the resource
+    :ivar str   owner:          the owner of the resource
+    :ivar dict  permissions:    The permissions of the resource. This :obj:`dict` contains keys of ``owner``,
+                                ``group``, and ``other``.  The value for any of those keys is a :obj:`list` which
+                                contains any of ``READ``, ``WRITE``, and ``EXECUTE``.  For example:
 
-                                {
-                                    'owner': ['READ', 'WRITE', 'EXECUTE'],
-                                    'group': ['READ', 'WRITE'],
-                                    'other': ['READ']
-                                }
+                                .. code-block:: json
+
+                                    {
+                                        'owner': ['READ', 'WRITE', 'EXECUTE'],
+                                        'group': ['READ', 'WRITE'],
+                                        'other': ['READ']
+                                    }
+
     """
 
-    __KEY_GROUP = 'group'
+    @property
+    def group(self):
+        return self.__group
 
-    __KEY_OTHER = 'other'
+    @property
+    def owner(self):
+        return self.__owner
 
-    __KEY_OWNER = 'owner'
-
-    __KEY_PERMISSIONS = 'permissions'
+    @property
+    def permissions(self):
+        return self.__permissions
 
     def __init__(self, client, location):
         self.__client = client
-        self.__location_self = location
+        self.__location = location
 
-        details = client.get(location)
-        self.group = details[self.__KEY_GROUP]
-        self.owner = details[self.__KEY_OWNER]
-        self.permissions = details[self.__KEY_PERMISSIONS]
+        self.reload()
+
+    def reload(self):
+        """Reloads the security configuration from the server"""
+
+        json = self.__client.get(self.__location)
+        self.__group = json['group']
+        self.__owner = json['owner']
+        self.__permissions = json['permissions']
+
 
     def chown(self, owner=None, group=None):
-        """Change the owner and group security configuration for an item or collection. Analogous to the UNIX |chown|_ command.
+        """Change the owner and group security configuration for an item or collection. Analogous to the UNIX |chown|_
+        command.
 
         .. |chown| replace:: ``chown``
         .. _chown: http://en.wikipedia.org/wiki/Chown
 
-        :type owner:     :obj:`str`
-        :param owner:    The new owner of the item or collection.  Unchanged if :obj:`None`.
-        :type group:     :obj:`str`
-        :param group:    The new group of the item or collection.  Unchanged if :obj:`None`.
+        :param str  owner:  The new owner of the item or collection.  Unchanged if :obj:`None`.
+        :param str  group:  The new group of the item or collection.  Unchanged if :obj:`None`.
         """
 
         payload = dict()
 
-        if owner is not None:
-            payload[self.__KEY_OWNER] = owner
+        if owner:
+            payload['owner'] = owner
 
-        if group is not None:
-            payload[self.__KEY_GROUP] = group
+        if group:
+            payload['group'] = group
 
-        self.__client.post(self.__location_self, payload)
-
-        if owner is not None:
-            self.owner = owner
-
-        if group is not None:
-            self.group = group
-
+        self.__client.post(self.__location, payload)
+        self.reload()
 
     def chmod(self, owner=None, group=None, other=None):
         """Change the permissions for an item or collection. Analogous to the UNIX |chmod|_ command.
@@ -82,48 +88,35 @@ class Security:
         .. |chmod| replace:: ``chmod``
         .. _chmod: http://en.wikipedia.org/wiki/Chmod
 
-        :type owner:     :obj:`list` of :obj:`str`
-        :param owner:    The new owner class permissions of the item or collection.  Legal values are any of ``READ``,
-                         ``WRITE``, and ``EXECUTE``. Unchanged if :obj:`None`.
-        :type group:     :obj:`list` of :obj:`str`
-        :param group:    The new group class permissions of the item or collection.  Legal values are any of ``READ``,
-                         ``WRITE``, and ``EXECUTE``. Unchanged if :obj:`None`.
-        :type other:     :obj:`list` of :obj:`str`
-        :param other:    The new other class permissions of the item or collection.  Legal values are any of ``READ``,
-                         ``WRITE``, and ``EXECUTE``. Unchanged if :obj:`None`.
+        :param list owner:  The new owner class permissions of the item or collection. Legal values are any of ``READ``,
+                            ``WRITE``, and ``EXECUTE``. Unchanged if :obj:`None`.
+        :param list group:  The new group class permissions of the item or collection. Legal values are any of ``READ``,
+                            ``WRITE``, and ``EXECUTE``. Unchanged if :obj:`None`.
+        :param list other:  The new other class permissions of the item or collection. Legal values are any of ``READ``,
+                            ``WRITE``, and ``EXECUTE``. Unchanged if :obj:`None`.
         """
 
         permissions = dict()
 
-        if owner is not None:
-            permissions[self.__KEY_OWNER] = owner
+        if owner:
+            permissions['owner'] = owner
 
-        if group is not None:
-            permissions[self.__KEY_GROUP] = group
+        if group:
+            permissions['group'] = group
 
-        if other is not None:
-            permissions[self.__KEY_OTHER] = other
+        if other:
+            permissions['other'] = other
 
-        self.__client.post(self.__location_self, {self.__KEY_PERMISSIONS: permissions})
+        self.__client.post(self.__location, {'permissions': permissions})
 
-        if owner is not None:
-            self.permissions[self.__KEY_OWNER] = owner
+        if owner:
+            self.permissions['owner'] = owner
 
-        if group is not None:
-            self.permissions[self.__KEY_GROUP] = group
+        if group:
+            self.permissions['group'] = group
 
-        if other is not None:
-            self.permissions[self.__KEY_OTHER] = other
-
-
-    def __eq__(self, other):
-        return self.__location_self == other.__location_self
-
-    def __hash__(self):
-        return hash(self.__location_self)
-
-    def __lt__(self, other):
-        return self.__location_self < other.__location_self
+        if other:
+            self.permissions['other'] = other
 
     def __repr__(self):
-        return "{}(client={}, location={})".format(self.__class__.__name__, self.__client, repr(self.__location_self))
+        return "{}(client={}, location={})".format(self.__class__.__name__, self.__client, repr(self.__location))

@@ -14,37 +14,31 @@
 # limitations under the License.
 
 
-from vas.VFabricAdministrationServerError import VFabricAdministrationServerError
-from vas.shared.Type import Type
+from vas.shared.Configuration import Configuration
 
-class LiveConfiguration(Type):
-    """A live configuration
+class LiveConfiguration(Configuration):
+    """A live configuration file in an instance
 
-    :ivar `vas.shared.GroupInstance` instance: The configuration's parent group instance
-    :ivar str path: The path of the configuration
-    :ivar int size: The size of the configuration
-    :ivar str content:  The contents of the configuration
-    :ivar `vas.shared.Security` security:   The security configuration for the type
+    :ivar str                               content:                The configuration's content
+    :ivar `vas.shared.Instance.Instance`    instance:               The instance that owns the configuration
+    :ivar str                               path:                   The configuration's path
+    :ivar list                              node_configurations:    The configuration's node configurations
+    :ivar `vas.shared.Security.Security`    security:               The resource's security
+    :ivar int                               size:                   The configuration's size
     """
 
-    __KEY_PATH = 'path'
-
-    __KEY_SIZE = 'size'
-
-    __REL_CONTENT = 'content'
-
-    def __init__(self, client, location, group_instance_rel):
-        super(LiveConfiguration, self).__init__(client, location)
-
-        self.instance = self._create_group_instance(client, self._links[group_instance_rel][0])
-        self.path = self._details[self.__KEY_PATH]
-        self.size = self._details[self.__KEY_SIZE]
-
-        self._location_content = self._links[self.__REL_CONTENT][0]
-
     @property
-    def content(self):
-        return self._client.get(self._location_content)
+    def node_configurations(self):
+        self.__node_live_configurations = self.__node_live_configurations or self._create_resources_from_links(
+            'node-live-configuration', self.__node_live_configuration_class)
+        return self.__node_live_configurations
 
-    def _create_group_instance(self, client, location):
-        raise VFabricAdministrationServerError('_create_group_instance(self, client, location) method is unimplemented')
+    def __init__(self, client, location, instance_type, instance_class, node_live_configuration_class):
+        super(LiveConfiguration, self).__init__(client, location, instance_type, instance_class)
+        self.__node_live_configuration_class = node_live_configuration_class
+
+    def reload(self):
+        """Reloads the live configuration's details from the server"""
+
+        super(LiveConfiguration, self).reload()
+        self.__node_live_configurations = None

@@ -17,42 +17,22 @@
 from vas.VFabricAdministrationServerError import VFabricAdministrationServerError
 
 class LinkUtils:
-    __KEY_HREF = 'href'
-
-    __KEY_LINKS = 'links'
-
-    __KEY_REL = 'rel'
-
-    __REL_SELF = 'self'
+    @classmethod
+    def get_link_hrefs(cls, json, rel):
+        return [link['href'] for link in json['links'] if link['rel'] == rel]
 
     @classmethod
-    def get_collection_self_links(cls, payload, collection_key):
-        return [cls.get_link(item, cls.__REL_SELF) for item in payload[collection_key]]
-
-    @classmethod
-    def get_link(cls, payload, rel):
-        links = cls.get_links(payload, rel)
-        if len(links) == 1:
-            return links[0]
+    def get_link_href(cls, json, rel):
+        hrefs = cls.get_link_hrefs(json, rel)
+        if len(hrefs) == 1:
+            return hrefs[0]
         else:
-            raise VFabricAdministrationServerError("There are {} links for rel '{}'".format(len(links), rel))
+            raise VFabricAdministrationServerError("There are {} links for rel '{}'".format(len(hrefs), rel))
 
     @classmethod
-    def get_links(cls, payload, rel=None):
-        links = dict()
+    def get_self_link_href(cls, json):
+        return cls.get_link_href(json, 'self')
 
-        for link in payload[cls.__KEY_LINKS]:
-            candidate_rel = link[cls.__KEY_REL]
-            candidate_href = link[cls.__KEY_HREF]
-
-            values = links.setdefault(candidate_rel, [])
-            if candidate_href not in values:
-                values.append(candidate_href)
-
-        if rel is None:
-            return links
-        else:
-            return links[rel]
 
     def __repr__(self):
         return "{}()".format(self.__class__.__name__)

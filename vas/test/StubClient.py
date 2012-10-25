@@ -18,6 +18,7 @@ import json
 import os
 import re
 from mock import MagicMock
+from vas.VFabricAdministrationServerError import VFabricAdministrationServerError
 
 class StubClient:
     __LOCATION_REGEX = re.compile(
@@ -54,15 +55,18 @@ class StubClient:
             else:
                 file_name += final_capture + '-list.json'
 
-        if file_name.endswith('.zip'):
-            with open(file_name, 'rb') as f:
-                return bytearray(f.read())
-        else:
-            with open(file_name) as f:
-                if file_name.endswith('.json'):
-                    return json.load(f)
-                else:
-                    return f.read()
+        try:
+            if file_name.endswith('.zip'):
+                with open(file_name, 'rb') as f:
+                    return bytearray(f.read())
+            else:
+                with open(file_name) as f:
+                    if file_name.endswith('.json'):
+                        return json.load(f)
+                    else:
+                        return f.read()
+        except IOError:
+            raise VFabricAdministrationServerError('Not Found', 404)
 
     def delete(self, location):
         self.delegate.delete(location)

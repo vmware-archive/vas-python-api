@@ -14,32 +14,35 @@
 # limitations under the License.
 
 
-from vas.shared.TopLevelType import TopLevelType
+from vas.util.LinkUtils import LinkUtils
 
-class VFabric(TopLevelType):
-    """The vFabric component of the vFabric Administration Server
 
-    :ivar `vas.vfabric.AgentImage` agent_image: The vFabric Administration Agent image
-    :ivar `vas.vfabric.VFabricNodes` nodes: The collection of nodes
+class VFabric(object):
+    """The entry point of the vFabric API
+
+    :ivar `vas.vfabric.AgentImage`  agent_image:    the installation image for the vFabric Administration agent
+    :ivar `vas.vfabric.Nodes.Nodes` nodes:          the nodes that are known to the server
     """
 
-    __REL_AGENT_IMAGE = 'agent-image'
+    @property
+    def agent_image(self):
+        return self.__agent_image
 
-    __ROOT_PATH = "/vfabric/v1/"
+    @property
+    def nodes(self):
+        return self.__nodes
 
+    def __init__(self, client, location):
+        self.__client = client
+        self.__location = location
 
-    def __init__(self, client, location_stem):
-        super(VFabric, self).__init__(client, location_stem.format(self.__ROOT_PATH))
-
-        self.agent_image = AgentImage(client, self._links[self.__REL_AGENT_IMAGE][0])
-        self.__location_stem = location_stem
-
-    def _create_nodes(self, client, location):
-        return VFabricNodes(client, location)
+        json = client.get(location)
+        self.__agent_image = AgentImage(client, LinkUtils.get_link_href(json, 'agent-image'))
+        self.__nodes = Nodes(client, LinkUtils.get_link_href(json, 'nodes'))
 
     def __repr__(self):
-        return "{}(client={}, location_stem={})".format(self.__class__.__name__, self._client,
-            repr(self.__location_stem))
+        return "{}(client={}, location={})".format(self.__class__.__name__, self.__client, repr(self.__location))
+
 
 from vas.vfabric.AgentImage import AgentImage
-from vas.vfabric.VFabricNodes import VFabricNodes
+from vas.vfabric.Nodes import Nodes

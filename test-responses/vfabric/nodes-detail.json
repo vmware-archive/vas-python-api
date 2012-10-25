@@ -1,5 +1,7 @@
 {
-    "ip-addresses":[ "192.168.0.2", "127.0.0.1" ],
+    "ip-addresses":[ "fc00:192:168:0:2d:4fff:fd48:5e80", "192.168.0.2" ],
+    "ipv4-addresses":[ "192.168.0.2" ],
+    "ipv6-addresses":[ "fc00:192:168:0:2d:4fff:fd48:5e80" ],
     "host-names":[ "example-host" ],
     "operating-system":"Linux",
     "architecture":"x64",

@@ -15,24 +15,28 @@
 
 
 class VFabricAdministrationServerError(Exception):
-    """An error resulting from interaction with the vFabric Administration Server
+    """Raised to indicate a failure has occurred when communicating with the vFabric Administration Server
 
-    :type messages:     A variable number of :obj:`str`
-    :param messages:    The messages to be displayed
-    :type code:     :obj:`str`
-    :param code:    The status code of the response that caused the error
+    :ivar int   code:       the HTTP error code returned by the server
+    :ivar list  messages:   the error messages, if any, returned by the server
     """
 
-    def __init__(self, messages, code=None):
-        super(VFabricAdministrationServerError, self).__init__()
+    @property
+    def code(self):
+        return self.__code
 
-        self.messages = []
+    @property
+    def messages(self):
+        return self.__messages
+
+    def __init__(self, messages, code=None):
+        self.__messages = []
         if isinstance(messages, list):
-            self.messages.extend(messages)
+            self.__messages.extend(messages)
         else:
             self.messages.append(messages)
 
-        self.code = code
+        self.__code = code
 
     def __str__(self):
         return '{}: {}'.format(self.code, ', '.join(self.messages))

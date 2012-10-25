@@ -118,7 +118,7 @@ class Client:
                 self.delete(task_location)
 
                 if rel is not None:
-                    return LinkUtils.get_link(task, rel)
+                    return LinkUtils.get_link_href(task, rel)
                 else:
                     return
             else:
@@ -128,7 +128,7 @@ class Client:
     def __raise_exception(self, response):
         reasons = []
 
-        body = response.read()
+        body = response.content
         try:
             for reason in response.json['reasons']:
                 reasons.append(reason['message'])

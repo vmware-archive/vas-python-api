@@ -14,29 +14,19 @@
 # limitations under the License.
 
 
-import re
-from unittest.case import TestCase
-from vas.rabbitmq.RabbitMqInstallationImages import RabbitMqInstallationImages
-from vas.rabbitmq.RabbitMqPluginImages import RabbitMqPluginImages
+from vas.rabbitmq.Groups import Groups
+from vas.rabbitmq.InstallationImages import InstallationImages
+from vas.rabbitmq.Nodes import Nodes
+from vas.rabbitmq.PluginImages import PluginImages
 from vas.rabbitmq.RabbitMq import RabbitMq
-from vas.rabbitmq.RabbitMqGroups import RabbitMqGroups
-from vas.rabbitmq.RabbitMqNodes import RabbitMqNodes
-from vas.test.StubClient import StubClient
+from vas.test.VasTestCase import VasTestCase
 
-class TestRabbitMq(TestCase):
-    __client = StubClient()
+class TestRabbitMq(VasTestCase):
 
-    def setUp(self):
-        self.__client.delegate.reset_mock()
-        self.__rabbitMq = RabbitMq(self.__client, 'https://localhost:8443{}')
-
-    def test_attributes(self):
-        self.assertIsInstance(self.__rabbitMq.groups, RabbitMqGroups)
-        self.assertIsInstance(self.__rabbitMq.installation_images, RabbitMqInstallationImages)
-        self.assertIsInstance(self.__rabbitMq.nodes, RabbitMqNodes)
-        self.assertIsInstance(self.__rabbitMq.plugin_images, RabbitMqPluginImages)
-
-    def test_repr(self):
-        self.assertIsNone(re.match('<.* object at 0x.*>', repr(self.__rabbitMq)),
-            '__repr__ method has not been specified')
-        eval(repr(self.__rabbitMq))
+    def test_rabbitmq(self):
+        self._assert_item(RabbitMq(self._client, 'https://localhost:8443/rabbitmq/v1/'), [
+            ('groups', lambda actual: self.assertIsInstance(actual, Groups)),
+            ('installation_images', lambda actual: self.assertIsInstance(actual, InstallationImages)),
+            ('nodes', lambda actual: self.assertIsInstance(actual, Nodes)),
+            ('plugin_images', lambda actual: self.assertIsInstance(actual, PluginImages))
+        ], False)

@@ -14,16 +14,67 @@
 # limitations under the License.
 
 
-from vas.shared.VersionedImages import VersionedImages
+from vas.shared.Deletable import Deletable
+from vas.shared.MutableCollection import MutableCollection
+from vas.shared.Resource import Resource
 
-class InstallationImages(VersionedImages):
+
+class InstallationImages(MutableCollection):
     """A collection of installation images
 
-    :ivar `vas.shared.Security` security:   The security configuration for the collection of installation images
+    :ivar `vas.shared.Security.Security`    security:   The resource's security
     """
 
-    __COLLECTION_KEY = 'installation-images'
+    def __init__(self, client, location, installation_image_class):
+        super(InstallationImages, self).__init__(client, location, 'installation-images', installation_image_class)
 
-    def __init__(self, client, location):
-        super(InstallationImages, self).__init__(client, location, self.__COLLECTION_KEY)
+    def create(self, path, version):
+        """Creates an installation image by uploading a file to the server and assigning it a version
 
+        :param str  path:       The path of the file to upload
+        :param str  version:    The installation image's version
+        :rtype:     :class:`vas.shared.InstallationImages.InstallationImage`
+        :return:    The new installation image
+        """
+
+        return self._create_multipart(path, {'version': version})
+
+
+class InstallationImage(Resource, Deletable):
+    """A product binary, typically are .zip or .tar.gz file, that has been uploaded to the server. Once created, an
+    installation image can then be used to create an installation on a group.
+
+    :ivar `vas.shared.Installations.Installations`  installations:  The installations that have been created from the
+                                                                    installation image
+    :ivar `vas.shared.Security.Security`            security:       The resource's security
+    :ivar int                                       size:           The installation image's size
+    :ivar str                                       version:        The installation image's version
+    """
+
+    @property
+    def installations(self):
+        self.__installations = self.__installations or self._create_resources_from_links('installation',
+            self.__installation_class)
+        return self.__installations
+
+    @property
+    def size(self):
+        return self.__size
+
+    @property
+    def version(self):
+        return self.__version
+
+    def __init__(self, client, location, installation_class):
+        super(InstallationImage, self).__init__(client, location)
+
+        self.__installation_class = installation_class
+
+        self.__size = self._details['size']
+        self.__version = self._details['version']
+
+    def reload(self):
+        """Reloads the installation image's details from the server"""
+
+        super(InstallationImage, self).reload()
+        self.__installations = None

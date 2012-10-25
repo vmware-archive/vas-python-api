@@ -14,41 +14,48 @@
 # limitations under the License.
 
 
-from vas.shared.ComponentType import ComponentType
+from vas.util.LinkUtils import LinkUtils
 
-class RabbitMq(ComponentType):
-    """The RabbitMQ component of the vFabric Administration Server
+class RabbitMq(object):
+    """The entry point to the API for administering RabbitMQ
 
-    :ivar `vas.rabbitmq.RabbitMqGroups` groups:    The collection of groups
-    :ivar `vas.rabbitmq.RabbitMqInstallationImages` installation_images:  The collection of installation images
-    :ivar `vas.rabbitmq.RabbitMqNodes` nodes: The collection of nodes
-    :ivar `vas.rabbitmq.RabbitMqPluginImages` plugin_images: The collection of plugin images
+    :ivar `vas.rabbitmq.Groups.Groups`                          groups:                 The RabbitMQ groups
+    :ivar `vas.rabbitmq.InstallationImages.InstallationImages`  installation_images:    The RabbitMQ installation images
+    :ivar `vas.rabbitmq.Nodes.Nodes`                            nodes:                  The RabbitMQ nodes
+    :ivar `vas.rabbitmq.PluginImages.PluginImages`              plugin_images:          The RabbitMQ plugin images
     """
 
-    __REL_PLUGIN_IMAGES = 'plugin-images'
+    @property
+    def groups(self):
+        return self.__groups
 
-    __ROOT_PATH = '/rabbitmq/v1/'
+    @property
+    def installation_images(self):
+        return self.__installation_images
 
-    def __init__(self, client, location_stem):
-        super(RabbitMq, self).__init__(client, location_stem.format(self.__ROOT_PATH))
+    @property
+    def nodes(self):
+        return self.__nodes
 
-        self.plugin_images = RabbitMqPluginImages(client, self._links[self.__REL_PLUGIN_IMAGES][0])
-        self.__location_stem = location_stem
+    @property
+    def plugin_images(self):
+        return self.__plugin_images
 
-    def _create_groups(self, client, location):
-        return RabbitMqGroups(client, location)
+    def __init__(self, client, location):
+        self.__client = client
+        self.__location = location
 
-    def _create_installation_images(self, client, location):
-        return RabbitMqInstallationImages(client, location)
-
-    def _create_nodes(self, client, location):
-        return RabbitMqNodes(client, location)
+        json = client.get(location)
+        self.__groups = Groups(client, LinkUtils.get_link_href(json, 'groups'))
+        self.__installation_images = InstallationImages(client, LinkUtils.get_link_href(json, 'installation-images'))
+        self.__nodes = Nodes(client, LinkUtils.get_link_href(json, 'nodes'))
+        self.__plugin_images = PluginImages(client, LinkUtils.get_link_href(json, 'plugin-images'))
 
     def __repr__(self):
-        return "{}(client={}, location_stem={})".format(self.__class__.__name__, self._client,
-            repr(self.__location_stem))
+        return "{}(client={}, location={})".format(self.__class__.__name__, self.__client, repr(self.__location))
 
-from vas.rabbitmq.RabbitMqInstallationImages import RabbitMqInstallationImages
-from vas.rabbitmq.RabbitMqPluginImages import RabbitMqPluginImages
-from vas.rabbitmq.RabbitMqGroups import RabbitMqGroups
-from vas.rabbitmq.RabbitMqNodes import RabbitMqNodes
+
+from vas.rabbitmq.Groups import Groups
+from vas.rabbitmq.InstallationImages import InstallationImages
+from vas.rabbitmq.Nodes import Nodes
+from vas.rabbitmq.PluginImages import PluginImages

@@ -13,28 +13,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import re
-from unittest import TestCase
+
 from vas.VFabricAdministrationServerError import VFabricAdministrationServerError
+from vas.test.VasTestCase import VasTestCase
 
-class TestVFabricAdministrationServerError(TestCase):
-    def test_no_code(self):
-        error = VFabricAdministrationServerError(['message1', 'message2'])
-        self.assertEqual(['message1', 'message2'], error.messages)
-        self.assertEqual(None, error.code)
+class TestVFabricAdministrationServerError(VasTestCase):
+    def test_error(self):
+        self._assert_item(VFabricAdministrationServerError(['message1', 'message2']), [
+            ('code', None),
+            ('messages', ['message1', 'message2'])
+        ], False)
 
-    def test_single(self):
-        error = VFabricAdministrationServerError('message1')
-        self.assertEqual(['message1'], error.messages)
-        self.assertEqual(None, error.code)
+        self._assert_item(VFabricAdministrationServerError(['message1']), [
+            ('code', None),
+            ('messages', ['message1'])
+        ], False)
 
-    def test_with_code(self):
-        error = VFabricAdministrationServerError(['message1', 'message2'], code='400')
-        self.assertEqual(['message1', 'message2'], error.messages)
-        self.assertEqual('400', error.code)
-
-    def test_repr(self):
-        error = VFabricAdministrationServerError(['message1', 'message2'], code='400')
-
-        self.assertIsNone(re.match('<.* object at 0x.*>', repr(error)), '__repr__ method has not been specified')
-        eval(repr(error))
+        self._assert_item(VFabricAdministrationServerError(['message1', 'message2'], 400), [
+            ('code', 400),
+            ('messages', ['message1', 'message2'])
+        ], False)

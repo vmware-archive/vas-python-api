@@ -17,140 +17,190 @@
 vas.rabbitmq
 =============
 
+:mod:`Groups`
+-------------
+.. automodule:: vas.rabbitmq.Groups
+.. autoclass:: Group()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: Groups()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`InstallationImages`
+-------------------------
+.. automodule:: vas.rabbitmq.InstallationImages
+.. autoclass:: InstallationImage()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: InstallationImages()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`Installations`
+--------------------
+.. automodule:: vas.rabbitmq.Installations
+.. autoclass:: Installation()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: Installations()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`Instances`
+----------------
+.. automodule:: vas.rabbitmq.Instances
+.. autoclass:: Instance()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: Instances()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`LiveConfigurations`
+-------------------------
+.. automodule:: vas.rabbitmq.LiveConfigurations
+.. autoclass:: LiveConfiguration()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: LiveConfigurations()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`Logs`
+-----------
+.. automodule:: vas.rabbitmq.Logs
+.. autoclass:: Log()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: Logs()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`NodeInstances`
+--------------------
+.. automodule:: vas.rabbitmq.NodeInstances
+.. autoclass:: NodeInstance()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: NodeInstances()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`NodeLiveConfigurations`
+-----------------------------
+.. automodule:: vas.rabbitmq.NodeLiveConfigurations
+.. autoclass:: NodeLiveConfiguration()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: NodeLiveConfigurations()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`Nodes`
+------------
+.. automodule:: vas.rabbitmq.Nodes
+.. autoclass:: Node()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: Nodes()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`PendingConfigurations`
+----------------------------
+.. automodule:: vas.rabbitmq.PendingConfigurations
+.. autoclass:: PendingConfiguration()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: PendingConfigurations()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`PluginImages`
+-------------------
+.. automodule:: vas.rabbitmq.PluginImages
+.. autoclass:: PluginImage()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: PluginImages()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`Plugins`
+--------------
+.. automodule:: vas.rabbitmq.Plugins
+.. autoclass:: Plugin()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: Plugins()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
 :mod:`RabbitMq`
 ---------------
 .. automodule:: vas.rabbitmq.RabbitMq
-    :members:
-    :inherited-members:
-
-:mod:`RabbitMqGroup`
---------------------
-.. automodule:: vas.rabbitmq.RabbitMqGroup
-    :members:
-    :inherited-members:
-
-:mod:`RabbitMqGroups`
----------------------
-.. automodule:: vas.rabbitmq.RabbitMqGroups
-    :members:
-    :inherited-members:
-
-:mod:`RabbitMqGroupInstance`
-----------------------------
-.. automodule:: vas.rabbitmq.RabbitMqGroupInstance
-    :members:
-    :inherited-members:
-
-:mod:`RabbitMqGroupInstances`
------------------------------
-.. automodule:: vas.rabbitmq.RabbitMqGroupInstances
-    :members:
-    :inherited-members:
-
-:mod:`RabbitMqGroupPlugin`
---------------------------
-.. automodule:: vas.rabbitmq.RabbitMqGroupPlugin
-    :members:
-    :inherited-members:
-
-:mod:`RabbitMqGroupPlugins`
----------------------------
-.. automodule:: vas.rabbitmq.RabbitMqGroupPlugins
-    :members:
-    :inherited-members:
-
-:mod:`RabbitMqInstallation`
----------------------------
-.. automodule:: vas.rabbitmq.RabbitMqInstallation
-    :members:
-    :inherited-members:
-
-:mod:`RabbitMqInstallations`
-----------------------------
-.. automodule:: vas.rabbitmq.RabbitMqInstallations
-    :members:
-    :inherited-members:
-
-:mod:`RabbitMqInstallationImage`
---------------------------------
-.. automodule:: vas.rabbitmq.RabbitMqInstallationImage
-    :members:
-    :inherited-members:
-
-:mod:`RabbitMqInstallationImages`
----------------------------------
-.. automodule:: vas.rabbitmq.RabbitMqInstallationImages
-    :members:
-    :inherited-members:
-
-:mod:`RabbitMqLiveConfiguration`
---------------------------------
-.. automodule:: vas.rabbitmq.RabbitMqLiveConfiguration
-    :members:
-    :inherited-members:
-
-:mod:`RabbitMqLiveConfigurations`
----------------------------------
-.. automodule:: vas.rabbitmq.RabbitMqLiveConfigurations
-    :members:
-    :inherited-members:
-
-:mod:`RabbitMqLog`
-------------------
-.. automodule:: vas.rabbitmq.RabbitMqLog
-    :members:
-    :inherited-members:
-
-:mod:`RabbitMqLogs`
--------------------
-.. automodule:: vas.rabbitmq.RabbitMqLogs
-    :members:
-    :inherited-members:
-
-:mod:`RabbitMqNode`
--------------------
-.. automodule:: vas.rabbitmq.RabbitMqNode
-    :members:
-    :inherited-members:
-
-:mod:`RabbitMqNodes`
---------------------
-.. automodule:: vas.rabbitmq.RabbitMqNodes
-    :members:
-    :inherited-members:
-
-:mod:`RabbitMqNodeInstance`
----------------------------
-.. automodule:: vas.rabbitmq.RabbitMqNodeInstance
-    :members:
-    :inherited-members:
-
-:mod:`RabbitMqNodeInstances`
-----------------------------
-.. automodule:: vas.rabbitmq.RabbitMqNodeInstances
-    :members:
-    :inherited-members:
-
-:mod:`RabbitMqPendingConfiguration`
------------------------------------
-.. automodule:: vas.rabbitmq.RabbitMqPendingConfiguration
-    :members:
-    :inherited-members:
-
-:mod:`RabbitMqPendingConfigurations`
-------------------------------------
-.. automodule:: vas.rabbitmq.RabbitMqPendingConfigurations
-    :members:
-    :inherited-members:
-
-:mod:`RabbitMqPluginImage`
---------------------------
-.. automodule:: vas.rabbitmq.RabbitMqPluginImage
-    :members:
-    :inherited-members:
-
-:mod:`RabbitMqPluginImages`
----------------------------
-.. automodule:: vas.rabbitmq.RabbitMqPluginImages
+.. autoclass:: RabbitMq()
+    :show-inheritance:
     :members:
     :inherited-members:
