@@ -57,7 +57,6 @@ class PluginImage(Resource, Deletable):
         self.__plugins = self.__plugins or self._create_resources_from_links('plugin', Plugin)
         return self.__plugins
 
-
     @property
     def size(self):
         return self.__size
@@ -78,6 +77,10 @@ class PluginImage(Resource, Deletable):
 
         super(PluginImage, self).reload()
         self.__plugins = None
+
+    def __str__(self):
+        return "<{} name={} size={} version={}>".format(self.__class__.__name__, self.__name, self.__size,
+            self.__version)
 
 
 from vas.rabbitmq.Plugins import Plugin

@@ -55,6 +55,9 @@ class GemFire(object):
     def __repr__(self):
         return "{}(client={}, location={})".format(self.__class__.__name__, self.__client, repr(self.__location))
 
+    def __str__(self):
+        return "<{}>".format(self.__class__.__name__)
+
 
 from vas.gemfire.ApplicationCodeImages import ApplicationCodeImages
 from vas.gemfire.Groups import Groups

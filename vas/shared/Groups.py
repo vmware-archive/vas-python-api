@@ -84,6 +84,9 @@ class Group(Resource, Deletable):
         super(Group, self).reload()
         self.__nodes = None
 
+    def __str__(self):
+        return "<{} name={}>".format(self.__class__.__name__, self.__name)
+
 
 class MutableGroup(Group):
     """A group that supports changes to it membership
@@ -103,4 +106,5 @@ class MutableGroup(Group):
         node_locations = [node._location for node in nodes]
         self._client.post(self._location, {'nodes': node_locations})
         self.reload()
+
 

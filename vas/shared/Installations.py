@@ -80,3 +80,6 @@ class Installation(Resource, Deletable):
 
         self.__version = self._details['version']
 
+    def __str__(self):
+        return "<{} version={}>".format(self.__class__.__name__, self.__version)
+

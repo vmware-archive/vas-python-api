@@ -70,5 +70,9 @@ class NodeRevision(StateResource):
         self.__application_location = LinkUtils.get_link_href(self._details, 'node-application')
         self.__group_revision_location = LinkUtils.get_link_href(self._details, 'group-revision')
 
+    def __str__(self):
+        return "<{} version={}>".format(self.__class__.__name__, self.__version)
+
+
 from vas.tc_server.NodeApplications import NodeApplication
 from vas.tc_server.Revisions import Revision

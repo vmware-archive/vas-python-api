@@ -72,3 +72,6 @@ class NodeConfiguration(Resource):
 
         super(NodeConfiguration, self).reload()
         self.__size = self._details['size']
+
+    def __str__(self):
+        return "<{} path={} size={}>".format(self.__class__.__name__, self.__path, self.__size)

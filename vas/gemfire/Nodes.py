@@ -83,6 +83,11 @@ class Node(GroupableNode):
 
         self.__java_home = self._details['java-home']
 
+    def __str__(self):
+        return "<{} host_names={} ip_addresses={} ipv4_addresses={} ipv6_addresses={} operating_system={} architecture={} agent_home={} java_home={} metadata={}>".format(
+            self.__class__.__name__, self.host_names, self.ip_addresses, self.ipv4_addresses, self.ipv6_addresses,
+            self.operating_system, self.architecture, self.agent_home, self.__java_home, self.metadata)
+
 
 from vas.gemfire.AgentNodeInstances import  AgentNodeInstances
 from vas.gemfire.CacheServerNodeInstances import  CacheServerNodeInstances

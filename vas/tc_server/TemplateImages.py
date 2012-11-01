@@ -80,5 +80,9 @@ class TemplateImage(Resource, Deletable):
         super(TemplateImage, self).reload()
         self.__templates = None
 
+    def __str__(self):
+        return "<{} name={} version={} size={}>".format(self.__class__.__name__, self.__name, self.__version,
+            self.__size)
+
 
 from vas.tc_server.Templates import Template

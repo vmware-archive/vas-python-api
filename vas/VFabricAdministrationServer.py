@@ -104,3 +104,6 @@ class VFabricAdministrationServer(object):
     def __repr__(self):
         return "{}(host={}, port={}, username={}, password={}, client={})".format(self.__class__.__name__,
             repr(self.__host), self.__port, repr(self.__username), repr(self.__password), self.__client)
+
+    def __str__(self):
+        return "<{}>".format(self.__class__.__name__)

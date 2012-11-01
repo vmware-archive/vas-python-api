@@ -63,6 +63,9 @@ class ApplicationCode(Resource):
         self.__application_code_image_location = LinkUtils.get_link_href(self._details, 'application-code-image')
         self.__instance_location = LinkUtils.get_link_href(self._details, 'cache-server-group-instance')
 
+    def __str__(self):
+        return "<{} name={} version={}>".format(self.__class__.__name__, self.__name, self.__version)
+
 
 from vas.gemfire.ApplicationCodeImages import ApplicationCodeImage
 from vas.gemfire.CacheServerInstances import CacheServerInstance

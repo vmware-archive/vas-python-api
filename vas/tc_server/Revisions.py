@@ -90,6 +90,9 @@ class Revision(StateResource, Deletable):
         self.__application_location = LinkUtils.get_link_href(self._details, 'group-application')
         self.__revision_image_location = LinkUtils.get_link_href(self._details, 'revision-image')
 
+    def __str__(self):
+        return "<{} version={}>".format(self.__class__.__name__, self.__version)
+
 
 from vas.tc_server.Applications import Application
 from vas.tc_server.NodeRevisions import NodeRevision

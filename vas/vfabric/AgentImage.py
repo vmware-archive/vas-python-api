@@ -55,3 +55,6 @@ class AgentImage(Resource):
             os.chmod(file, permission)
 
         return '{}/vfabric-administration-agent'.format(location)
+
+    def __str__(self):
+        return "<{}>".format(self.__class__.__name__)

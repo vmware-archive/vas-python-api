@@ -23,7 +23,7 @@ from vas.vfabric.AgentImage import AgentImage
 class TestAgentImage(VasTestCase):
     def test_agent_image(self):
         self._assert_item(AgentImage(self._client, 'https://localhost:8443/vfabric/v1/agent-image/'), [
-            ('content', lambda actual: self.assertEquals(164, len(actual)))
+            ('content', lambda actual: self.assertEqual(164, len(actual)))
         ])
 
     def test_extract_to(self):

@@ -108,7 +108,6 @@ class Instance(Resource, Deletable):
         self.__installation = None
         self.__node_instances = None
 
-
     def start(self, serial=False):
         """Starts the resource
 
@@ -124,4 +123,7 @@ class Instance(Resource, Deletable):
         """
 
         self._client.post(self.__state_location, {'status': 'STOPPED', 'serial': serial})
+
+    def __str__(self):
+        return "<{} name={}>".format(self.__class__.__name__, self.__name)
 

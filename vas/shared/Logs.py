@@ -103,3 +103,7 @@ class Log(Resource, Deletable):
             url += "end-line={}".format(end_line)
 
         return self._client.get(url)
+
+    def __str__(self):
+        return "<{} name={} size={} last_modified={}>".format(self.__class__.__name__, self.__name, self.__size,
+            self.__last_modified)

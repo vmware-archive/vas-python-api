@@ -146,6 +146,10 @@ class Instance(vas.shared.Instance.Instance):
         self._client.post(self._location, payload)
         self.reload()
 
+    def __str__(self):
+        return "<{} name={} layout={} runtime_version={} services={}>".format(self.__class__.__name__, self.__name,
+            self.__layout, self.__runtime_version, self.__services)
+
 
 from vas.tc_server.Applications import Applications
 from vas.tc_server.Groups import Group
