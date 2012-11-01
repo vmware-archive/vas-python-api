@@ -14,56 +14,31 @@
 # limitations under the License.
 
 
-import re
-from unittest.case import TestCase
 from vas.shared.Security import Security
-from vas.test.StubClient import StubClient
+from vas.test.VasTestCase import VasTestCase
 
-class TestSecurity(TestCase):
-    __client = StubClient()
-
-    def setUp(self):
-        self.__client.delegate.reset_mock()
-        self.__security = Security(self.__client, 'https://localhost:8443/vfabric/v1/security/0/')
-
-    def test_attributes(self):
-        self.assertEqual('owner', self.__security.owner)
-        self.assertEqual('group', self.__security.group)
-        self.assertEqual({'owner': ['READ', 'WRITE', 'EXECUTE'], 'group': ['READ', 'WRITE'], 'other': ['READ']},
-            self.__security.permissions)
+class TestSecurity(VasTestCase):
+    def test_security(self):
+        self._assert_item(Security(self._client, 'https://localhost:8443/vfabric/v1/security/0/'), [
+            ('owner', 'owner'),
+            ('group', 'group'),
+            ('permissions', {'owner': ['READ', 'WRITE', 'EXECUTE'], 'group': ['READ', 'WRITE'], 'other': ['READ']})
+        ], False)
 
     def test_chown_no_optionals(self):
-        self.__client.delegate.reset_mock()
-        self.__security.chown()
-        self.__client.delegate.post.assert_called_once_with('https://localhost:8443/vfabric/v1/security/0/', {})
-        self.assertEqual('owner', self.__security.owner)
-        self.assertEqual('group', self.__security.group)
+        Security(self._client, 'https://localhost:8443/vfabric/v1/security/0/').chown()
+        self._assert_post('https://localhost:8443/vfabric/v1/security/0/', {})
 
     def test_chown_all_optionals(self):
-        self.__client.delegate.reset_mock()
-        self.__security.chown(owner='owner-2', group='group-2')
-        self.__client.delegate.post.assert_called_once_with('https://localhost:8443/vfabric/v1/security/0/',
-                {'owner': 'owner-2', 'group': 'group-2'})
-        self.assertEqual('owner-2', self.__security.owner)
-        self.assertEqual('group-2', self.__security.group)
+        Security(self._client, 'https://localhost:8443/vfabric/v1/security/0/').chown(owner='owner-2', group='group-2')
+        self._assert_post('https://localhost:8443/vfabric/v1/security/0/', {'owner': 'owner-2', 'group': 'group-2'})
 
     def test_chmod_no_optionals(self):
-        self.__client.delegate.reset_mock()
-        self.__security.chmod()
-        self.__client.delegate.post.assert_called_once_with('https://localhost:8443/vfabric/v1/security/0/',
-                {'permissions': {}})
-        self.assertEqual({'owner': ['READ', 'WRITE', 'EXECUTE'], 'group': ['READ', 'WRITE'], 'other': ['READ']},
-            self.__security.permissions)
+        Security(self._client, 'https://localhost:8443/vfabric/v1/security/0/').chmod()
+        self._assert_post('https://localhost:8443/vfabric/v1/security/0/', {'permissions': {}})
 
     def test_chmod_all_optionals(self):
-        self.__client.delegate.reset_mock()
-        self.__security.chmod(owner=['READ', 'WRITE'], group=['READ'], other=['READ', 'WRITE', 'EXECUTE'])
-        self.__client.delegate.post.assert_called_once_with('https://localhost:8443/vfabric/v1/security/0/',
-                {'permissions': {'owner': ['READ', 'WRITE'], 'group': ['READ'], 'other': ['READ', 'WRITE', 'EXECUTE']}})
-        self.assertEqual({'owner': ['READ', 'WRITE'], 'group': ['READ'], 'other': ['READ', 'WRITE', 'EXECUTE']},
-            self.__security.permissions)
-
-    def test_repr(self):
-        self.assertIsNone(re.match('<.* object at 0x.*>', repr(self.__security)),
-            '__repr__ method has not been specified')
-        eval(repr(self.__security))
+        Security(self._client, 'https://localhost:8443/vfabric/v1/security/0/').chmod(owner=['READ', 'WRITE'],
+            group=['READ'], other=['READ', 'WRITE', 'EXECUTE'])
+        self._assert_post('https://localhost:8443/vfabric/v1/security/0/',
+            {'permissions': {'owner': ['READ', 'WRITE'], 'group': ['READ'], 'other': ['READ', 'WRITE', 'EXECUTE']}})

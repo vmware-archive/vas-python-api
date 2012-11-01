@@ -14,29 +14,42 @@
 # limitations under the License.
 
 
-from vas.shared.MutableCollectionType import MutableCollectionType
+from vas.shared.Configuration import Configuration
+from vas.shared.Deletable import Deletable
+from vas.shared.MutableCollection import MutableCollection
 
-class PendingConfigurations(MutableCollectionType):
-    """An collection of pending configurations
+class PendingConfigurations(MutableCollection):
+    """A collection of an instance's pending configurations
 
-    :ivar `vas.shared.Security` security:   The security configuration for the collection of pending configurations
+    :ivar `vas.shared.Security.Security`    security:   The resource's security
     """
 
-    __COLLECTION_KEY = 'pending-configurations'
+    def __init__(self, client, location, entry_class):
+        super(PendingConfigurations, self).__init__(client, location, 'pending-configurations', entry_class)
 
-    def __init__(self, client, location):
-        super(PendingConfigurations, self).__init__(client, location, self.__COLLECTION_KEY)
+    def create(self, path, content):
+        """Creates a new configuration. The configuration will be pending until its instance is started at which point
+        the configuration will become live.
 
-    def create(self, path, configuration):
-        """Create a new pending configuration
-
-        :type path:     :obj:`str`
-        :param path:    The path of the pending configuration
-        :type configuration:    :obj:`str`
-        :param configuration:   The local path configuration file
-        :rtype:         :class:`vas.shared.PendingConfiguration`
-        :return:        The newly created pending configuration
+        :param str  path:       The configuration's path
+        :param str  content:    The configuration's content
+        :rtype:     :class:`vas.shared.PendingConfigurations.PendingConfiguration`
+        :return:    The new configuration
         """
 
-        location = self._client.post_multipart(self._location_self, configuration, {'path': path})
-        return self._create_item(self._client, location)
+        return self._create_multipart(content, {'path': path})
+
+class PendingConfiguration(Configuration, Deletable):
+    """A configuration file that is pending and will be made live the next time its instance is started
+
+    :ivar str                               content:    The configuration's content
+    :ivar `vas.shared.Instance.Instance`    instance:   The instance that owns the configuration
+    :ivar str                               path:       The configuration's path
+    :ivar `vas.shared.Security.Security`    security:   The resource's security
+    :ivar int                               size:       The configuration's size
+    """
+
+    #noinspection PyMethodOverriding
+    @Configuration.content.setter
+    def content(self, content):
+        self._client.post(self._content_location, content)

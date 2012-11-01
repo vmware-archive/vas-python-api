@@ -17,200 +17,274 @@
 vas.tc_server
 =============
 
+:mod:`Applications`
+-------------------
+.. automodule:: vas.tc_server.Applications
+.. autoclass:: Application()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: Applications()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`Configuration`
+--------------------
+.. automodule:: vas.tc_server.Configuration
+.. autoclass:: Configuration()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`Groups`
+-------------
+.. automodule:: vas.tc_server.Groups
+.. autoclass:: Group()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: Groups()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`InstallationImages`
+-------------------------
+.. automodule:: vas.tc_server.InstallationImages
+.. autoclass:: InstallationImage()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: InstallationImages()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`Installations`
+--------------------
+.. automodule:: vas.tc_server.Installations
+.. autoclass:: Installation()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: Installations()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`Instances`
+----------------
+.. automodule:: vas.tc_server.Instances
+.. autoclass:: Instance()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: Instances()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`LiveConfigurations`
+-------------------------
+.. automodule:: vas.tc_server.LiveConfigurations
+.. autoclass:: LiveConfiguration()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: LiveConfigurations()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`Logs`
+-----------
+.. automodule:: vas.tc_server.Logs
+.. autoclass:: Log()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: Logs()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+
+:mod:`NodeApplications`
+-----------------------
+.. automodule:: vas.tc_server.NodeApplications
+.. autoclass:: NodeApplication()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: NodeApplications()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`NodeInstances`
+--------------------
+.. automodule:: vas.tc_server.NodeInstances
+.. autoclass:: NodeInstance()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: NodeInstances()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`NodeLiveConfigurations`
+-----------------------------
+.. automodule:: vas.tc_server.NodeLiveConfigurations
+.. autoclass:: NodeLiveConfiguration()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: NodeLiveConfigurations()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`NodeLiveRevisions`
+------------------------
+.. automodule:: vas.tc_server.NodeRevisions
+.. autoclass:: NodeRevision()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: NodeRevisions()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`Nodes`
+------------
+.. automodule:: vas.tc_server.Nodes
+.. autoclass:: Node()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: Nodes()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`PendingConfigurations`
+----------------------------
+.. automodule:: vas.tc_server.PendingConfigurations
+.. autoclass:: PendingConfiguration()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: PendingConfigurations()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`RevisionImages`
+---------------------
+.. automodule:: vas.tc_server.RevisionImages
+.. autoclass:: RevisionImage()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: RevisionImages()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`Revisions`
+----------------
+.. automodule:: vas.tc_server.Revisions
+.. autoclass:: Revision()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: Revisions()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
 :mod:`TcServer`
 ---------------
 .. automodule:: vas.tc_server.TcServer
+.. autoclass:: TcServer()
+    :show-inheritance:
     :members:
     :inherited-members:
 
-:mod:`TcServerGroup`
---------------------
-.. automodule:: vas.tc_server.TcServerGroup
-    :members:
-    :inherited-members:
-
-:mod:`TcServerGroups`
+:mod:`TemplateImages`
 ---------------------
-.. automodule:: vas.tc_server.TcServerGroups
+.. automodule:: vas.tc_server.TemplateImages
+.. autoclass:: TemplateImage()
+    :show-inheritance:
     :members:
     :inherited-members:
 
-:mod:`TcServerGroupApplication`
--------------------------------
-.. automodule:: vas.tc_server.TcServerGroupApplication
+----
+
+.. autoclass:: TemplateImages()
+    :show-inheritance:
     :members:
     :inherited-members:
 
-:mod:`TcServerGroupApplications`
---------------------------------
-.. automodule:: vas.tc_server.TcServerGroupApplications
+:mod:`Templates`
+----------------
+.. automodule:: vas.tc_server.Templates
+.. autoclass:: Template()
+    :show-inheritance:
     :members:
     :inherited-members:
 
-:mod:`TcServerGroupInstance`
-----------------------------
-.. automodule:: vas.tc_server.TcServerGroupInstance
-    :members:
-    :inherited-members:
+----
 
-:mod:`TcServerGroupInstances`
------------------------------
-.. automodule:: vas.tc_server.TcServerGroupInstances
-    :members:
-    :inherited-members:
-
-:mod:`TcServerGroupRevision`
-----------------------------
-.. automodule:: vas.tc_server.TcServerGroupRevision
-    :members:
-    :inherited-members:
-
-:mod:`TcServerGroupRevisions`
------------------------------
-.. automodule:: vas.tc_server.TcServerGroupRevisions
-    :members:
-    :inherited-members:
-
-:mod:`TcServerInstallation`
----------------------------
-.. automodule:: vas.tc_server.TcServerInstallation
-    :members:
-    :inherited-members:
-
-:mod:`TcServerInstallations`
-----------------------------
-.. automodule:: vas.tc_server.TcServerInstallations
-    :members:
-    :inherited-members:
-
-:mod:`TcServerInstallationImage`
---------------------------------
-.. automodule:: vas.tc_server.TcServerInstallationImage
-    :members:
-    :inherited-members:
-
-:mod:`TcServerInstallationImages`
----------------------------------
-.. automodule:: vas.tc_server.TcServerInstallationImages
-    :members:
-    :inherited-members:
-
-:mod:`TcServerLiveConfiguration`
---------------------------------
-.. automodule:: vas.tc_server.TcServerLiveConfiguration
-    :members:
-    :inherited-members:
-
-:mod:`TcServerLiveConfigurations`
----------------------------------
-.. automodule:: vas.tc_server.TcServerLiveConfigurations
-    :members:
-    :inherited-members:
-
-:mod:`TcServerLog`
-------------------
-.. automodule:: vas.tc_server.TcServerLog
-    :members:
-    :inherited-members:
-
-:mod:`TcServerLogs`
--------------------
-.. automodule:: vas.tc_server.TcServerLogs
-    :members:
-    :inherited-members:
-
-:mod:`TcServerNode`
--------------------
-.. automodule:: vas.tc_server.TcServerNode
-    :members:
-    :inherited-members:
-
-:mod:`TcServerNodes`
---------------------
-.. automodule:: vas.tc_server.TcServerNodes
-    :members:
-    :inherited-members:
-
-:mod:`TcServerNodeApplication`
-------------------------------
-.. automodule:: vas.tc_server.TcServerNodeApplication
-    :members:
-    :inherited-members:
-
-:mod:`TcServerNodeApplications`
--------------------------------
-.. automodule:: vas.tc_server.TcServerNodeApplications
-    :members:
-    :inherited-members:
-
-:mod:`TcServerNodeInstance`
----------------------------
-.. automodule:: vas.tc_server.TcServerNodeInstance
-    :members:
-    :inherited-members:
-
-:mod:`TcServerNodeInstances`
-----------------------------
-.. automodule:: vas.tc_server.TcServerNodeInstances
-    :members:
-    :inherited-members:
-
-:mod:`TcServerNodeRevision`
----------------------------
-.. automodule:: vas.tc_server.TcServerNodeRevision
-    :members:
-    :inherited-members:
-
-:mod:`TcServerNodeRevisions`
-----------------------------
-.. automodule:: vas.tc_server.TcServerNodeRevisions
-    :members:
-    :inherited-members:
-
-:mod:`TcServerPendingConfiguration`
------------------------------------
-.. automodule:: vas.tc_server.TcServerPendingConfiguration
-    :members:
-    :inherited-members:
-
-:mod:`TcServerPendingConfigurations`
-------------------------------------
-.. automodule:: vas.tc_server.TcServerPendingConfigurations
-    :members:
-    :inherited-members:
-
-:mod:`TcServerRevisionImage`
-----------------------------
-.. automodule:: vas.tc_server.TcServerRevisionImage
-    :members:
-    :inherited-members:
-
-:mod:`TcServerRevisionImages`
------------------------------
-.. automodule:: vas.tc_server.TcServerRevisionImages
-    :members:
-    :inherited-members:
-
-:mod:`TcServerTemplate`
------------------------
-.. automodule:: vas.tc_server.TcServerTemplate
-    :members:
-    :inherited-members:
-
-:mod:`TcServerTemplates`
-------------------------
-.. automodule:: vas.tc_server.TcServerTemplates
-    :members:
-    :inherited-members:
-
-:mod:`TcServerTemplateImage`
-----------------------------
-.. automodule:: vas.tc_server.TcServerTemplateImage
-    :members:
-    :inherited-members:
-
-:mod:`TcServerTemplateImages`
------------------------------
-.. automodule:: vas.tc_server.TcServerTemplateImages
+.. autoclass:: Templates()
+    :show-inheritance:
     :members:
     :inherited-members:

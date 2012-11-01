@@ -14,41 +14,49 @@
 # limitations under the License.
 
 
-from vas.shared.ComponentType import ComponentType
+from vas.util.LinkUtils import LinkUtils
 
-class GemFire(ComponentType):
-    """The GemFire component of the vFabric Administration Server
+class GemFire(object):
+    """The entry point to the API for administering GemFire
 
-    :ivar `vas.gemfire.GemFireGroups` groups:    The collection of groups
-    :ivar `vas.gemfire.GemFireInstallationImages` installation_images:  The collection of installation images
-    :ivar `vas.gemfire.GemFireNodes` nodes: The collection of nodes
-    :ivar `vas.gemfire.GemFireApplicationCodeImages` application_code_images: The collection of application code images
+    :ivar `vas.gemfire.ApplicationCodeImages`   application_code_images:    The collection of application code images
+    :ivar `vas.gemfire.Groups`                  groups:                     The collection of groups
+    :ivar `vas.gemfire.InstallationImages`      installation_images:        The collection of installation images
+    :ivar `vas.gemfire.Nodes`                   nodes:                      The collection of nodes
     """
 
-    __REL_APPLICATION_CODE_IMAGES = 'application-code-images'
+    @property
+    def application_code_images(self):
+        return self.__application_code_images
 
-    __ROOT_PATH = '/gemfire/v1/'
+    @property
+    def groups(self):
+        return self.__groups
 
-    def __init__(self, client, location_stem):
-        super(GemFire, self).__init__(client, location_stem.format(self.__ROOT_PATH))
+    @property
+    def installation_images(self):
+        return self.__installation_images
 
-        self.application_code_images = GemFireApplicationCodeImages(client, self._links[self.__REL_APPLICATION_CODE_IMAGES][0])
-        self.__location_stem = location_stem
+    @property
+    def nodes(self):
+        return self.__nodes
 
-    def _create_groups(self, client, location):
-        return GemFireGroups(client, location)
+    def __init__(self, client, location):
+        self.__client = client
+        self.__location = location
 
-    def _create_installation_images(self, client, location):
-        return GemFireInstallationImages(client, location)
-
-    def _create_nodes(self, client, location):
-        return GemFireNodes(client, location)
+        json = client.get(location)
+        self.__application_code_images = ApplicationCodeImages(client,
+            LinkUtils.get_link_href(json, 'application-code-images'))
+        self.__groups = Groups(client, LinkUtils.get_link_href(json, 'groups'))
+        self.__installation_images = InstallationImages(client, LinkUtils.get_link_href(json, 'installation-images'))
+        self.__nodes = Nodes(client, LinkUtils.get_link_href(json, 'nodes'))
 
     def __repr__(self):
-        return "{}(client={}, location_stem={})".format(self.__class__.__name__, self._client,
-            repr(self.__location_stem))
+        return "{}(client={}, location={})".format(self.__class__.__name__, self.__client, repr(self.__location))
 
-from vas.gemfire.GemFireApplicationCodeImages import GemFireApplicationCodeImages
-from vas.gemfire.GemFireGroups import GemFireGroups
-from vas.gemfire.GemFireInstallationImages import GemFireInstallationImages
-from vas.gemfire.GemFireNodes import GemFireNodes
+
+from vas.gemfire.ApplicationCodeImages import ApplicationCodeImages
+from vas.gemfire.Groups import Groups
+from vas.gemfire.InstallationImages import InstallationImages
+from vas.gemfire.Nodes import Nodes

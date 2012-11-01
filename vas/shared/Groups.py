@@ -14,32 +14,93 @@
 # limitations under the License.
 
 
-from vas.shared.MutableCollectionType import MutableCollectionType
+from vas.shared.Deletable import Deletable
+from vas.shared.MutableCollection import MutableCollection
+from vas.shared.Resource import Resource
+from vas.util.LinkUtils import LinkUtils
 
-class Groups(MutableCollectionType):
-    """A collection of abstract groups
+class Groups(MutableCollection):
+    """A collection of groups
 
-    :ivar `vas.shared.Security` security:   The security configuration for the collection of abstract groups
+    :ivar `vas.shared.Security.Security`    security:   The security configuration for the collection
     """
 
-    __COLLECTION_KEY = 'groups'
-
-    __REL_GROUP = 'group'
-
-    def __init__(self, client, location):
-        super(Groups, self).__init__(client, location, self.__COLLECTION_KEY)
+    def __init__(self, client, location, group_class):
+        super(Groups, self).__init__(client, location, 'groups', group_class)
 
     def create(self, name, nodes):
-        """Create a new group
+        """Creates a new group
 
-        :type name:     :obj:`str`
-        :param name:    The name of the group
-        :type nodes:    :obj:`list` of :class:`vas.shared.Node`
-        :param nodes:   The collection of nodes to be included in the group
-        :rtype:         :class:`vas.shared.Group`
-        :return:        The newly created group
+        :param str  name:   The group's name
+        :param list nodes:  The group's nodes
+        :rtype:     :class:`vas.shared.Groups.Group`
+        :return:    The new group
         """
 
-        location = self._client.post(self._location_self,
-                {'name': name, 'nodes': [node._location_self for node in nodes]}, self.__REL_GROUP)
-        return self._create_item(self._client, location)
+        payload = {'name': name, 'nodes': [node._location for node in nodes]}
+        return self._create(payload, 'group')
+
+
+class Group(Resource, Deletable):
+    """A collection of one or more nodes
+
+    :ivar `vas.shared.Installations.Installations`  installations:  The group's installations
+    :ivar str                                       name:           The group's name
+    :ivar list                                      nodes:          The group's nodes
+    :ivar `vas.shared.Security`                     security:       The resource's security
+    """
+
+    __installations = None
+    __nodes = None
+
+    @property
+    def name(self):
+        return self.__name
+
+    @property
+    def installations(self):
+        self.__installations = self.__installations or self.__installations_class(self._client,
+            self.__installations_location)
+        return self.__installations
+
+    @property
+    def nodes(self):
+        self.__nodes = self.__nodes or self._create_resources_from_links('node', self.__nodes_class)
+        return self.__nodes
+
+    def __init__(self, client, location, nodes_class, installations_class):
+        super(Group, self).__init__(client, location)
+
+        self.__installations_class = installations_class
+        self.__nodes_class = nodes_class
+
+        self.__installations_location = LinkUtils.get_link_href(self._details, 'installations')
+
+        self.__name = self._details['name']
+
+    def reload(self):
+        """Reloads the group's details from the server"""
+
+        super(Group, self).reload()
+        self.__nodes = None
+
+
+class MutableGroup(Group):
+    """A group that supports changes to it membership
+
+    :ivar `vas.shared.Installations.Installations`  installations:  The group's installations
+    :ivar str                                       name:           The group's name
+    :ivar list                                      nodes:          The group's nodes
+    :ivar `vas.shared.Security`                     security:       The resource's security
+    """
+
+    def update(self, nodes):
+        """Update the group to contain the given nodes
+
+        :param  list    nodes: The group's nodes
+        """
+
+        node_locations = [node._location for node in nodes]
+        self._client.post(self._location, {'nodes': node_locations})
+        self.reload()
+

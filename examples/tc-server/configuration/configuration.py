@@ -40,7 +40,7 @@ try:
     tc_server = VFabricAdministrationServer(args.host, args.port, args.username, args.password).tc_server
 
     print('Creating installation image... ', end='')
-    installation_image = tc_server.installation_images.create(args.installation_image_version, args.installation_image)
+    installation_image = tc_server.installation_images.create(args.installation_image, args.installation_image_version)
     print('done')
 
     print('Creating group... ', end='')
@@ -52,7 +52,7 @@ try:
     print('done')
 
     print('Creating instance that will listen on 8080... ', end='')
-    instance = group.instances.create('example', installation, properties={'base.jmx.port': 6970})
+    instance = group.instances.create(installation, 'example', properties={'base.jmx.port': 6970})
     print('done')
 
     print('Starting instance... ', end='')
@@ -85,15 +85,19 @@ finally:
 
     if 'instance' in variables:
         print('Stopping instance... ', end='')
+        #noinspection PyUnboundLocalVariable
         instance.stop()
         print('done')
 
     if 'group' in variables:
         print('Deleting group... ', end='')
-        tc_server.groups.delete(group)
+
+        #noinspection PyUnboundLocalVariable
+        group.delete()
         print('done')
 
     if 'installation_image' in variables:
         print('Deleting installation image... ', end='')
-        tc_server.installation_images.delete(installation_image)
+        #noinspection PyUnboundLocalVariable
+        installation_image.delete()
         print('done')

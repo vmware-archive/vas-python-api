@@ -15,39 +15,21 @@
 
 
 import re
-from unittest.case import TestCase
-from vas.test.StubClient import StubClient
+from vas.test.VasTestCase import VasTestCase
 from vas.util.LinkUtils import LinkUtils
 from vas.VFabricAdministrationServerError import VFabricAdministrationServerError
 
-class TestLinkUtils(TestCase):
-    __client = StubClient()
-
-    def setUp(self):
-        self.__client.delegate.reset_mock()
-
-    def test_get_collection_self_links(self):
-        links = LinkUtils.get_collection_self_links(self.__client.get('https://localhost:8443/vfabric/v1/nodes/'),
-            'nodes')
-        self.assertEqual(['https://localhost:8443/vfabric/v1/nodes/0/', 'https://localhost:8443/vfabric/v1/nodes/1/'],
-            links)
-
-    def test_get_link_single(self):
-        link = LinkUtils.get_link(self.__client.get('https://localhost:8443/vfabric/v1/'), 'nodes')
+class TestLinkUtils(VasTestCase):
+    def test_get_link_href(self):
+        link = LinkUtils.get_link_href(self._client.get('https://localhost:8443/vfabric/v1/'), 'nodes')
         self.assertEqual('https://localhost:8443/vfabric/v1/nodes/', link)
 
-    def test_get_link_multiple(self):
-        self.assertRaises(VFabricAdministrationServerError, LinkUtils.get_link,
-            self.__client.get('https://localhost:8443/tc-server/v1/groups/0/'), 'node')
+    def test_get_link_href_multiple(self):
+        self.assertRaises(VFabricAdministrationServerError, LinkUtils.get_link_href,
+            self._client.get('https://localhost:8443/tc-server/v1/groups/0/'), 'node')
 
-    def test_get_links_no_rel(self):
-        links = LinkUtils.get_links(self.__client.get('https://localhost:8443/vfabric/v1/'))
-        self.assertEqual({'agent-image': ['https://localhost:8443/vfabric/v1/agent-image/'],
-                          'nodes': ['https://localhost:8443/vfabric/v1/nodes/'],
-                          'tasks': ['https://localhost:8443/vfabric/v1/tasks/']}, links)
-
-    def test_get_links_with_rel(self):
-        links = LinkUtils.get_links(self.__client.get('https://localhost:8443/tc-server/v1/groups/0/'), 'node')
+    def test_get_link_hrefs(self):
+        links = LinkUtils.get_link_hrefs(self._client.get('https://localhost:8443/tc-server/v1/groups/0/'), 'node')
         self.assertEqual(
             ['https://localhost:8443/tc-server/v1/nodes/1/', 'https://localhost:8443/tc-server/v1/nodes/0/'], links)
 

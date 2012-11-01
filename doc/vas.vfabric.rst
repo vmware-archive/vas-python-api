@@ -20,23 +20,30 @@ vas.vfabric
 :mod:`AgentImage`
 -----------------
 .. automodule:: vas.vfabric.AgentImage
+.. autoclass:: AgentImage()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`Nodes`
+------------
+.. automodule:: vas.vfabric.Nodes
+.. autoclass:: Node()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: Nodes()
+    :show-inheritance:
     :members:
     :inherited-members:
 
 :mod:`VFabric`
---------------
+-----------------
 .. automodule:: vas.vfabric.VFabric
-    :members:
-    :inherited-members:
-
-:mod:`VFabricNode`
-------------------
-.. automodule:: vas.vfabric.VFabricNode
-    :members:
-    :inherited-members:
-
-:mod:`VFabricNodes`
--------------------
-.. automodule:: vas.vfabric.VFabricNodes
+.. autoclass:: VFabric()
+    :show-inheritance:
     :members:
     :inherited-members:

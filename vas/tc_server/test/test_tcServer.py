@@ -14,31 +14,20 @@
 # limitations under the License.
 
 
-import re
-from unittest.case import TestCase
-from vas.tc_server.TcServerInstallationImages import TcServerInstallationImages
-from vas.tc_server.TcServerRevisionImages import TcServerRevisionImages
+from vas.tc_server.Groups import Groups
+from vas.tc_server.InstallationImages import InstallationImages
+from vas.tc_server.Nodes import Nodes
+from vas.tc_server.RevisionImages import RevisionImages
 from vas.tc_server.TcServer import TcServer
-from vas.tc_server.TcServerGroups import TcServerGroups
-from vas.tc_server.TcServerNodes import TcServerNodes
-from vas.tc_server.TcServerTemplateImages import TcServerTemplateImages
-from vas.test.StubClient import StubClient
+from vas.tc_server.TemplateImages import TemplateImages
+from vas.test.VasTestCase import VasTestCase
 
-class TestTcServer(TestCase):
-    __client = StubClient()
-
-    def setUp(self):
-        self.__client.delegate.reset_mock()
-        self.__tc_server = TcServer(self.__client, 'https://localhost:8443{}')
-
-    def test_attributes(self):
-        self.assertIsInstance(self.__tc_server.groups, TcServerGroups)
-        self.assertIsInstance(self.__tc_server.installation_images, TcServerInstallationImages)
-        self.assertIsInstance(self.__tc_server.nodes, TcServerNodes)
-        self.assertIsInstance(self.__tc_server.revision_images, TcServerRevisionImages)
-        self.assertIsInstance(self.__tc_server.template_images, TcServerTemplateImages)
-
-    def test_repr(self):
-        self.assertIsNone(re.match('<.* object at 0x.*>', repr(self.__tc_server)),
-            '__repr__ method has not been specified')
-        eval(repr(self.__tc_server))
+class TestTcServer(VasTestCase):
+    def test_tc_server(self):
+        self._assert_item(TcServer(self._client, 'https://localhost:8443/tc-server/v1/'), [
+            ('groups', lambda actual: self.assertIsInstance(actual, Groups)),
+            ('installation_images', lambda actual: self.assertIsInstance(actual, InstallationImages)),
+            ('nodes', lambda actual: self.assertIsInstance(actual, Nodes)),
+            ('revision_images', lambda actual: self.assertIsInstance(actual, RevisionImages)),
+            ('template_images', lambda actual: self.assertIsInstance(actual, TemplateImages))
+        ], False)

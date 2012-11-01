@@ -1,8 +1,10 @@
 {
     "nodes":[
         {
+            "ipv4-addresses":[ "192.168.0.2" ],
+            "ipv6-addresses":[ "fc00:192:168:0:2d:4fff:fd48:5e80" ],
             "host-names":[ "example-host-1" ],
-            "ip-addresses":[ "192.168.0.2", "127.0.0.1" ],
+            "ip-addresses":[ "fc00:192:168:0:2d:4fff:fd48:5e80", "192.168.0.2" ],
             "links":[
                 {
                     "href":"https://localhost:8443/tc-server/v1/nodes/0/",
@@ -12,8 +14,10 @@
             ]
         },
         {
+            "ipv4-addresses":[ "192.168.0.3" ],
+            "ipv6-addresses":[ "fc00:192:168:0:3d:4fff:fd48:5e80" ],
             "host-names":[ "example-host-2" ],
-            "ip-addresses":[ "127.0.0.1", "192.168.0.3" ],
+            "ip-addresses":[ "fc00:192:168:0:3d:4fff:fd48:5e80", "192.168.0.3" ],
             "links":[
                 {
                     "href":"https://localhost:8443/tc-server/v1/nodes/1/",

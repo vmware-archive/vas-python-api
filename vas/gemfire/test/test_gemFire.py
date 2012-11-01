@@ -12,31 +12,18 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-
-import re
-from unittest.case import TestCase
-from vas.gemfire.GemFireApplicationCodeImages import GemFireApplicationCodeImages
-from vas.gemfire.GemFireInstallationImages import GemFireInstallationImages
+from vas.gemfire.ApplicationCodeImages import ApplicationCodeImages
 from vas.gemfire.GemFire import GemFire
-from vas.gemfire.GemFireGroups import GemFireGroups
-from vas.gemfire.GemFireNodes import GemFireNodes
-from vas.test.StubClient import StubClient
+from vas.gemfire.Groups import Groups
+from vas.gemfire.InstallationImages import InstallationImages
+from vas.gemfire.Nodes import Nodes
+from vas.test.VasTestCase import VasTestCase
 
-class TestGemFire(TestCase):
-    __client = StubClient()
-
-    def setUp(self):
-        self.__client.delegate.reset_mock()
-        self.__gemFire = GemFire(self.__client, 'https://localhost:8443{}')
-
-    def test_attributes(self):
-        self.assertIsInstance(self.__gemFire.application_code_images, GemFireApplicationCodeImages)
-        self.assertIsInstance(self.__gemFire.groups, GemFireGroups)
-        self.assertIsInstance(self.__gemFire.installation_images, GemFireInstallationImages)
-        self.assertIsInstance(self.__gemFire.nodes, GemFireNodes)
-
-    def test_repr(self):
-        self.assertIsNone(re.match('<.* object at 0x.*>', repr(self.__gemFire)),
-            '__repr__ method has not been specified')
-        eval(repr(self.__gemFire))
+class TestGemFire(VasTestCase):
+    def test_gemfire(self):
+        self._assert_item(GemFire(self._client, 'https://localhost:8443/gemfire/v1/'), [
+            ('application_code_images', lambda actual: self.assertIsInstance(actual, ApplicationCodeImages)),
+            ('groups', lambda actual: self.assertIsInstance(actual, Groups)),
+            ('installation_images', lambda actual: self.assertIsInstance(actual, InstallationImages)),
+            ('nodes', lambda actual: self.assertIsInstance(actual, Nodes))
+        ], False)

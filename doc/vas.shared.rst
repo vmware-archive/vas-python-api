@@ -17,8 +17,194 @@
 vas.shared
 ==========
 
+:mod:`Collection`
+-----------------
+.. automodule:: vas.shared.Collection
+.. autoclass:: Collection()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`Configuration`
+--------------------
+.. automodule:: vas.shared.Configuration
+.. autoclass:: Configuration()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`Deletable`
+-----------------
+.. automodule:: vas.shared.Deletable
+.. autoclass:: Deletable()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`Groups`
+-------------
+.. automodule:: vas.shared.Groups
+.. autoclass:: Group()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: Groups()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: MutableGroup()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`InstallationImages`
+-------------------------
+.. automodule:: vas.shared.InstallationImages
+.. autoclass:: InstallationImage()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: InstallationImages()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`Installations`
+--------------------
+.. automodule:: vas.shared.Installations
+.. autoclass:: Installation()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: Installations()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`Instance`
+---------------
+.. automodule:: vas.shared.Instance
+.. autoclass:: Instance()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`LiveConfiguration`
+------------------------
+.. automodule:: vas.shared.LiveConfiguration
+.. autoclass:: LiveConfiguration()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`Logs`
+-----------
+.. automodule:: vas.shared.Logs
+.. autoclass:: Log()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: Logs()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`MutableCollection`
+------------------------
+.. automodule:: vas.shared.MutableCollection
+.. autoclass:: MutableCollection()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`NodeConfiguration`
+------------------------
+.. automodule:: vas.shared.NodeConfiguration
+.. autoclass:: NodeConfiguration()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`NodeInstances`
+--------------------
+.. automodule:: vas.shared.NodeInstances
+.. autoclass:: NodeInstance()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: NodeInstances()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`Nodes`
+------------
+.. automodule:: vas.shared.Nodes
+.. autoclass:: Node()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: GroupableNode()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`PendingConfigurations`
+----------------------------
+.. automodule:: vas.shared.PendingConfigurations
+.. autoclass:: PendingConfiguration()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+----
+
+.. autoclass:: PendingConfigurations()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`Resource`
+---------------
+.. automodule:: vas.shared.Resource
+.. autoclass:: Resource()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
 :mod:`Security`
 ---------------
 .. automodule:: vas.shared.Security
+.. autoclass:: Security()
+    :show-inheritance:
+    :members:
+    :inherited-members:
+
+:mod:`StateResource`
+--------------------
+.. automodule:: vas.shared.StateResource
+.. autoclass:: StateResource()
+    :show-inheritance:
     :members:
     :inherited-members:

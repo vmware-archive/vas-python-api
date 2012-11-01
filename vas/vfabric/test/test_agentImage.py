@@ -14,35 +14,24 @@
 # limitations under the License.
 
 
-import re
 import os
 import shutil
 import tempfile
-from unittest.case import TestCase
-from vas.shared.Security import Security
-from vas.test.StubClient import StubClient
+from vas.test.VasTestCase import VasTestCase
 from vas.vfabric.AgentImage import AgentImage
 
-class TestAgentImage(TestCase):
-    __client = StubClient()
-
-    def setUp(self):
-        self.__client.delegate.reset_mock()
-        self.__agent_image = AgentImage(self.__client, 'https://localhost:8443/vfabric/v1/agent-image/')
-
-    def test_attributes(self):
-        self.assertEqual(164, len(self.__agent_image.content))
-        self.assertIsInstance(self.__agent_image.security, Security)
+class TestAgentImage(VasTestCase):
+    def test_agent_image(self):
+        self._assert_item(AgentImage(self._client, 'https://localhost:8443/vfabric/v1/agent-image/'), [
+            ('content', lambda actual: self.assertEquals(164, len(actual)))
+        ])
 
     def test_extract_to(self):
+        agent_image = AgentImage(self._client, 'https://localhost:8443/vfabric/v1/agent-image/')
+
         location = tempfile.mkdtemp()
         try:
-            self.__agent_image.extract_to(location)
+            agent_image.extract_to(location)
             self.assertTrue(os.path.exists(os.path.join(location, 'foo.txt')))
         finally:
             shutil.rmtree(location)
-
-    def test_repr(self):
-        self.assertIsNone(re.match('<.* object at 0x.*>', repr(self.__agent_image)),
-            '__repr__ method has not been specified')
-        eval(repr(self.__agent_image))

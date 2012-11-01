@@ -13,14 +13,9 @@
 .. See the License for the specific language governing permissions and
 .. limitations under the License.
 
-
-vFabric Administration Server Python API Documentation
-======================================================
+vFabric Administration Server Python API
+========================================
 .. toctree::
+    :glob:
 
-    vas
-    vas.gemfire
-    vas.rabbitmq
-    vas.tc_server
-    vas.vfabric
-    vas.shared
+    vas*

@@ -14,29 +14,20 @@
 # limitations under the License.
 
 
-import re
-from unittest.case import TestCase
 from vas.VFabricAdministrationServer import VFabricAdministrationServer
 from vas.gemfire.GemFire import GemFire
 from vas.rabbitmq.RabbitMq import RabbitMq
 from vas.tc_server.TcServer import TcServer
-from vas.test.StubClient import StubClient
+from vas.test.VasTestCase import VasTestCase
 from vas.vfabric.VFabric import VFabric
 
-class TestVFabricAdministrationServer(TestCase):
-    __client = StubClient()
-
-    def setUp(self):
-        self.__client.delegate.reset_mock()
-        self.__vfabric_administration_server = VFabricAdministrationServer(client=self.__client)
-
-    def test_attributes(self):
-        self.assertIsInstance(self.__vfabric_administration_server.gemfire, GemFire)
-        self.assertIsInstance(self.__vfabric_administration_server.rabbitmq, RabbitMq)
-        self.assertIsInstance(self.__vfabric_administration_server.tc_server, TcServer)
-        self.assertIsInstance(self.__vfabric_administration_server.vfabric, VFabric)
-
-    def test_repr(self):
-        self.assertIsNone(re.match('<.* object at 0x.*>', repr(self.__vfabric_administration_server)),
-            '__repr__ method has not been specified')
-        eval(repr(self.__vfabric_administration_server))
+class TestVFabricAdministrationServer(VasTestCase):
+    def test_vas(self):
+        self._assert_item(VFabricAdministrationServer(client=self._client), [
+            ('gemfire', lambda actual: self.assertIsInstance(actual, GemFire)),
+            ('rabbitmq', lambda actual: self.assertIsInstance(actual, RabbitMq)),
+            ('sqlfire', lambda actual: self.assertIsNone(actual)),
+            ('tc_server', lambda actual: self.assertIsInstance(actual, TcServer)),
+            ('vfabric', lambda actual: self.assertIsInstance(actual, VFabric)),
+            ('web_server', lambda actual: self.assertIsNone(actual))
+        ], False)

@@ -14,25 +14,14 @@
 # limitations under the License.
 
 
-import re
-from unittest.case import TestCase
-from vas.test.StubClient import StubClient
+from vas.test.VasTestCase import VasTestCase
 from vas.vfabric.AgentImage import AgentImage
 from vas.vfabric.VFabric import VFabric
-from vas.vfabric.VFabricNodes import VFabricNodes
+from vas.vfabric.Nodes import Nodes
 
-class TestVFabric(TestCase):
-    __client = StubClient()
-
-    def setUp(self):
-        self.__client.delegate.reset_mock()
-        self.__vfabric = VFabric(self.__client, 'https://localhost:8443{}')
-
-    def test_attributes(self):
-        self.assertIsInstance(self.__vfabric.agent_image, AgentImage)
-        self.assertIsInstance(self.__vfabric.nodes, VFabricNodes)
-
-    def test_repr(self):
-        self.assertIsNone(re.match('<.* object at 0x.*>', repr(self.__vfabric)),
-            '__repr__ method has not been specified')
-        eval(repr(self.__vfabric))
+class TestVFabric(VasTestCase):
+    def test_vfabric(self):
+        self._assert_item(VFabric(self._client, 'https://localhost:8443/vfabric/v1/'), [
+            ('agent_image', lambda actual: self.assertIsInstance(actual, AgentImage)),
+            ('nodes', lambda actual: self.assertIsInstance(actual, Nodes))
+        ], False)

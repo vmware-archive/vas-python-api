@@ -14,46 +14,57 @@
 # limitations under the License.
 
 
-from vas.shared.ComponentType import ComponentType
+from vas.util.LinkUtils import LinkUtils
 
-class TcServer(ComponentType):
-    """The tc Server component of the vFabric Administration Server
+class TcServer(object):
+    """The entry point to the API for administering tc Server
 
-    :ivar `vas.tc_server.TcServerGroups` groups:    The collection of groups
-    :ivar `vas.tc_server.TcServerInstallationImages` installation_images:  The collection of installation images
-    :ivar `vas.tc_server.TcServerNodes` nodes: The collection of nodes
-    :ivar `vas.tc_server.TcServerRevisionImages` revision_images: The collection of revision images
-    :ivar `vas.tc_server.TcServerTemplateImages` template_images: The collection of template images
+    :ivar `vas.tc_server.Groups.Groups`                         groups:                 the tc Server groups
+    :ivar `vas.tc_server.InstallationImages.InstallationImages` installation_images:    the tc Server installation
+                                                                                        images
+    :ivar `vas.tc_server.Nodes.Nodes`                           nodes:                  The tc Server nodes
+    :ivar `vas.tc_server.RevisionImages.RevisionImages`         revision_images:        The tc Server revision images
+    :ivar `vas.tc_server.TemplateImages.TemplateImages`         template_images:        The tc Server template images
     """
 
-    __REL_REVISION_IMAGES = 'revision-images'
+    @property
+    def groups(self):
+        return self.__groups
 
-    __REL_TEMPLATE_IMAGES = 'template-images'
+    @property
+    def installation_images(self):
+        return self.__installation_images
 
-    __ROOT_PATH = '/tc-server/v1/'
+    @property
+    def nodes(self):
+        return self.__nodes
 
-    def __init__(self, client, location_stem):
-        super(TcServer, self).__init__(client, location_stem.format(self.__ROOT_PATH))
+    @property
+    def revision_images(self):
+        return self.__revision_images
 
-        self.revision_images = TcServerRevisionImages(client, self._links[self.__REL_REVISION_IMAGES][0])
-        self.template_images = TcServerTemplateImages(client, self._links[self.__REL_TEMPLATE_IMAGES][0])
-        self.__location_stem = location_stem
+    @property
+    def template_images(self):
+        return self.__template_images
 
-    def _create_groups(self, client, location):
-        return TcServerGroups(client, location)
+    def __init__(self, client, location):
+        self.__client = client
+        self.__location = location
 
-    def _create_installation_images(self, client, location):
-        return TcServerInstallationImages(client, location)
+        json = client.get(location)
+        self.__groups = Groups(client, LinkUtils.get_link_href(json, 'groups'))
+        self.__installation_images = InstallationImages(client, LinkUtils.get_link_href(json, 'installation-images'))
+        self.__nodes = Nodes(client, LinkUtils.get_link_href(json, 'nodes'))
+        self.__revision_images = RevisionImages(client, LinkUtils.get_link_href(json, 'revision-images'))
+        self.__template_images = TemplateImages(client, LinkUtils.get_link_href(json, 'template-images'))
 
-    def _create_nodes(self, client, location):
-        return TcServerNodes(client, location)
 
     def __repr__(self):
-        return "{}(client={}, location_stem={})".format(self.__class__.__name__, self._client,
-            repr(self.__location_stem))
+        return "{}(client={}, location={})".format(self.__class__.__name__, self.__client, repr(self.__location))
 
-from vas.tc_server.TcServerInstallationImages import TcServerInstallationImages
-from vas.tc_server.TcServerRevisionImages import TcServerRevisionImages
-from vas.tc_server.TcServerGroups import TcServerGroups
-from vas.tc_server.TcServerNodes import TcServerNodes
-from vas.tc_server.TcServerTemplateImages import TcServerTemplateImages
+
+from vas.tc_server.Groups import Groups
+from vas.tc_server.InstallationImages import InstallationImages
+from vas.tc_server.Nodes import Nodes
+from vas.tc_server.RevisionImages import RevisionImages
+from vas.tc_server.TemplateImages import TemplateImages
