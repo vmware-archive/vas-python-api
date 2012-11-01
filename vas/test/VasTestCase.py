@@ -56,6 +56,7 @@ class VasTestCase(TestCase):
             self.assertIsInstance(item.security, Security)
 
         self.__assert_repr(item)
+        self.__assert_str(item)
 
     def _assert_post(self, url, payload=None, rel=None):
         if rel:
@@ -93,3 +94,6 @@ class VasTestCase(TestCase):
 
         self.assertIsNone(re.match('<.* object at 0x.*>', repr(item)), '__repr__ method has not been specified')
         eval(repr(item), eval_globals, eval_locals)
+
+    def __assert_str(self, item):
+        self.assertNotEqual(repr(item), str(item))

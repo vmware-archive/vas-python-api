@@ -75,7 +75,6 @@ class NodeInstance(StateResource):
         self.__node = self.__node or self.__node_class(self._client, self.__node_location)
         return self.__node
 
-
     def __init__(self, client, location, node_class, logs_class, group_instance_class, group_instance_type,
                  node_live_configurations_class):
         super(NodeInstance, self).__init__(client, location)
@@ -91,3 +90,6 @@ class NodeInstance(StateResource):
         self.__live_configurations_location = LinkUtils.get_link_href(self._details, 'node-live-configurations')
 
         self.__name = self._details['name']
+
+    def __str__(self):
+        return "<{} name={}>".format(self.__class__.__name__, self.__name)

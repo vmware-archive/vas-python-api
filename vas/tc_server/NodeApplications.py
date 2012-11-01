@@ -93,6 +93,10 @@ class NodeApplication(Resource):
         self.__instance_location = LinkUtils.get_link_href(self._details, 'node-instance')
         self.__revisions_location = LinkUtils.get_link_href(self._details, 'node-revisions')
 
+    def __str__(self):
+        return "<{} name={} context_path={} service={} host={}>".format(self.__class__.__name__, self.__name,
+            self.__context_path, self.__service, self.__host)
+
 
 from vas.tc_server.Applications import Application
 from vas.tc_server.NodeInstances import NodeInstance

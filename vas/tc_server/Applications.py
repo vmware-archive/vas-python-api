@@ -116,6 +116,10 @@ class Application(Resource, Deletable):
         super(Application, self).reload()
         self.__node_applications = None
 
+    def __str__(self):
+        return "<{} name={} context_path={} service={} host={}>".format(self.__class__.__name__, self.__name,
+            self.__context_path, self.__service, self.__host)
+
 
 from vas.tc_server.Instances import Instance
 from vas.tc_server.NodeApplications import NodeApplication

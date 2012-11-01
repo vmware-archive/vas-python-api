@@ -42,3 +42,8 @@ class Node(vas.shared.Nodes.Node, Deletable):
     :ivar `vas.shared.Security.Security`    security:           The resource's security
     """
     pass
+
+    def __str__(self):
+        return "<{} host_names={} ip_addresses={} ipv4_addresses={} ipv6_addresses={} operating_system={} architecture={} agent_home={} metadata={}>".format(
+            self.__class__.__name__, self.host_names, self.ip_addresses, self.ipv4_addresses, self.ipv6_addresses,
+            self.operating_system, self.architecture, self.agent_home, self.metadata)

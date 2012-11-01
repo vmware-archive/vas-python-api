@@ -54,6 +54,9 @@ class RabbitMq(object):
     def __repr__(self):
         return "{}(client={}, location={})".format(self.__class__.__name__, self.__client, repr(self.__location))
 
+    def __str__(self):
+        return "<{}>".format(self.__class__.__name__)
+
 
 from vas.rabbitmq.Groups import Groups
 from vas.rabbitmq.InstallationImages import InstallationImages

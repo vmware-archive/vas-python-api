@@ -82,6 +82,10 @@ class LocatorNodeInstance(NodeInstance):
         self.__port = self._details['port']
         self.__server = self._details['server']
 
+    def __str__(self):
+        return "<{} name={} port={} peer={} server={} address={}>".format(self.__class__.__name__, self.name,
+            self.__port, self.__peer, self.__server, self.__address)
+
 
 from vas.gemfire.LocatorInstances import LocatorInstance
 from vas.gemfire.LocatorLogs import LocatorLogs

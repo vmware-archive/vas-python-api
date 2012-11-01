@@ -92,6 +92,10 @@ class ApplicationCodeImage(Resource, Deletable):
         self.__live_application_codes = None
         self.__pending_application_codes = None
 
+    def __str__(self):
+        return "<{} name={} version={} size={}>".format(self.__class__.__name__, self.__name, self.__version,
+            self.__size)
+
 
 from vas.gemfire.ApplicationCode import ApplicationCode
 from vas.gemfire.PendingApplicationCodes import PendingApplicationCode

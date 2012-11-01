@@ -80,5 +80,9 @@ class Statistic(Resource, Deletable):
         self.__last_modified = datetime.utcfromtimestamp(self._details['last-modified'])
         self.__size = self._details['size']
 
+    def __str__(self):
+        return "<{} path={} size={} last_modified={}>".format(self.__class__.__name__, self.__path, self.__size,
+            self.__last_modified)
+
 
 from vas.gemfire.CacheServerNodeInstances import CacheServerNodeInstance

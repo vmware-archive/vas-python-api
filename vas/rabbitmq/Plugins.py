@@ -100,5 +100,9 @@ class Plugin(Resource, Deletable):
 
         self._client.post(self.__state_location, {'status': 'ENABLED'})
 
+    def __str__(self):
+        return "<{} name={} version={}>".format(self.__class__.__name__, self.__name, self.__version)
+
+
 from vas.rabbitmq.Instances import Instance
 from vas.rabbitmq.PluginImages import PluginImage

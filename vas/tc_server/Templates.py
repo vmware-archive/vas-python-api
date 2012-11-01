@@ -82,6 +82,9 @@ class Template(Resource, Deletable):
         self.__installation_location = LinkUtils.get_link_href(self._details, 'installation')
         self.__template_image_location = LinkUtils.get_link_href(self._details, 'template-image')
 
+    def __str__(self):
+        return "<{} name={} version={}>".format(self.__class__.__name__, self.__name, self.__version)
+
 
 from vas.tc_server.Installations import Installation
 from vas.tc_server.TemplateImages import TemplateImage

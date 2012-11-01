@@ -78,3 +78,6 @@ class InstallationImage(Resource, Deletable):
 
         super(InstallationImage, self).reload()
         self.__installations = None
+
+    def __str__(self):
+        return "<{} version={} size={}>".format(self.__class__.__name__, self.__version, self.__size)

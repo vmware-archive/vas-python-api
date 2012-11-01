@@ -80,5 +80,9 @@ class RevisionImage(Resource, Deletable):
         super(RevisionImage, self).reload()
         self.__revisions = None
 
+    def __str__(self):
+        return "<{} name={} version={} size={}>".format(self.__class__.__name__, self.__name, self.__version,
+            self.__size)
+
 
 from vas.tc_server.Revisions import Revision

@@ -120,3 +120,7 @@ class Security(object):
 
     def __repr__(self):
         return "{}(client={}, location={})".format(self.__class__.__name__, self.__client, repr(self.__location))
+
+    def __str__(self):
+        return "<{} owner={} group={} permissions={}>".format(self.__class__.__name__, self.__owner, self.__group,
+            self.__permissions)
