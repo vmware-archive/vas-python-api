@@ -17,6 +17,7 @@
 from vas.VFabricAdministrationServer import VFabricAdministrationServer
 from vas.gemfire.GemFire import GemFire
 from vas.rabbitmq.RabbitMq import RabbitMq
+from vas.sqlfire.SqlFire import SqlFire
 from vas.tc_server.TcServer import TcServer
 from vas.test.VasTestCase import VasTestCase
 from vas.vfabric.VFabric import VFabric
@@ -27,7 +28,7 @@ class TestVFabricAdministrationServer(VasTestCase):
         self._assert_item(VFabricAdministrationServer(client=self._client), [
             ('gemfire', lambda actual: self.assertIsInstance(actual, GemFire)),
             ('rabbitmq', lambda actual: self.assertIsInstance(actual, RabbitMq)),
-            ('sqlfire', lambda actual: self.assertIsNone(actual)),
+            ('sqlfire', lambda actual: self.assertIsInstance(actual, SqlFire)),
             ('tc_server', lambda actual: self.assertIsInstance(actual, TcServer)),
             ('vfabric', lambda actual: self.assertIsInstance(actual, VFabric)),
             ('web_server', lambda actual: self.assertIsInstance(actual, WebServer))

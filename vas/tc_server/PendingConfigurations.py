@@ -29,11 +29,11 @@ class PendingConfigurations(vas.shared.PendingConfigurations.PendingConfiguratio
 class PendingConfiguration(vas.shared.PendingConfigurations.PendingConfiguration):
     """A configuration file that is pending
 
-    :ivar str                               content:    The configuration's content
-    :ivar `vas.tc_server.Instance.Instance` instance:   The instance that owns the configuration
-    :ivar str                               path:       The configuration's path
-    :ivar `vas.shared.Security.Security`    security:   The resource's security
-    :ivar int                               size:       The configuration's size
+    :ivar str                                   content:    The configuration's content
+    :ivar `vas.tc_server.Instances.Instance`    instance:   The instance that owns the configuration
+    :ivar str                                   path:       The configuration's path
+    :ivar `vas.shared.Security.Security`        security:   The resource's security
+    :ivar int                                   size:       The configuration's size
     """
 
     def __init__(self, client, location):
