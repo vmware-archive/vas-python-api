@@ -13,21 +13,3 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
-from vas.shared.Collection import Collection
-
-class MutableCollection(Collection):
-    """A collection that allows items to be created
-
-    :ivar `vas.shared.Security.Security`    security:   The resource's security
-    """
-
-    def _create(self, payload, rel=None):
-        created = self._create_entry(self._client.post(self._location, payload, rel))
-        self.reload()
-        return created
-
-    def _create_multipart(self, path, payload=None):
-        created = self._create_entry(self._client.post_multipart(self._location, path, payload))
-        self.reload()
-        return created

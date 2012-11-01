@@ -14,18 +14,16 @@
 # limitations under the License.
 
 
-from vas.rabbitmq.Groups import Groups
-from vas.rabbitmq.InstallationImages import InstallationImages
-from vas.rabbitmq.Nodes import Nodes
-from vas.rabbitmq.PluginImages import PluginImages
-from vas.rabbitmq.RabbitMq import RabbitMq
 from vas.test.VasTestCase import VasTestCase
+from vas.web_server.Groups import Groups
+from vas.web_server.InstallationImages import InstallationImages
+from vas.web_server.Nodes import Nodes
+from vas.web_server.WebServer import WebServer
 
-class TestRabbitMq(VasTestCase):
-    def test_rabbitmq(self):
-        self._assert_item(RabbitMq(self._client, 'https://localhost:8443/rabbitmq/v1/'), [
+class TestWebServer(VasTestCase):
+    def test_webserver(self):
+        self._assert_item(WebServer(self._client, 'https://localhost:8443/web-server/v1/'), [
             ('groups', lambda actual: self.assertIsInstance(actual, Groups)),
             ('installation_images', lambda actual: self.assertIsInstance(actual, InstallationImages)),
-            ('nodes', lambda actual: self.assertIsInstance(actual, Nodes)),
-            ('plugin_images', lambda actual: self.assertIsInstance(actual, PluginImages))
+            ('nodes', lambda actual: self.assertIsInstance(actual, Nodes))
         ], False)

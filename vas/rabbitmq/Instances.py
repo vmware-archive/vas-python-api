@@ -28,7 +28,7 @@ class Instances(MutableCollection):
         super(Instances, self).__init__(client, location, 'group-instances', Instance)
 
 
-    def create(self, name, installation):
+    def create(self, installation, name):
         """Creates a new instance
 
         :param str                                          name:           The name of the group instance
@@ -80,7 +80,7 @@ class Instance(vas.shared.Instance.Instance):
         :param `vas.rabbitmq.Installations.Installation`    installation:   The installation that the instance should use
         """
 
-        self._client.post(self._location, {'installation', installation._location})
+        self._client.post(self._location, {'installation': installation._location})
         self.reload()
 
 

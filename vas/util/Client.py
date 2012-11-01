@@ -88,7 +88,7 @@ class Client:
         files = {}
 
         if metadata is not None:
-            files['metadata'] =('metadata.json', json.dumps(metadata))
+            files['metadata'] = ('metadata.json', json.dumps(metadata))
 
         if os.path.isfile(content):
             with open(content, 'rb') as data:
@@ -134,7 +134,6 @@ class Client:
                 reasons.append(reason['message'])
         except ValueError:
             reasons.append(body)
-
 
         raise VFabricAdministrationServerError(*reasons, code=response.status_code)
 

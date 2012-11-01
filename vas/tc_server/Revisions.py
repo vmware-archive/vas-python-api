@@ -68,7 +68,8 @@ class Revision(StateResource, Deletable):
 
     @property
     def node_revisions(self):
-        self.__node_revisions = self.__node_revisions or self._create_resources_from_links('node-revision', NodeRevision)
+        self.__node_revisions = self.__node_revisions or self._create_resources_from_links('node-revision',
+            NodeRevision)
         return self.__node_revisions
 
     @property

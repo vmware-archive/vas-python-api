@@ -32,11 +32,13 @@ class TestInstances(VasTestCase):
         location = 'https://localhost:8443/rabbitmq/v1/groups/2/instances/'
         self._return_location('https://localhost:8443/rabbitmq/v1/groups/2/instances/4/')
 
-        instance = Instances(self._client, location).create('example',
-            Installation(self._client, installation_location))
+        instance = Instances(self._client, location).create(Installation(self._client, installation_location),
+            'example')
 
         self.assertIsInstance(instance, Instance)
-        self._assert_post(location, {'name': 'example', 'installation': installation_location}, 'group-instance')
+        self._assert_post(location,
+            {'name': 'example', 'installation': installation_location},
+            'group-instance')
 
     def test_detail(self):
         self._assert_item(Instance(self._client, 'https://localhost:8443/rabbitmq/v1/groups/2/instances/4/'), [
@@ -80,4 +82,4 @@ class TestInstances(VasTestCase):
 
         Instance(self._client, location).update(Installation(self._client, installation_location))
 
-        self._assert_post(location, {'installation', installation_location})
+        self._assert_post(location, {'installation': installation_location})

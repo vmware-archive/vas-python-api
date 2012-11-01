@@ -20,6 +20,7 @@ from vas.rabbitmq.RabbitMq import RabbitMq
 from vas.tc_server.TcServer import TcServer
 from vas.vfabric.VFabric import VFabric
 from vas.VFabricAdministrationServerError import VFabricAdministrationServerError
+from vas.web_server.WebServer import WebServer
 
 class VFabricAdministrationServer(object):
     """The main entry point to the vFabric Administration Server API

@@ -51,7 +51,7 @@ try:
     print('done')
 
     print('Creating instance... ', end='')
-    instance = group.instances.create('example', installation)
+    instance = group.instances.create(installation, 'example')
     print('done')
 
     for plugin in instance.plugins:

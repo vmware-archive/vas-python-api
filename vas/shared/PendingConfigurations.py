@@ -39,6 +39,7 @@ class PendingConfigurations(MutableCollection):
 
         return self._create_multipart(content, {'path': path})
 
+
 class PendingConfiguration(Configuration, Deletable):
     """A configuration file that is pending and will be made live the next time its instance is started
 
