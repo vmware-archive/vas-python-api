@@ -18,7 +18,7 @@ import vas.shared.Groups
 from vas.util.LinkUtils import LinkUtils
 
 class Groups(vas.shared.Groups.Groups):
-    """Used to enumerate, create, and delete tc Server groups
+    """Used to enumerate, create, and delete Web Server groups
 
     :ivar `vas.shared.Security.Security`    security:   The security configuration for the collection
     """
@@ -27,11 +27,11 @@ class Groups(vas.shared.Groups.Groups):
         super(Groups, self).__init__(client, location, Group)
 
 
-class Group(vas.shared.Groups.MutableGroup):
-    """A tc Server group
+class Group(vas.shared.Groups.Group):
+    """A Web Server group
 
-    :ivar `vas.tc_server.Installations.Installations`   installations:  The group's installations
-    :ivar `vas.tc_server.Instances.Instances`           instances:      The group's instances
+    :ivar `vas.web_server.Installations.Installations`  installations:  The group's installations
+    :ivar `vas.web_server.Instances.Instances`          instances:      The groups' instances
     :ivar str                                           name:           The group's name
     :ivar list                                          nodes:          The group's nodes
     :ivar `vas.shared.Security`                         security:       The resource's security
@@ -49,6 +49,7 @@ class Group(vas.shared.Groups.MutableGroup):
 
         self.__instances_location = LinkUtils.get_link_href(self._details, 'group-instances')
 
-from vas.tc_server.Installations import Installations
-from vas.tc_server.Instances import Instances
-from vas.tc_server.Nodes import Node
+
+from vas.web_server.Installations import Installations
+from vas.web_server.Instances import Instances
+from vas.web_server.Nodes import Node

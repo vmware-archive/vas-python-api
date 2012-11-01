@@ -17,27 +17,28 @@
 import vas.shared.Logs
 
 class Logs(vas.shared.Logs.Logs):
-    """Used to enumerate a RabbitMQ node instance's logs
+    """Used to enumerate a Web Server node instance's logs
 
     :ivar `vas.shared.Security.Security`    security:   The resource's security
     """
+
 
     def __init__(self, client, location):
         super(Logs, self).__init__(client, location, Log)
 
 
 class Log(vas.shared.Logs.Log):
-    """A log file in a RabbitMQ node instance
+    """A log file in a Web Server node instance
 
-    :ivar `vas.rabbitmq.NodeInstances.NodeInstance` instance:       The node instance that the log belongs to
-    :ivar `datetime.datetime`                       last_modified:  The last modified stamp of the log
-    :ivar str                                       name:           The name of the log
-    :ivar `vas.shared.Security.Security`            security:       The resource's security
-    :ivar int                                       size:           The size of the log
+    :ivar `vas.web_server.NodeInstances.NodeInstance`   instance:       The node instance that the log belongs to
+    :ivar `datetime.datetime`                           last_modified:  The last modified stamp of the log
+    :ivar str                                           name:           The name of the log
+    :ivar `vas.shared.Security.Security`                security:       The resource's security
+    :ivar int                                           size:           The size of the log
     """
 
     def __init__(self, client, location):
         super(Log, self).__init__(client, location, 'node-instance', NodeInstance)
 
 
-from vas.rabbitmq.NodeInstances import NodeInstance
+from vas.web_server.NodeInstances import NodeInstance

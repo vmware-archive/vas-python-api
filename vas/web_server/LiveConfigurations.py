@@ -18,7 +18,7 @@ from vas.shared.Collection import Collection
 import vas.shared.LiveConfiguration
 
 class LiveConfigurations(Collection):
-    """Used to enumerate a RabbitMQ instance's live configuration
+    """Used to enumerate an instance's live configuration
 
     :ivar `vas.shared.Security.Security`    security:   The resource's security
     """
@@ -28,19 +28,19 @@ class LiveConfigurations(Collection):
 
 
 class LiveConfiguration(vas.shared.LiveConfiguration.LiveConfiguration):
-    """A live configuration file in a RabbitMQ instance
+    """A live configuration file in a Web Server instance
 
-    :ivar str                               content:                The configuration's content
-    :ivar `vas.rabbitmq.Instance.Instance`  instance:               The instance the owns the configuration
-    :ivar str                               path:                   The configuration's path
-    :ivar list                              node_configurations:    The configuration's node configurations
-    :ivar `vas.shared.Security.Security`    security:               The resource's security
-    :ivar int                               size:                   The configuration's size
+    :ivar str                                   content:                The configuration's content
+    :ivar `vas.web_server.Instances.Instance`   instance:               The instance that owns the configuration
+    :ivar str                                   path:                   The configuration's path
+    :ivar list                                  node_configurations:    The configuration's node configurations
+    :ivar `vas.shared.Security.Security`        security:               The resource's security
+    :ivar int                                   size:                   The configuration's size
     """
 
     def __init__(self, client, location):
         super(LiveConfiguration, self).__init__(client, location, 'group-instance', Instance, NodeLiveConfiguration)
 
 
-from vas.rabbitmq.Instances import Instance
-from vas.rabbitmq.NodeLiveConfigurations import NodeLiveConfiguration
+from vas.web_server.Instances import Instance
+from vas.web_server.NodeLiveConfigurations import NodeLiveConfiguration

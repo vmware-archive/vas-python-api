@@ -20,6 +20,7 @@ from vas.rabbitmq.RabbitMq import RabbitMq
 from vas.tc_server.TcServer import TcServer
 from vas.test.VasTestCase import VasTestCase
 from vas.vfabric.VFabric import VFabric
+from vas.web_server.WebServer import WebServer
 
 class TestVFabricAdministrationServer(VasTestCase):
     def test_vas(self):
@@ -29,5 +30,5 @@ class TestVFabricAdministrationServer(VasTestCase):
             ('sqlfire', lambda actual: self.assertIsNone(actual)),
             ('tc_server', lambda actual: self.assertIsInstance(actual, TcServer)),
             ('vfabric', lambda actual: self.assertIsInstance(actual, VFabric)),
-            ('web_server', lambda actual: self.assertIsNone(actual))
+            ('web_server', lambda actual: self.assertIsInstance(actual, WebServer))
         ], False)
