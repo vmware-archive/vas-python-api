@@ -17,6 +17,7 @@
 from vas.util.Client import Client
 from vas.gemfire.GemFire import GemFire
 from vas.rabbitmq.RabbitMq import RabbitMq
+from vas.sqlfire.SqlFire import SqlFire
 from vas.tc_server.TcServer import TcServer
 from vas.vfabric.VFabric import VFabric
 from vas.VFabricAdministrationServerError import VFabricAdministrationServerError

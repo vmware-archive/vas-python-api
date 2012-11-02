@@ -12,17 +12,17 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from vas.gemfire.ApplicationCodeImages import ApplicationCodeImages
-from vas.gemfire.GemFire import GemFire
-from vas.gemfire.Groups import Groups
-from vas.gemfire.InstallationImages import InstallationImages
-from vas.gemfire.Nodes import Nodes
+
+
+from vas.sqlfire.SqlFire import SqlFire
+from vas.sqlfire.Groups import Groups
+from vas.sqlfire.InstallationImages import InstallationImages
+from vas.sqlfire.Nodes import Nodes
 from vas.test.VasTestCase import VasTestCase
 
-class TestGemFire(VasTestCase):
-    def test_gemfire(self):
-        self._assert_item(GemFire(self._client, 'https://localhost:8443/gemfire/v1/'), [
-            ('application_code_images', lambda actual: self.assertIsInstance(actual, ApplicationCodeImages)),
+class TestSqlFire(VasTestCase):
+    def test_sqlfire(self):
+        self._assert_item(SqlFire(self._client, 'https://localhost:8443/sqlfire/v1/'), [
             ('groups', lambda actual: self.assertIsInstance(actual, Groups)),
             ('installation_images', lambda actual: self.assertIsInstance(actual, InstallationImages)),
             ('nodes', lambda actual: self.assertIsInstance(actual, Nodes))
