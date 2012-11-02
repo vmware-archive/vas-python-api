@@ -25,7 +25,7 @@ setup(
     description='vFabric Administration Server Python API',
     long_description='A Python API for VMware vFabric Administration Server',
     classifiers=[
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'Intended Audience :: System Administrators',
         'License :: OSI Approved :: Apache Software License',
