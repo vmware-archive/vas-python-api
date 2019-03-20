@@ -19,7 +19,7 @@ from setuptools import setup, find_packages
 setup(
     name='vas',
     version='1.1.0.dev',
-    url='http://vfabric.co',
+    url='https://www.vmware.com/vfabric',
     author='VMware',
     author_email='support@vmware.com',
     description='vFabric Administration Server Python API',

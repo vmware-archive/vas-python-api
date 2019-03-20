@@ -65,7 +65,7 @@ class Security(object):
         command.
 
         .. |chown| replace:: ``chown``
-        .. _chown: http://en.wikipedia.org/wiki/Chown
+        .. _chown: https://en.wikipedia.org/wiki/Chown
 
         :param str  owner:  The new owner of the item or collection.  Unchanged if :obj:`None`.
         :param str  group:  The new group of the item or collection.  Unchanged if :obj:`None`.
@@ -86,7 +86,7 @@ class Security(object):
         """Change the permissions for an item or collection. Analogous to the UNIX |chmod|_ command.
 
         .. |chmod| replace:: ``chmod``
-        .. _chmod: http://en.wikipedia.org/wiki/Chmod
+        .. _chmod: https://en.wikipedia.org/wiki/Chmod
 
         :param list owner:  The new owner class permissions of the item or collection. Legal values are any of ``READ``,
                             ``WRITE``, and ``EXECUTE``. Unchanged if :obj:`None`.
