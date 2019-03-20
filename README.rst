@@ -1,6 +1,6 @@
 vFabric Administration Server Python API
 ========================================
-The vFabric Administration Server (VAS) API is a Python library used for interacting with the `vFabric Administration Server <http://www.vmware.com/support/pubs/vfabric-vas.html>`_.
+The vFabric Administration Server (VAS) API is a Python library used for interacting with the `vFabric Administration Server <https://www.vmware.com/support/pubs/vfabric-vas.html>`_.
 
 VAS's primary mode of interaction is via RESTful interface.  This API enables the use of VAS using rich Python types, eliminating the need for a detailed understanding of the REST API and its JSON payloads.
 
@@ -12,7 +12,7 @@ The VAS Python API requires Python 2.7.  It has been built and tested on 2.7.3.
 
 Installation
 ------------
-The VAS Python egg is available on `PyPI <http://pypi.python.org/pypi/vas>`_.  To install it run::
+The VAS Python egg is available on `PyPI <https://pypi.python.org/pypi/vas>`_.  To install it run::
 
     pip install vas
 
@@ -42,7 +42,7 @@ VAS
 
 Documentation
 ~~~~~~~~~~~~~
-You may also like to look at the `API Documentation <http://packages.python.org/vas>`_.
+You may also like to look at the `API Documentation <https://packages.python.org/vas>`_.
 
 
 License
