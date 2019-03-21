@@ -47,4 +47,4 @@ You may also like to look at the `API Documentation <https://packages.python.org
 
 License
 -------
-The VAS Python API is licensed under the `Apache Licence, Version 2.0 <http://www.apache.org/licenses/LICENSE-2.0.html>`_.
+The VAS Python API is licensed under the `Apache Licence, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0.html>`_.
