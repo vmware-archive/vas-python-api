@@ -1,3 +1,6 @@
+vas-python-api is no longer actively maintained by VMware, Inc.
+===============================================================
+
 vFabric Administration Server Python API
 ========================================
 The vFabric Administration Server (VAS) API is a Python library used for interacting with the `vFabric Administration Server <https://www.vmware.com/support/pubs/vfabric-vas.html>`_.
